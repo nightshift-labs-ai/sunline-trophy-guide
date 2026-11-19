@@ -96,9 +96,26 @@
 - Process note: one word of README.md ("fonts" -> "font files") was changed with a shell `sed` instead of the edit
   tool; every other change in this run went through the edit/write tools.
 
+## Done (G4b, short run, 2026-11-19 16:52-17:04 EET): step C only
+- Roadmap: three stage columns balanced by chip count (1-3 | 4-5 | 6-7 + watch list); every one of the 55
+  trophies has a chip in its stage card (no height cap), and chips with a target show "now/target" from the save.
+- No cut text: stage titles and goal lines wrap; three stage titles shortened in our own words (roadmap.json).
+- Key-fact tiles over the stages, each with its sources: platinum ~200 h [PowerPyx][OutputLag], difficulty 4/10
+  [PowerPyx], 1 run and no mission replay [PowerPyx][OutputLag], 0 online trophies [PowerPyx], missable split
+  counted from the data. Other guides give 100-200 h; they are not in our registry, so the tile shows only ~200 h.
+- PowerPyx's hour estimates on the stage groups it gives one for: whole story 60-80 h (stage 4), strands ~10 h
+  (stage 5), ~100 h (stage 7). The "How this roadmap is built" card is gone (its facts moved into tiles and stages).
+- Missable watch list: one compact line per trophy (flag, name, stage); the reason is in the tooltip and on the
+  Missables page (the heading links there).
+- Numbers: shots 247,480 / 249,984 / 213,740 B; judge-sheet GATE OK; cut text (scrollWidth > clientWidth among
+  visible titles, goals, chips, names and descriptions) = 0 on the shot 1 state and 0 on the shot 2 state;
+  roadmap chips = 55, all distinct; lowest roadmap card ends at 776 px of 800 (footer at ~778).
+- trophies.json: the 55 official names, descriptions and grades are still identical to the starter (7d71397).
+
 ## Known issues
-- Long stage titles and goal lines are still cut with an ellipsis on the roadmap cards at 1280 px (9 in the shot 2
-  state); the roadmap does not show all 55 trophies; shots 2-3 show the G3 header. All three are G4b work.
+- G4b step D (shot 3 as a sources + progress page) was NOT done: no time in the 12-minute window. Shot 3 is still
+  the G3 save page with the G3 header. Next run: #/save -> sources registry, progress by grade/kind, save card.
+- G4b did not re-run the dossier or the kit check (no time); the G4a numbers above are the last ones.
 - Step 1 of the Positive Mental Attitude guide leaves its cite box alone on a second line at 1280 px.
 - Shots 1-2 are over the 210 KiB target (dense text); both are under the gate's 256 KiB.
 - Mid-session in run 1 one batch of CSS edits went through a shell script instead of the edit tool; the whole
