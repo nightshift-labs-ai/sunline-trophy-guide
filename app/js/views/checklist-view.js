@@ -142,7 +142,7 @@ export function renderSaveBanner(state) {
     `<p class="banner-line">Spoilers are <b>${on ? "hidden" : "shown"}</b>: an unearned story trophy hides its name, ` +
     `description and guide until you earn it or tap Reveal. Grades and stages stay visible.</p>` +
     `<p class="banner-line">Progress is saved in this browser. Export writes <code>sunline-progress-YYYY-MM-DD.json</code> ` +
-    `(earned trophies and counters by official name); Import reads it back, or a plain list of names.</p>` +
+    `(earned trophies, counters and your notes, by official name); Import reads it back, or a plain list of names.</p>` +
     `<div class="banner-actions"><button data-action="spoilers" aria-pressed="${on}">` +
     `${on ? "Spoilers: hidden until earned" : "Spoilers: shown"}</button>` +
     `<button data-action="export">Export progress</button>` +
