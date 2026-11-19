@@ -78,12 +78,28 @@ function guideBodyHtml(trophy, state) {
   return (
     `<section class="howto"><h3>How to get it <span class="h3-note">· in our own words</span></h3>` +
     `<p class="guide-text">${withMarks(trophy.guide)}</p><ol class="steps">${steps}</ol></section>` +
+    disagreeHtml(trophy) +
     `<div class="pane-cols"><section class="miss-call miss-${call}" aria-label="Can it be missed?">` +
     `<h3>${callHead}</h3><p>${withMarks(trophy.missableWhy)}</p>` +
     `${trophy.window ? `<p class="miss-window"><b>Window:</b> ${withMarks(trophy.window)}</p>` : ""}</section>` +
     `<section>${unknown}</section></div>` +
     `<section class="sources-block"><h3>Sources</h3>${sourcesHtml(trophy, state)}</section>`
   );
+}
+
+// Where the sources give different versions, both stay on screen, each with its cites; we do not pick silently.
+function disagreeHtml(trophy) {
+  if (!trophy.disagree?.length) return "";
+  const marks = (nums) => nums.map((n) => `<span class="cite-box">${n}</span>`).join("");
+  const items = trophy.disagree
+    .map(
+      (d) =>
+        `<p class="dis-on"><span class="dis-tag">Sources disagree</span>${escapeHtml(d.on)}</p><ul class="dis-vs">` +
+        d.versions.map((v) => `<li>${escapeHtml(v.says)} ${marks(v.cites)}</li>`).join("") +
+        `</ul>`
+    )
+    .join("");
+  return `<section class="disagree" aria-label="Sources disagree: both versions">${items}</section>`;
 }
 
 function sourcesHtml(trophy, state) {

@@ -523,6 +523,22 @@ body[data-route="roadmap"] .view, body[data-route="missables"] .view { grid-temp
 
 .miss-window b { color: var(--text); }
 
+/* G5: two sources give different versions; both are kept, each with its cites. Violet so it is not read as a missable. */
+.disagree { margin-top: 4px; padding: 4px 10px 6px; border-radius: var(--r-ctl); border-left: 5px solid #b69cff;
+  background: #2a2340; }
+
+.disagree .dis-on { margin: 0; font-size: 15px; font-weight: 700; color: var(--text); }
+
+.dis-tag { margin-right: 8px; color: #d6c8ff; font-size: 13px; font-weight: 800; letter-spacing: 0.06em;
+  text-transform: uppercase; }
+
+.dis-vs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 2px 0 0; padding: 0; list-style: none;
+  font-size: 15px; line-height: 1.33; }
+
+.dis-vs li { padding-left: 10px; border-left: 2px solid #5e5191; }
+
+.audit-dis b { color: #d6c8ff; }
+
 .src-extra { font-size: 13px; color: var(--desc); margin: 2px 0 0; }
 
 .masked-body { margin-top: 14px; padding: 16px; border-radius: var(--r-ctl); background: var(--stripes); border: 1px solid var(--line); }

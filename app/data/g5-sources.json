@@ -144,9 +144,8 @@
     "28": {
       "supports": { "pms": "10 spots, 18 meditations; spots 2-9 count once per character; the summit spot appears only after 17", "gb": "balcony offered the morning after Down to Earth", "lfc": "balcony right after Gone Fishing" },
       "steps": [
-        "Spots 2-9 count once for Jason and once for Lucia; the balcony and the Mount Kalaga summit count once each: 16 + 1 + 1 = 18 [@pms].",
-        "The summit stone circle stays off the map until the other 17 are done, so skipping the balcony may leave you stuck at 16 [@pms].",
-        "The eight shared spots: Capri sandbar, Buckskin Swamp dock, Camp Moonflower, Manifest Canyon, the south Moreau water wheel, the Mount Kalaga mine tower, the falls north-west of Tallaloko, the rocks east of Waning Sands [@pms]."
+        "18 = spots 2-9 once per character + balcony + Kalaga summit; the summit shows only after the other 17, so skip the balcony and you may stall at 16 [@pms].",
+        "Spots 2-9: Capri sandbar, Buckskin Swamp, Camp Moonflower, Manifest Canyon, Moreau water wheel, Kalaga mine tower, Tallaloko falls, Waning Sands rocks [@pms]."
       ],
       "disagree": [
         { "on": "When the balcony meditation is offered", "versions": [

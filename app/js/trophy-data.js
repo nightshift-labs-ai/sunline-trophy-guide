@@ -117,18 +117,21 @@ export function auditHtml(trophies, sources) {
   const regs = [...byUrl.values()];
   const guides = regs.filter(([, s]) => s.role === "guide").length;
   const reads = [...new Set(regs.map(([, s]) => s.read).filter(Boolean))];
-  const cited = trophies.filter((t) => t.guide?.trim() && t.cites?.length).length;
+  const a = auditCounts(trophies, sources);
   const possible = trophies.filter((t) => t.missable === "possible").length;
   const unknown = trophies.filter((t) => t.missable === "unknown").length;
   const hidden = trophies.filter((t) => t.hidden).length;
   const b = (v) => `<b>${v}</b>`;
+  const shortRead = (iso) => readDate(iso).replace(/ \d{4}$/, "");
   const parts = [
-    `${b(trophies.length)} official trophies: ${b(count("platinum"))} P · ${b(count("gold"))} G · ${b(count("silver"))} S · ${b(count("bronze"))} B`,
-    `${b(hidden)} hidden on PSN`,
-    `${b(`${cited}/${trophies.length}`)} guides cite a source`,
-    `${b(regs.length)} sources (${guides} guides, ${regs.length - guides} lists)`,
-    `${b(possible)} possibly missable · ${b(unknown)} trigger not known`,
-    `sources read ${reads.map(readDate).join(", ") || "date not recorded"}`,
+    `${b(trophies.length)} official: ${b(count("platinum"))} P · ${b(count("gold"))} G · ${b(count("silver"))} S · ${b(count("bronze"))} B`,
+    `${b(hidden)} hidden`,
+    `<span title="${guides} guides, ${regs.length - guides} lists">${b(regs.length)} sources</span>`,
+    `${b(`${a.cited}/${a.steps}`)} steps cited`,
+    `${b(a.single)} single-source`,
+    `<span class="audit-dis">${b(a.disagree.length)} disagree</span>`,
+    `${b(possible)} possibly missable · ${b(unknown)} trigger unknown`,
+    `read ${reads.map(shortRead).join(", ") || "date not recorded"}`,
   ];
   return `<span class="audit-tag">Audit</span>${parts.join(" <i>·</i> ")}`;
 }
