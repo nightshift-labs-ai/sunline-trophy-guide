@@ -183,10 +183,12 @@
       "guide": "Breakfast Run is a Chapter 2 story mission, so this unlocks as you push the main story on.",
       "steps": [
         "Follow the main story into Chapter 2 and finish Breakfast Run [1].",
-        "Then look around for Chapter 2's side work: Billy, Bret and the gym all open after Coffee Break [1]."
+        "Then look around for Chapter 2's side work: Billy, Bret and the gym all open after Coffee Break [1].",
+        "Keep a manual save from before the mission if you want to see it again: story missions cannot be replayed [1][2]."
       ],
       "cites": [
-        { "n": 1, "src": "ppx", "supports": "Breakfast Run is in Chapter 2; what opens after Coffee Break" }
+        { "n": 1, "src": "ppx", "supports": "Breakfast Run is in Chapter 2; what opens after Coffee Break; no replay" },
+        { "n": 2, "src": "ol", "supports": "no mission replay, a single playthrough" }
       ]
     },
     {
@@ -203,10 +205,12 @@
       "guide": "The Cartel Heist is a Chapter 3 story mission; the trophy unlocks once it is done.",
       "steps": [
         "Advance Chapter 3 until The Cartel Heist comes up and finish it [1].",
-        "Use the chapter's free time for the robbery trophies: Credit Check opens laundering and Yasmani's jobs give you the Snap Gun [1]."
+        "Use the chapter's free time for the robbery trophies: Credit Check opens laundering and Yasmani's jobs give you the Snap Gun [1].",
+        "Watch for Race Against Yago while Chapter 3 lasts: OutputLag calls it time-sensitive, and it counts for Strangers & Freaks [2]."
       ],
       "cites": [
-        { "n": 1, "src": "ppx", "supports": "The Cartel Heist is in Chapter 3; Credit Check and Snap Gun unlocks" }
+        { "n": 1, "src": "ppx", "supports": "The Cartel Heist is in Chapter 3; Credit Check and Snap Gun unlocks" },
+        { "n": 2, "src": "ol", "supports": "Race Against Yago is time-sensitive in Chapter 3 and counts as a strand" }
       ]
     },
     {
@@ -223,10 +227,12 @@
       "guide": "Child's Play is one of the Chapter 4 story missions; finishing it unlocks the trophy.",
       "steps": [
         "Play the Chapter 4 story until Child's Play and see it through [1].",
-        "Keep going in order: Headliners and VCIA Takedown in the same chapter carry trophies of their own [1]."
+        "Keep going in order: Headliners and VCIA Takedown in the same chapter carry trophies of their own [1].",
+        "Take the optional That's Where The Money Is... when Chapter 4 offers it: it opens the vault jobs behind Maximum Withdrawal and A Classic Blitz Play [1][2]."
       ],
       "cites": [
-        { "n": 1, "src": "ppx", "supports": "Child's Play, Headliners and VCIA Takedown are Chapter 4 missions" }
+        { "n": 1, "src": "ppx", "supports": "Child's Play, Headliners and VCIA Takedown are Chapter 4 missions; the vault mission" },
+        { "n": 2, "src": "ol", "supports": "the Chapter 4 vault mission opens the robbery trophies" }
       ]
     },
     {
@@ -264,10 +270,12 @@
       "guide": "VCIA Takedown is the Chapter 4 story mission behind this trophy.",
       "steps": [
         "Finish VCIA Takedown when Chapter 4 offers it [1].",
-        "Remember the airport for later: stealing a jet from a VCIA boarding bridge is a separate trophy, Catch Me If You Can [1]."
+        "Remember the airport for later: stealing a jet from a VCIA boarding bridge is a separate trophy, Catch Me If You Can [1][2].",
+        "Save by hand between Chapter 4 missions, because no story mission can be replayed once it is done [2]."
       ],
       "cites": [
-        { "n": 1, "src": "ppx", "supports": "VCIA Takedown is a Chapter 4 mission; the jet theft at VCIA" }
+        { "n": 1, "src": "ppx", "supports": "VCIA Takedown is a Chapter 4 mission; the jet theft at VCIA" },
+        { "n": 2, "src": "ol", "supports": "no mission replay; the jet theft at the boarding bridges" }
       ]
     },
     {
@@ -430,10 +438,12 @@
       "guide": "Win twenty distinct races; winning the same race twice does not add to the count.",
       "steps": [
         "Choose from the 40 race locations PowerPyx counts, so half of them will do [1].",
-        "Note that car races, race challenges and drone races all count as races for Master of None too [1]."
+        "Note that car races, race challenges and drone races all count as races for Master of None too [1].",
+        "Leave the rest for after the credits if you like: free roam stays open once the story ends [2]."
       ],
       "cites": [
-        { "n": 1, "src": "ppx", "supports": "40 unique race locations; race types" }
+        { "n": 1, "src": "ppx", "supports": "40 unique race locations; race types" },
+        { "n": 2, "src": "ol", "supports": "free roam continues after the story" }
       ]
     },
     {
@@ -957,7 +967,8 @@
       "guide": "Clear the fog from the whole map; flying is the quickest way to do it.",
       "steps": [
         "Fly over every patch of black fog on the map until none is left [1].",
-        "Use a fast plane; PowerPyx links a separate guide to the best one for the job [1]."
+        "Use a fast plane; PowerPyx links a separate guide to the best one for the job [1].",
+        "Do the sweep after the credits, when the whole map is open; the timing is our advice, as no source we read gives an area count [1]."
       ],
       "unknown": "No source gives an area count, so SUNLINE shows no counter for this one.",
       "cites": [
