@@ -210,7 +210,56 @@ change, so their shots.json sentences stay. Shot 1's sentence now names the lege
 - Data: app/data unchanged since G5 (0 diff lines); 55 official names, descriptions and grades identical to the
   starter; 182 steps and every disagree version carry cites that resolve to registry sources (0 unresolved).
 
+## Done (G7, short run, 2026-11-19 20:35-20:54 EET): shot 1 only
+Input: the operator's judge read of G6 against the two tied leaders: each opens a trophy's detail with a short,
+labelled, plain-language answer (what to do, the one risk, missable or not) before the numbered steps; our pane had
+one unlabelled line there that reads like a sub-heading at judge size. No new facts, no new sources, no web
+research, no theme change. A/B rule as in G6: re-shoot shot 1 as shots.json defines it, judge-sheet preview into
+out/ab/ (g7_sheet_*.jpg), read before (out/ab/sheet_before.jpg) and after at 768x480, cut-text check on the shot 1
+state; keep only if the cover clearly reads better and the cut count stays 0.
+1. Kept. Every guide pane opens, right under the official description and its chips, with a "Short answer": a
+   teal-ruled block with an inline label, at most two sentences, each ending with the trophy's own cite numbers (the
+   same [n] its steps use). Written for all 55 in our own words from each trophy's cited steps and missable call
+   (new file app/data/g7-answers.json, attached at load; trophies.json's official fields untouched). It replaces the
+   unlabelled one-line summary (the 'guide' field stays in the data as a fallback only; it is not shown beside the
+   answer). The steps' heading now reads "How to get it · step by step, in our own words". Answer text is 15 px,
+   the steps' size, in the pane's brightest text colour.
+   First shot: the answer took three lines and pushed the window line and legend rows [4]-[6] under the fold. Room
+   was made inside the pane, nothing dropped: step spacing 1.33 -> 1.28 with no gap between steps; Positive Mental
+   Attitude's steps 1 and 3 reworded shorter with the same cites (step 1's lone cite box on a second line is gone,
+   and step 3 no longer wraps for "Collections [1][2]"); its answer trimmed to two lines. At 768x480 the cover now
+   reads: SHORT ANSWER "Meditate at all 18 spots: 2-9 as each lead, plus balcony and Kalaga summit [1][4]. Do
+   Jason's house in Chapter 1 and keep a save; it may go later [1][2]", then six steps, the "Sources disagree"
+   row with both versions, the missable call with its full window line, and all six legend lines, all above the
+   fold. Cut text 0 (21 checked). Four answers (23, 34, 39, 44) and then two more (1, 26) were trimmed to keep all
+   55 at 34 words or fewer.
+2. (optional) Tried and reverted. Answer text one size larger (16 px): on the cover the answer wraps to a third
+   line with "later [1][2]" alone on it, and everything below moves down so the legend's last line and the window
+   line sit on the fold edge. Cut text stayed 0, but the cover did not clearly read better, so the CSS and shot 1
+   were restored with git. Open.
+3. Checks. Shots 2 and 3 were not re-taken: the roadmap and Sources & save views do not show the guide pane, and
+   their counts did not change. shots.json: only shot 1's "shows" sentence changed (it names the Short answer).
+
+## Numbers (end of G7)
+- Shots: 1-checklist-guide.jpg 249,994 B (q82) · 2-roadmap.jpg 255,802 B (q81, unchanged) · 3-sources-save.jpg
+  215,559 B (unchanged), all <= 250 KiB = 256,000 B. Judge-sheet preview GATE OK; final sheet out/ab/g7_sheet_final.jpg
+  read at 768x480.
+- Cut text: shot 1 state 0, shot 2 state 0, after every shoot.
+- Dossier: 1,135,043 B, byte-identical over two runs (<= 1.45 MiB), on step 1b and again on the checks commit. Kit
+  check on HEAD: 4 passed, 0 failed (16 skipped, 5 at submission). Path grep: 0 files. Kit copy level 26, site 27.
+- Answers: 55/55 written; each has at most 2 sentences, each sentence ends with cite numbers, every cite resolves to
+  a registry source through that trophy's own cites (0 unresolved); longest 34 words (cites not counted).
+- Data: 55 official names, descriptions and grades identical to the starter (0 differences). trophies.json changed
+  only in Positive Mental Attitude's steps 1 and 3 (shorter wording, same cites [1] and [1][2]). 182/182 steps cited;
+  audit counts unchanged: 37 on 2+ independent sources, 136 single-source, 10 trophies where sources disagree.
+
 ## Known issues
+- G7: answers summarise the trophy's cited steps, so where a step's figure is itself disputed (A Long Road: 300
+  stunts per [1][2], 250 per LFCarry [5]) the answer gives the steps' figure and the dispute stays in the pane's
+  "Sources disagree" row, not in the answer.
+- G7: the Short answer adds about two lines to every pane; a trophy with six or more two-line steps plus a long
+  legend (more than about six cites) may now push its last legend lines under the fold at 1280x800. Positive
+  Mental Attitude, the cover, fits.
 - G6: the roadmap's Missable watch list still marks a trigger-unknown trophy with an amber "?" flag (a glyph beside
   a name, not after a digit); left as it is in this run. Open.
 - G6: shots 1 and 2 sit just under the 250 KiB cap (q83 and q81); more text in view would push the quality lower.
@@ -230,6 +279,9 @@ change, so their shots.json sentences stay. Shot 1's sentence now names the lege
   stylesheet was rewritten with the Write tool right after, so every line of it comes from a direct write.
 
 ## Next
+- G7 open: the Short answer one size larger than the steps (16 px) once the pane has a line to spare above the
+  fold (for example a shorter legend sub-line, or the answer for Positive Mental Attitude cut to fit two lines at
+  16 px); A/B at 768x480 again.
 - More sources for the one-source guides once new guides publish (Push Square, KeenGamer could not be read).
 - Bring the shots under 210 KiB (less text in view, or fewer rows) without losing the cover's required parts.
 - A "Next up" pick could weigh time-sensitive strands (Race Against Yago) above plain roadmap order.
