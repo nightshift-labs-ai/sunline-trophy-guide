@@ -57,10 +57,10 @@
   under the gate's 256 KiB.
 
 ## Numbers (end of run 3)
-- Shots: 1-checklist-guide.jpg 253,911 B (q85) · 2-roadmap.jpg 255,574 B (q81, to stay under 250 KiB with the two
-  new cards) · 3-spoilers-save.jpg 213,183 B (q85).
-- Dossier: 1,113,276 B, byte-identical over two runs; kit check on HEAD: 4 passed, 0 failed; judge-sheet GATE OK.
-- First load (Totals): 11 files, 24,052 B gzip-9 (75,159 raw); whole app 13 files, 137,957 B.
+- Shots: 1-checklist-guide.jpg 253,884 B (q85) · 2-roadmap.jpg 255,540 B (q81, to stay under 250 KiB with the two
+  new cards) · 3-spoilers-save.jpg 213,740 B (q85).
+- Dossier: 1,113,949 B, byte-identical over two runs; kit check on HEAD: 4 passed, 0 failed; judge-sheet GATE OK.
+- First load (Totals): 11 files, 24,061 B gzip-9 (75,172 raw); whole app 13 files, 137,970 B.
 - Outside sources: all 55 trophies cite PowerPyx and/or OutputLag; 5 of them (unknown triggers) lead with the
   official description and cite the guides only for "trigger not known yet" or a guess.
 
