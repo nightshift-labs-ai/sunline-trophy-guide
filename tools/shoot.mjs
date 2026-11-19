@@ -20,6 +20,7 @@ const SHOTS = {
   "1-checklist-guide.jpg": { hash: `#/checklist?f=all&t=${PMA}`, waitToastGone: true },
   "2-roadmap.jpg": { hash: "#/roadmap", spoilersShown: true, waitToastGone: true },
   "2-checklist-missable.jpg": { hash: `#/checklist?f=missable&t=${PMA}`, waitToastGone: true },
+  "missables-page.jpg": { hash: "#/missables", waitToastGone: true },
   "3-spoilers-save.jpg": { hash: `#/save?t=${PARADISE_LOST}` },
 };
 

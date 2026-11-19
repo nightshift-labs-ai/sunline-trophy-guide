@@ -6,6 +6,7 @@ import { isKnownFilter } from "./filters.js";
 import { spoilerLabel } from "./spoiler-rule.js";
 import { renderChecklist, renderSaveBanner } from "./views/checklist-view.js";
 import { renderGuidePane } from "./views/guide-pane.js";
+import { renderRoadmap, renderMissables, setRoadmapContext } from "./views/roadmap-view.js";
 
 export async function bootSunline() {
   const data = await loadTrophyData();
@@ -20,6 +21,8 @@ export async function bootSunline() {
     query: "",
     selected: null,
   };
+  state.stages = data.roadmap.stages.map((s) => ({ ...s, trophies: data.trophies.filter((t) => t.stage === s.n) }));
+  setRoadmapContext({ missables: data.roadmap.missables, sources: data.sources });
   wireEvents(state);
   applyHash(state);
   render(state, { scrollToSelected: true });
@@ -72,9 +75,10 @@ function render(state, { scrollToSelected = false } = {}) {
     renderGuidePane(state.byId.get(state.selected), state);
     if (state.route === "save") renderSaveBanner(state);
     if (scrollToSelected) scrollRowIntoView(state.selected);
+  } else if (state.route === "roadmap") {
+    renderRoadmap(state.stages, state.progress);
   } else {
-    const section = document.getElementById(state.route);
-    section.innerHTML = `<h2 class="banner-title">Coming in the next build</h2>`;
+    renderMissables(state.stages, state.progress);
   }
 }
 

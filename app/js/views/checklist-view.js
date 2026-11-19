@@ -112,10 +112,9 @@ function rowHtml(t, state) {
     ` aria-label="Earned: ${escapeHtml(maskedName(t, p))}">${earned ? "✓" : ""}</button>` +
     `<span class="row-medal">${medalSvg(t.grade)}</span>` +
     `<div class="row-main"><div class="row-line">` +
-    `<span class="row-name">${escapeHtml(maskedName(t, p))}</span>${missableFlagHtml(t, true)}` +
-    `<span class="tag tag-stage">S${t.stage}</span></div>` +
+    `<span class="row-name">${escapeHtml(maskedName(t, p))}</span>${missableFlagHtml(t, true)}</div>` +
     `<div class="row-line row-sub"><span class="row-desc">${escapeHtml(maskedDescription(t, p))}</span>` +
-    `<span class="tag">${ROW_KIND[t.kind]}</span>${hidden}</div></div>` +
+    `<span class="tag tag-stage">S${t.stage}</span><span class="tag">${ROW_KIND[t.kind]}</span>${hidden}</div></div>` +
     `<div class="row-side">${counter || reveal}<span class="cite-badge">${escapeHtml(badgeText(t, state.sources))}</span>` +
     `${counter ? reveal : ""}</div></li>`
   );
