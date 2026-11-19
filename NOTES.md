@@ -15,11 +15,19 @@
   Missables page with why / how to stay safe / what is not known.
 - Shots via `tools/shoot.mjs` (fresh context, demo save imported through the app's own file input).
 
+## Done (M2, this run)
+- (a) Treat Yo Self gained a second source (OutputLag). Still on one source: ids 8, 9, 10, 12, 16, 19, 31, 42 (the
+  sources file has no second source for them).
+- (b) Search box in the checklist tools; `/` focuses it; it matches the visible name (masked names stay masked),
+  grade, kind and stage.
+- (c) Missables page names its sources ([PPX], [OL]) and lists them per card.
+- (d) "Next up" card: not done (cut at end−10).
+
 ## Numbers
-- Shots (q85 floor): 1-checklist-guide.jpg 248,117 B · 2-roadmap.jpg 255,520 B · 3-spoilers-save.jpg 211,051 B.
-  Shots 1 and 2 stay above the 210 KiB target even at the q85 floor (dense text); all are under the gate's 256 KiB.
-- Dossier: 1,081,880 B, byte-identical over two runs.
-- First load (Totals): 11 files, 19,042 B gzip-9 (56,954 raw).
+- Shots (q85 floor): 1-checklist-guide.jpg 242,798 B · 2-roadmap.jpg 255,512 B · 3-spoilers-save.jpg 213,054 B.
+  All three are above the 210 KiB target even at the q85 floor (dense text); all are under the gate's 256 KiB.
+- Dossier: 1,079,057 B, byte-identical over two runs.
+- First load (Totals): 11 files, 19,254 B gzip-9 (57,727 raw).
 - Outside sources: all 55 trophies cite PowerPyx and/or OutputLag; 5 of them (unknown triggers) lead with the
   official description and cite the guides only for "trigger not known yet" or a guess.
 
@@ -29,9 +37,8 @@
 - Mid-session one batch of CSS edits went through a shell script instead of the edit tool; the whole stylesheet was
   rewritten with the Write tool right after, so every line of it comes from a direct write.
 
-## Next (M2)
-- Deepen the thinnest guides with more cited facts and a second source where one exists.
-- Search box (`/` focuses it), j/k row keys.
-- Missables page polish (source names in place of bare [n] markers).
-- "Next up" planner card at the top of the roadmap.
+## Next (M2, remaining)
+- "Next up" planner card on the roadmap (the empty grid slot under stage 7 has room for it).
+- More sources for the one-source guides once new guides publish; j/k row keys.
 - Notes per trophy, print view, a11y pass, platinum auto-suggest at 54 earned.
+- Bring the shots under 210 KiB (less text in view, or fewer rows) without losing the cover's required parts.
