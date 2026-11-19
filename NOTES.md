@@ -115,7 +115,8 @@
 ## Known issues
 - G4b step D (shot 3 as a sources + progress page) was NOT done: no time in the 12-minute window. Shot 3 is still
   the G3 save page with the G3 header. Next run: #/save -> sources registry, progress by grade/kind, save card.
-- G4b did not re-run the dossier or the kit check (no time); the G4a numbers above are the last ones.
+- G4b checks on the step C commit: dossier 1,106,514 B, byte-identical over two runs; kit check on HEAD 4 passed,
+  0 failed (16 skipped, 5 at submission). The kit copy is level 26, the site level 27 (operator's call to refresh).
 - Step 1 of the Positive Mental Attitude guide leaves its cite box alone on a second line at 1280 px.
 - Shots 1-2 are over the 210 KiB target (dense text); both are under the gate's 256 KiB.
 - Mid-session in run 1 one batch of CSS edits went through a shell script instead of the edit tool; the whole
