@@ -453,9 +453,33 @@ body[data-route="roadmap"] .view, body[data-route="missables"] .view { grid-temp
 
 .guide-text { margin: 0 0 3px; font-size: 15px; }
 
+/* G7 short answer: the gist before the steps. A teal rule and an inline label set it apart from a heading; its
+   text is the steps' size and the brightest text colour in the pane. */
+.answer {
+  margin: 7px 0 0;
+  padding: 4px 9px 5px;
+  border-left: 3px solid var(--teal);
+  border-radius: 0 6px 6px 0;
+  background: var(--raised);
+  font-size: 15px;
+  line-height: 1.35;
+  color: var(--text);
+}
+
+.answer-label {
+  margin-right: 4px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
 .steps { margin: 0; padding-left: 20px; font-size: 15px; }
 
-.steps li { margin: 1px 0; line-height: 1.33; }
+.steps li { margin: 0; line-height: 1.28; }
+
+.answer + .howto h3 { margin-top: 5px; }
 
 .pane-cols { display: grid; grid-template-columns: 1.45fr 1fr; gap: 12px; }
 

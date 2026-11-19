@@ -75,9 +75,15 @@ function guideBodyHtml(trophy, state) {
   // The missable call sits in a tinted callout: red for 'possible', amber for an unknown trigger, teal for 'no'.
   const call = trophy.missable === "possible" ? "possible" : trophy.missable === "unknown" ? "unknown" : "no";
   const callHead = { possible: "Missable? Possibly", unknown: "Missable? Not known", no: "Missable? No" }[call];
+  // The short answer comes first, labelled, so the gist (what to do, the one risk) is read before the steps.
+  // A trophy without one falls back to its one-line summary.
+  const answer = trophy.answer
+    ? `<p class="answer"><b class="answer-label">Short answer</b> ${withMarks(trophy.answer)}</p>`
+    : `<p class="guide-text">${withMarks(trophy.guide)}</p>`;
   return (
-    `<section class="howto"><h3>How to get it <span class="h3-note">· in our own words</span></h3>` +
-    `<p class="guide-text">${withMarks(trophy.guide)}</p><ol class="steps">${steps}</ol></section>` +
+    answer +
+    `<section class="howto"><h3>How to get it <span class="h3-note">· step by step, in our own words</span></h3>` +
+    `<ol class="steps">${steps}</ol></section>` +
     disagreeHtml(trophy) +
     `<div class="pane-cols"><section class="miss-call miss-${call}" aria-label="Can it be missed?">` +
     `<h3>${callHead}</h3><p>${withMarks(trophy.missableWhy)}</p>` +

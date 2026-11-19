@@ -13,12 +13,15 @@ export const KIND_LABELS = {
 };
 
 export async function loadTrophyData() {
-  const [doc, roadmap, extra] = await Promise.all([
+  const [doc, roadmap, extra, short] = await Promise.all([
     fetch("data/trophies.json").then((r) => r.json()),
     fetch("data/roadmap.json").then((r) => r.json()),
     fetch("data/g5-sources.json").then((r) => r.json()),
+    fetch("data/g7-answers.json").then((r) => r.json()),
   ]);
   mergeExtra(doc, extra);
+  // G7: each trophy's short answer (our words, cited with the trophy's own numbers) opens its guide pane.
+  for (const t of doc.trophies) t.answer = short.answers[String(t.id)] || "";
   const trophies = doc.trophies;
   return {
     doc,
