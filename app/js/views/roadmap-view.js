@@ -79,6 +79,15 @@ function watchListHtml(flagged, stages, progress) {
   return `<aside class="watch" aria-label="Missable watch list"><h3>Missable watch list</h3><ul>${items}</ul></aside>`;
 }
 
+// "[2]" in a trophy's text becomes "[OL]": the page shows no numbered source list, so it names the source instead.
+function namedMarks(text, trophy) {
+  return escapeHtml(text).replace(/\[(\d+)\]/g, (whole, n) => {
+    const cite = trophy.cites.find((c) => c.n === Number(n));
+    const short = cite && context.sources[cite.src]?.short;
+    return `<sup class="cite-mark">[${escapeHtml(short || n)}]</sup>`;
+  });
+}
+
 // The Missables page: every flagged trophy with the reason for the call and what to do to stay safe.
 export function renderMissables(stages, progress) {
   const flagged = stages.flatMap((s) => s.trophies).filter((t) => t.missable);
@@ -93,9 +102,10 @@ export function renderMissables(stages, progress) {
         `<article class="miss-card${masked ? " is-masked" : ""}">${missableFlagHtml(t)}` +
         `<h3>${medalSvg(t.grade, 22)}${escapeHtml(maskedName(t, progress))}</h3>` +
         `<p><b>Stage ${t.stage} · ${escapeHtml(stageTitle(stages, t.stage))}</b></p>` +
-        `<p><b>Why:</b> ${escapeHtml(masked ? "Hidden with the spoiler setting on." : t.missableWhy)}</p>` +
+        `<p><b>Why:</b> ${masked ? "Hidden with the spoiler setting on." : namedMarks(t.missableWhy, t)}</p>` +
         `<p><b>To stay safe:</b> ${escapeHtml(safe)}</p>` +
-        (t.unknown && !masked ? `<p><b>Not pinned down yet:</b> ${escapeHtml(t.unknown)}</p>` : "") +
+        (t.unknown && !masked ? `<p><b>Not pinned down yet:</b> ${namedMarks(t.unknown, t)}</p>` : "") +
+        `<p class="miss-src">Sources: ${escapeHtml(t.cites.map((c) => context.sources[c.src]?.name).filter(Boolean).join(" · "))}</p>` +
         `<p><a href="#/checklist?f=missable&amp;t=${t.id}">Open the guide and its sources</a></p></article>`
       );
     })
