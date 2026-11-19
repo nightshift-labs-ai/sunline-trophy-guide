@@ -215,6 +215,19 @@ function wireEvents(state) {
     else return;
     render(state);
   });
+  const search = document.getElementById("search");
+  search.addEventListener("input", () => {
+    state.query = search.value;
+    render(state);
+  });
+  // "/" jumps to the search box from anywhere outside a text field.
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "/" || event.ctrlKey || event.metaKey) return;
+    if (event.target.closest("input, select, textarea")) return;
+    event.preventDefault();
+    if (state.route !== "checklist") writeHash(state, { route: "checklist" });
+    search.focus();
+  });
   document.getElementById("spoiler-switch").addEventListener("click", () => toggleSpoilers(state));
   document.getElementById("export-progress").addEventListener("click", () => exportFromState(state));
   document.getElementById("import-progress").addEventListener("change", (event) => {

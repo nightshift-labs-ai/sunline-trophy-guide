@@ -24,6 +24,9 @@ const SHOTS = {
   "3-spoilers-save.jpg": { hash: `#/save?t=${PARADISE_LOST}` },
 };
 
+// The entry's three shots; the others are for checking a view by hand (name them on the command line).
+const FINAL = ["1-checklist-guide.jpg", "2-roadmap.jpg", "3-spoilers-save.jpg"];
+
 const MAX_BYTES = 210 * 1024;
 
 async function shoot(browser, name, spec) {
@@ -61,7 +64,7 @@ mkdirSync(outDir, { recursive: true });
 const browser = await chromium.launch({ args: ["--disable-lcd-text"] });
 try {
   for (const [name, spec] of Object.entries(SHOTS)) {
-    if (only.length ? only.includes(name) : name !== "2-checklist-missable.jpg") await shoot(browser, name, spec);
+    if (only.length ? only.includes(name) : FINAL.includes(name)) await shoot(browser, name, spec);
   }
 } finally {
   await browser.close();

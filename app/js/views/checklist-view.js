@@ -70,8 +70,7 @@ function listToolsHtml(state) {
     `<label class="tool">Sort <select id="sort-select" data-action="sort">` +
     opt("roadmap", "Roadmap", state.sort) +
     opt("list", "List order", state.sort) +
-    `</select></label>` +
-    `<span class="tool-note">${state.sort === "list" ? "Official list order" : "Goal first, then roadmap stages 1-6"}</span>`
+    `</select></label>`
   );
 }
 
