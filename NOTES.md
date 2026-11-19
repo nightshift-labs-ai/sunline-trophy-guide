@@ -112,9 +112,30 @@
   roadmap chips = 55, all distinct; lowest roadmap card ends at 776 px of 800 (footer at ~778).
 - trophies.json: the 55 official names, descriptions and grades are still identical to the starter (7d71397).
 
+## Done (G4c, short run, 2026-11-19 17:24-17:37 EET): step D + checks
+- #/save is now its own page, "Sources & save" (app/js/views/sources-save-view.js; the old save banner over the
+  checklist is gone from the route): big title; Spoilers card (Hidden/Shown and how many of the 12 story trophies
+  it masks right now, 11 with the demo save); Save card (saved-in-browser time, counts, Export / Import, the file
+  pattern sunline-progress-YYYY-MM-DD.json and what it carries, the last import as text, kept in memory for the
+  visit); By grade and By kind meters counted from the data and the save; a sources registry table (7 rows, one
+  per page: name, guide / list cross-check, link, what SUNLINE used it for, guides citing it counted from the data,
+  read date). The tab is renamed "Sources & save".
+- Shot 3 renamed 3-sources-save.jpg (shoot.mjs and shots.json follow), taken after the import toast has gone.
+- Shots 1 and 2 were kept exactly as G4a/G4b took them (by plan), so the cover's tab bar still reads
+  "Spoilers & save"; the next re-shoot of shot 1 will show "Sources & save".
+
+## Numbers (end of G4c)
+- Shots: 1-checklist-guide.jpg 247,480 B · 2-roadmap.jpg 249,984 B · 3-sources-save.jpg 213,385 B (all <= 250 KiB).
+  Judge-sheet preview GATE OK; shot 3's title reads in its small cell.
+- Dossier: 1,114,741 B (<= 1.45 MiB), byte-identical over two runs; kit check on HEAD: 4 passed, 0 failed
+  (16 skipped, 5 at submission). Path grep: no operator paths in the repo.
+- Cut text (out/cut-check.mjs, 1280x800): shot 1 state 0 of 24; shot 2 state 0 of 15. Roadmap untouched since
+  G4b (55 distinct chips checked then).
+- trophies.json: the 55 official names, descriptions and grades are identical to the starter (7d71397).
+
 ## Known issues
-- G4b step D (shot 3 as a sources + progress page) was NOT done: no time in the 12-minute window. Shot 3 is still
-  the G3 save page with the G3 header. Next run: #/save -> sources registry, progress by grade/kind, save card.
+- The registry lists CULTR with 0 guides citing it: it is shown only as a list cross-check in the guide pane.
+- Keys j / k / x act only on #/checklist now (they used to reach the hidden list from #/save).
 - G4b checks on the step C commit: dossier 1,106,514 B, byte-identical over two runs; kit check on HEAD 4 passed,
   0 failed (16 skipped, 5 at submission). The kit copy is level 26, the site level 27 (operator's call to refresh).
 - Step 1 of the Positive Mental Attitude guide leaves its cite box alone on a second line at 1280 px.

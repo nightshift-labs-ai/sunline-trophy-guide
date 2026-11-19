@@ -298,7 +298,7 @@ function wireEvents(state) {
       search.focus();
       return;
     }
-    if (state.route !== "checklist" && state.route !== "save") return;
+    if (state.route !== "checklist") return;
     const rows = [...document.querySelectorAll("#trophy-list li.row")];
     if (event.key === "j" || event.key === "k") {
       const i = rows.findIndex((r) => Number(r.dataset.id) === state.selected);

@@ -21,6 +21,11 @@ guide, written in our own words, with boxed, numbered sources (PowerPyx, OutputL
 guide pane, each with its read date and what it supports, a tinted "Missable?" callout, and a box for your own notes, which are saved with your progress and travel in
 the export file.
 
+The "Sources & save" tab is a page of its own: the spoiler setting with how many story trophies it masks right now,
+the save card (saved time, Export / Import, what the export file carries, the last import), progress by grade and by
+kind, and a sources registry that lists each source with its link, what SUNLINE used it for, how many guides cite it
+(counted from the data) and when it was read.
+
 Keys: `/` search, `j` / `k` next and previous trophy, `x` mark earned. The checklist also prints as a plain paper
 list. The app is plain HTML, CSS and JavaScript with no libraries, font files or images, and it makes no network requests.
 

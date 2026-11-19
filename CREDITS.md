@@ -20,6 +20,8 @@ and the Missables page's "what cannot be missed" points cite PowerPyx and Output
 All pages were read on 19 Nov 2026; the date is kept once per source in the data's `sources` registry and shown on
 every source line. PSNProfiles, Beebom, Insider Gaming and CULTR only list the official text (names, grades and/or
 descriptions), so the guide pane shows them as a cross-check of exactly that, never as a source for how-to facts.
+The "Sources & save" page lists the same registry in one table (the official list and Exophase's hidden flags share
+one page and one row); pages we could not read (Push Square, KeenGamer) are not listed as sources.
 
 ## Official text
 
