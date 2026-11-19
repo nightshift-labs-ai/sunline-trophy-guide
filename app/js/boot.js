@@ -6,7 +6,7 @@ export async function bootSunline() {
   for (const t of doc.trophies) {
     const li = document.createElement("li");
     li.className = "row";
-    li.textContent = `${t.name} · ${t.grade} · ${t.description}`;
+    li.textContent = `${t.name} · ${t.grade} · ${t.description}${t.hidden ? " · hidden on PSN" : ""}`;
     list.append(li);
   }
   document.body.dataset.ready = "1";

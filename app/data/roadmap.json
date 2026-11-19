@@ -1,0 +1,90 @@
+{
+  "missables": "Missables: 2 possible · 5 unknown triggers · 0 confirmed (PowerPyx: 1 potentially missable)",
+  "summary": "One playthrough, no mission replay and no New Game Plus; free roam stays open after the credits.",
+  "stages": [
+    {
+      "id": "s1",
+      "n": 1,
+      "title": "Chapter 1",
+      "goal": "Opening mission, Cal's fishing, an arcade game, and the meditation at Jason's house.",
+      "why": "The Jason's-house meditation spot only exists in Chapter 1, so it comes first.",
+      "tips": [
+        "Do the Chapter 1 meditation before the chapter ends and keep a save from this chapter.",
+        "Cal's fishing questline opens after Feng Shui; an arcade game can be finished at home."
+      ],
+      "cites": ["ppx", "ol"]
+    },
+    {
+      "id": "s2",
+      "n": 2,
+      "title": "Chapter 2",
+      "goal": "Breakfast Run, then the side work Coffee Break opens: Billy, Bret, the gym, partner heat.",
+      "why": "Coffee Break unlocks partner play and most side strands; garages and Scooter Bros open here too.",
+      "tips": [
+        "Little Boxes opens after Daily Driver and On the Spot after Moses.",
+        "The bowling alley robbery respawns, so it is safe to leave for later."
+      ],
+      "cites": ["ppx", "ol"]
+    },
+    {
+      "id": "s3",
+      "n": 3,
+      "title": "Chapter 3",
+      "goal": "The Cartel Heist, the jewelry jobs, laundering and four side finales.",
+      "why": "The Snap Gun and the Dye Pack Jammer arrive here, and Race Against Yago is time-sensitive.",
+      "tips": [
+        "Play Race Against Yago before Chapter 3 ends.",
+        "Rob three shops back-to-back with your partner while you are in north Vice City."
+      ],
+      "cites": ["ppx", "ol"]
+    },
+    {
+      "id": "s4",
+      "n": 4,
+      "title": "Chapters 4-5 & the final mission",
+      "goal": "The rest of the story plus the optional bank mission that opens vaults and armored trucks.",
+      "why": "Vault and armored-truck robberies unlock with an optional Chapter 4 mission.",
+      "tips": [
+        "Make a manual save before the final mission: missions cannot be replayed.",
+        "Hot Together often pops during the vault jobs."
+      ],
+      "cites": ["ppx", "ol"]
+    },
+    {
+      "id": "s5",
+      "n": 5,
+      "title": "After the credits: activities & strands",
+      "goal": "Stunts, ranges, drone races, races, challenges and the eight stranger strands.",
+      "why": "PowerPyx leaves activities and Strangers & Freaks for after the story.",
+      "tips": [
+        "Fly under bridges for the quickest stunts.",
+        "Only some strangers count toward the eight strands."
+      ],
+      "cites": ["ppx", "ol"]
+    },
+    {
+      "id": "s6",
+      "n": 6,
+      "title": "After the credits: collectibles, money & unknown triggers",
+      "goal": "Cards, WAiNK scans, vehicles, map fog, gang operations, spending, and the five secret triggers.",
+      "why": "Everything here stays open in free roam; five triggers are still unknown.",
+      "tips": [
+        "A WAiNK scan also counts as discovering a vehicle.",
+        "Check back on the unknown triggers as the guides update."
+      ],
+      "cites": ["ppx", "ol"]
+    },
+    {
+      "id": "s7",
+      "n": 7,
+      "title": "100% and the platinum",
+      "goal": "Finish the 100% checklist under Progress > Stats, then the platinum follows.",
+      "why": "The checklist only appears after the credits, but earlier progress counts.",
+      "tips": [
+        "Nothing on the 100% checklist can be missed, per PowerPyx.",
+        "Expect around 100 hours for this step."
+      ],
+      "cites": ["ppx", "ol"]
+    }
+  ]
+}
