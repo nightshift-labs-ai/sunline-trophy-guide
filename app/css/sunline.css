@@ -128,6 +128,24 @@ code { font-size: 13px; background: var(--raised); padding: 1px 5px; border-radi
 
 .actions { display: flex; gap: 8px; }
 
+.stage-earned { display: flex; gap: 6px; }
+
+.se { flex: 1; display: flex; flex-direction: column; gap: 2px; padding: 2px 7px 3px; border: 1px solid var(--line);
+  border-radius: 6px; background: var(--raised); color: var(--desc); font-size: 12px; font-weight: 700;
+  line-height: 1.2; text-decoration: none; white-space: nowrap; }
+
+.se b { color: var(--amber); }
+
+.se i { display: block; height: 3px; border-radius: 2px; background: var(--pane); overflow: hidden; }
+
+.se i span { display: block; height: 100%; background: var(--sun); }
+
+.se.is-done { border-color: var(--teal); color: var(--text); }
+
+.se.is-done b { color: var(--teal); }
+
+.se:hover, .se:focus-visible { color: var(--text); border-color: var(--amber); }
+
 .actions button, .actions .btn { font-size: 14px; font-weight: 700; padding: 6px 10px; white-space: nowrap; }
 
 #spoiler-switch[aria-pressed="true"] { background: var(--amber); color: var(--page); border-color: var(--amber); }

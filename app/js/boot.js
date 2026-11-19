@@ -111,6 +111,17 @@ function renderHeader(state) {
       return `<span class="ge ge-${g}">${l} ${got}/${all.length}</span>`;
     })
     .join("");
+  // Per-stage strip: each roadmap stage's earned count with a small bar; a finished stage turns teal.
+  document.getElementById("stage-earned").innerHTML = (state.stages || [])
+    .map((s) => {
+      const n = s.trophies.length;
+      const got = s.trophies.filter((t) => progress.earned[t.id]).length;
+      const p = n ? Math.round((got / n) * 100) : 0;
+      const done = n > 0 && got === n ? " is-done" : "";
+      return `<a class="se${done}" href="#/roadmap" aria-label="Stage ${s.n}: ${got} of ${n} earned">` +
+        `<span><b>S${s.n}</b> ${got}/${n}</span><i><span style="width:${p}%"></span></i></a>`;
+    })
+    .join("");
   const when = progress.savedAt
     ? new Date(progress.savedAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
     : "nothing saved yet";
