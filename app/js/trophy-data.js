@@ -76,17 +76,19 @@ export function witnesses(trophy, text, sources) {
 
 // Counts for the audit strip and the registry, all from the data.
 export function auditCounts(trophies, sources) {
-  let steps = 0, cited = 0, single = 0;
+  let steps = 0, cited = 0, single = 0, multi = 0;
   for (const t of trophies) {
     for (const s of t.steps || []) {
       steps++;
       const w = witnesses(t, s, sources);
       if (w.cited) cited++;
       if (w.guides > 0 && w.groups <= 1) single++;
+      // Same per-step witness count as 'single': two or more independent groups back this step.
+      if (w.groups >= 2) multi++;
     }
   }
   const disagree = trophies.filter((t) => t.disagree?.length);
-  return { steps, cited, single, disagree };
+  return { steps, cited, single, multi, disagree };
 }
 
 export function escapeHtml(text) {
@@ -127,8 +129,9 @@ export function auditHtml(trophies, sources) {
     `${b(trophies.length)} official: ${b(count("platinum"))} P · ${b(count("gold"))} G · ${b(count("silver"))} S · ${b(count("bronze"))} B`,
     `${b(hidden)} hidden`,
     `<span title="${guides} guides, ${regs.length - guides} lists">${b(regs.length)} sources</span>`,
-    `${b(`${a.cited}/${a.steps}`)} steps cited`,
-    `${b(a.single)} single-source`,
+    `<span title="Counted per guide step. ${a.single} of ${a.steps} steps rest on one independent witness ` +
+      `(pages that echo PowerPyx count with it; aggregators never confirm).">steps: ${b(`${a.cited}/${a.steps}`)} cited · ` +
+      `${b(a.multi)} on 2+ independent sources</span>`,
     `<span class="audit-dis">${b(a.disagree.length)} disagree</span>`,
     `${b(possible)} possibly missable · ${b(unknown)} trigger unknown`,
     `read ${reads.map(shortRead).join(", ") || "date not recorded"}`,
