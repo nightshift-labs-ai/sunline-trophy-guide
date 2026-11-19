@@ -1,0 +1,239 @@
+{
+  "about": "G5 additions, merged into trophies.json at load. Steps cite sources as [@key]; the loader turns each into the trophy's numbered cite. 'disagree' lists points where sources give different versions; both are shown. Official names, descriptions and grades live only in trophies.json and are never touched here.",
+  "independence": {
+    "ppx": { "group": "PowerPyx", "note": "Independent guide" },
+    "ol": { "group": "OutputLag", "note": "Independent guide" }
+  },
+  "sources": {
+    "pms": {
+      "name": "PowerPyx — GTA 6 All Meditation Spot Locations",
+      "short": "PowerPyx spots",
+      "url": "https://www.powerpyx.com/gta-6-all-meditation-spot-locations/",
+      "read": "2026-11-19",
+      "role": "guide",
+      "group": "PowerPyx",
+      "note": "PowerPyx location page (same publisher as its trophy guide): used for spot names and counts"
+    },
+    "pch": {
+      "name": "PowerPyx — GTA 6 All Collectible Card Sets Locations",
+      "short": "PowerPyx cards",
+      "url": "https://www.powerpyx.com/gta-6-all-collectible-card-sets-locations",
+      "read": "2026-11-19",
+      "role": "guide",
+      "group": "PowerPyx",
+      "note": "PowerPyx location page (same publisher as its trophy guide): used for set names and card counts"
+    },
+    "pcd": {
+      "name": "PowerPyx — GTA 6 Delights Dancers Card Set Locations",
+      "short": "PowerPyx Delights",
+      "url": "https://www.powerpyx.com/gta-6-delights-dancers-collectible-card-set-locations/",
+      "read": "2026-11-19",
+      "role": "guide",
+      "group": "PowerPyx",
+      "note": "PowerPyx location page, incomplete when read (5 of 18 cards placed)"
+    },
+    "gb": {
+      "name": "GTABase — GTA 6 Trophy Guide & Achievements List",
+      "short": "GTABase",
+      "url": "https://www.gtabase.com/articles/gta-6/gta-6-achievements-trophies-list-ps5-xbox-series",
+      "read": "2026-11-19",
+      "role": "guide",
+      "group": "PowerPyx",
+      "note": "Near-copy of PowerPyx (same missions, counts and order): never counted as a second witness"
+    },
+    "eg1": {
+      "name": "eGamers — GTA 6 Trophy List: All 55 Trophies (George Tsagkarakis)",
+      "short": "eGamers list",
+      "url": "https://egamers.io/gta-6-trophy-list-all-55-trophies-and-achievements-plus-the-hardest-ones/",
+      "read": "2026-11-19",
+      "role": "guide",
+      "confirms": false,
+      "note": "Aggregator: credits PowerPyx and GTABase, so it confirms nothing on its own"
+    },
+    "eg2": {
+      "name": "eGamers — GTA 6 100% Completion Guide (George Tsagkarakis)",
+      "short": "eGamers 100%",
+      "url": "https://egamers.io/gta-6-100-completion-guide-which-collectibles-you-can-skip-and-the-one-trophy-you-might-miss/",
+      "read": "2026-11-19",
+      "role": "guide",
+      "confirms": false,
+      "note": "Aggregator; says itself that some of its counts do not add up"
+    },
+    "lfc": {
+      "name": "LFCarry — GTA 6 Platinum Trophy Guide",
+      "short": "LFCarry",
+      "url": "https://lfcarry.com/guides/gta-6-platinum-trophy-guide",
+      "read": "2026-11-19",
+      "role": "guide",
+      "confirms": false,
+      "note": "Low trust: a sales page for paid boosting; cited only where it differs, and never as confirmation"
+    }
+  },
+  "trophies": {
+    "1": {
+      "supports": { "lfc": "15 manual save slots and one autosave", "eg2": "autosaves said to be rare" },
+      "steps": ["Rotate manual saves rather than trusting the autosave: LFCarry counts 15 manual slots and one autosave [@lfc], and eGamers reports autosaves are rare [@eg2]."]
+    },
+    "7": {
+      "supports": { "lfc": "places the final mission in Chapter 5" },
+      "disagree": [
+        { "on": "Which chapter holds the final mission", "versions": [
+          { "says": "PowerPyx ties this trophy and Top Of The World, Ma to the same Chapter 4 mission.", "src": ["ppx"] },
+          { "says": "The final story mission is in Chapter 5.", "src": ["lfc"] }
+        ] }
+      ]
+    },
+    "14": {
+      "supports": { "gb": "100% list under Progress > Stats > 100% Completion, with items PowerPyx and OutputLag leave out", "eg2": "all 22 bank jobs for 100%", "lfc": "250 stunts for 100%" },
+      "steps": ["GTABase's 100% list adds every underwater discovery, all 42 drone races, 100 optional missions and 100 of the 255 animal studies [@gb]."],
+      "disagree": [
+        { "on": "Which bank jobs the 100% list wants", "versions": [
+          { "says": "All 8 large bank vaults.", "src": ["ppx", "ol", "gb"] },
+          { "says": "All 22 bank jobs: 14 small banks plus the 8 vaults.", "src": ["eg2"] }
+        ] },
+        { "on": "Stunts needed for 100%", "versions": [
+          { "says": "300 stunts.", "src": ["ol", "gb"] },
+          { "says": "250 stunts.", "src": ["lfc"] }
+        ] }
+      ]
+    },
+    "15": {
+      "supports": { "gb": "397 stunts split 130 / 202 / 40 / 25" },
+      "steps": ["The 397 stunts split into 130 jumps, 202 under-bridge flights, 40 knife flights and 25 base jumps; Progress > Activities > Stunts shows what is left [@ppx][@gb]."]
+    },
+    "17": {
+      "supports": { "gb": "42 golds over 12 ranges; ranges raise Focus" },
+      "steps": ["Ranges also raise your Focus level, which makes Gunslinger easier later [@gb]."],
+      "disagree": [
+        { "on": "How many shooting ranges hold the 42 golds", "versions": [
+          { "says": "12 ranges.", "src": ["ppx", "gb"] },
+          { "says": "Two ranges.", "src": ["ol"] }
+        ] }
+      ]
+    },
+    "22": {
+      "supports": { "gb": "Andy texts a Belville address from Chapter 3" },
+      "steps": ["From Chapter 3, watch for Andy's text with an address in Belville: that starts the chain [@gb]."]
+    },
+    "23": {
+      "supports": { "gb": "Kenton's Treasures tracker" },
+      "steps": ["Your wrecks are tracked under Progress > Collections > Kenton's Treasures [@gb]."]
+    },
+    "25": {
+      "supports": { "gb": "strands not part of 100%", "lfc": "8 strands in its 100% list" },
+      "disagree": [
+        { "on": "Whether stranger strands count toward 100%", "versions": [
+          { "says": "Not needed for 100%.", "src": ["gb"] },
+          { "says": "8 strands are on the 100% list.", "src": ["lfc"] }
+        ] }
+      ]
+    },
+    "26": {
+      "supports": { "gb": "Wish List after 'Clonin' Keys, Makin' GS'; hotel driveways" },
+      "steps": ["Hotel driveways in Vice Beach and Ocean Beach are the best place to find listed cars; cleaner cars pay more [@gb]."]
+    },
+    "27": {
+      "supports": { "gb": "names the last job 'Shut Down the Labs'" },
+      "disagree": [
+        { "on": "The name of Tyrone's last job", "versions": [
+          { "says": "Spin On This.", "src": ["ppx"] },
+          { "says": "Shut Down the Labs.", "src": ["gb"] }
+        ] }
+      ]
+    },
+    "28": {
+      "supports": { "pms": "10 spots, 18 meditations; spots 2-9 count once per character; the summit spot appears only after 17", "gb": "balcony offered the morning after Down to Earth", "lfc": "balcony right after Gone Fishing" },
+      "steps": [
+        "Spots 2-9 count once for Jason and once for Lucia; the balcony and the Mount Kalaga summit count once each: 16 + 1 + 1 = 18 [@pms].",
+        "The summit stone circle stays off the map until the other 17 are done, so skipping the balcony may leave you stuck at 16 [@pms].",
+        "The eight shared spots: Capri sandbar, Buckskin Swamp dock, Camp Moonflower, Manifest Canyon, the south Moreau water wheel, the Mount Kalaga mine tower, the falls north-west of Tallaloko, the rocks east of Waning Sands [@pms]."
+      ],
+      "disagree": [
+        { "on": "When the balcony meditation is offered", "versions": [
+          { "says": "The morning after Down to Earth: follow Lucia from the kitchen.", "src": ["ol", "gb"] },
+          { "says": "Right after Gone Fishing, before Chapter 1 ends.", "src": ["lfc"] }
+        ] }
+      ]
+    },
+    "29": {
+      "supports": { "gb": "first hunt 'Veteran Hunted'; bring animals back alive" },
+      "steps": ["GTABase alone says to bring the animals back alive; nobody else says so, so treat it as unconfirmed [@gb]."]
+    },
+    "30": {
+      "supports": { "pch": "18 sets, 480 cards, set sizes, where cards sit, variants", "pcd": "Vicki's card gone after Chapter 2" },
+      "steps": [
+        "There are 18 sets and 480 cards; the trophy needs any 3 full sets [@pch].",
+        "Smallest three by card count: Backyard Wrestling (12), Delights Dancers (18) and any 24-card set, 54 cards in all (our sum from the set list) [@pch].",
+        "If Delights Dancers is one of your three, take Vicki's card before Chapter 3 [@pcd].",
+        "Look on shelves and walls indoors, in yellow wall phone boxes and toolboxes outdoors; bronze, silver and gold variants count separately [@pch]."
+      ]
+    },
+    "31": {
+      "supports": { "gb": "D-pad Up opens WAiNK, R1 scans" },
+      "steps": ["Open WAiNK with D-pad Up and scan with R1 [@gb]."]
+    },
+    "34": {
+      "supports": { "gb": "pop can lag ~30 s; rob a fourth", "eg1": "rob a fourth if it does not pop" },
+      "steps": ["The pop can lag about 30 seconds; if nothing comes after three, rob a fourth [@gb][@eg1]."]
+    },
+    "35": {
+      "supports": { "gb": "a scan counts without driving", "lfc": "277 base vehicles" },
+      "steps": ["A scan counts without driving the car, so a busy roadside does the job [@gb]."],
+      "disagree": [
+        { "on": "How many vehicles the game has", "versions": [
+          { "says": "557 vehicles at launch.", "src": ["ppx"] },
+          { "says": "277 base vehicles.", "src": ["ol", "lfc"] }
+        ] }
+      ]
+    },
+    "36": {
+      "supports": { "gb": "refill Focus at home; Adrenaline" },
+      "steps": ["Fill Focus first by eating, drinking or washing up at home; Adrenaline makes it last longer [@gb]."]
+    },
+    "37": {
+      "supports": { "gb": "only jets at a boarding bridge count; gates E3/E4" },
+      "steps": ["Only a jet at a gate's boarding bridge counts, not one parked on the airfield; gates E3 and E4 are easiest [@gb]."]
+    },
+    "40": {
+      "supports": { "gb": "pass a bag to your partner; up to $205,000 per vault", "lfc": "links vaults to the Cartel Heist" },
+      "steps": ["Each vault can pay up to $205,000; bring a fast bike and swap vehicles once clear [@gb]."],
+      "disagree": [
+        { "on": "What opens the vault jobs", "versions": [
+          { "says": "The optional Chapter 4 mission That's Where The Money Is...", "src": ["ppx", "ol", "gb"] },
+          { "says": "The Cartel Heist.", "src": ["lfc"] }
+        ] }
+      ]
+    },
+    "41": {
+      "supports": { "gb": "a Pay 'n' Spray also ends the job" },
+      "steps": ["Reaching a Pay 'n' Spray also counts as getting away, not only leaving the red zone [@gb]."]
+    },
+    "43": {
+      "supports": { "gb": "gang operations show as yellow icons" },
+      "steps": ["Gang operations show as yellow map icons [@gb]."]
+    },
+    "46": {
+      "supports": { "gb": "not all three valuables in one visit" },
+      "disagree": [
+        { "on": "Whether all three valuables are needed", "versions": [
+          { "says": "Take all three, then lose the police.", "src": ["ppx"] },
+          { "says": "Not all three in one visit; it pops once you lose the police.", "src": ["gb"] }
+        ] }
+      ]
+    },
+    "48": {
+      "supports": { "gb": "the Irredeemable profile is permanent", "lfc": "reads it as story choices" },
+      "steps": ["Steer clear of the Irredeemable profile while you farm: GTABase says it is permanent [@gb]."],
+      "disagree": [
+        { "on": "What counts toward the trophy", "versions": [
+          { "says": "500 actions that shift the Criminal Profile.", "src": ["ppx", "ol", "gb"] },
+          { "says": "Story choices made before big chapter decisions.", "src": ["lfc"] }
+        ] }
+      ]
+    },
+    "55": {
+      "supports": { "gb": "each registration costs money" },
+      "steps": ["Each registration costs money, so cheap cars and bikes keep the bill down [@gb]."]
+    }
+  }
+}

@@ -13,10 +13,12 @@ export const KIND_LABELS = {
 };
 
 export async function loadTrophyData() {
-  const [doc, roadmap] = await Promise.all([
+  const [doc, roadmap, extra] = await Promise.all([
     fetch("data/trophies.json").then((r) => r.json()),
     fetch("data/roadmap.json").then((r) => r.json()),
+    fetch("data/g5-sources.json").then((r) => r.json()),
   ]);
+  mergeExtra(doc, extra);
   const trophies = doc.trophies;
   return {
     doc,
@@ -26,6 +28,65 @@ export async function loadTrophyData() {
     byId: new Map(trophies.map((t) => [t.id, t])),
     stageByN: new Map(roadmap.stages.map((s) => [s.n, s])),
   };
+}
+
+// G5: new sources join the registry; each trophy's extra steps cite them as [@key], which becomes the trophy's own
+// numbered cite (added if the trophy did not cite that source yet). Official names, descriptions and grades are not
+// touched. 'disagree' keeps both versions, each with its cite numbers.
+export function mergeExtra(doc, extra) {
+  for (const [key, ind] of Object.entries(extra.independence || {})) Object.assign(doc.sources[key], ind);
+  Object.assign(doc.sources, extra.sources);
+  for (const [id, add] of Object.entries(extra.trophies)) {
+    const t = doc.trophies.find((x) => x.id === Number(id));
+    if (!t) continue;
+    const citeOf = (src) => {
+      let c = t.cites.find((x) => x.src === src);
+      if (!c) {
+        c = { n: Math.max(0, ...t.cites.map((x) => x.n)) + 1, src, supports: add.supports?.[src] || "" };
+        t.cites.push(c);
+      }
+      return c.n;
+    };
+    for (const src of Object.keys(add.supports || {})) citeOf(src);
+    const mark = (text) => text.replace(/\[@(\w+)\]/g, (_, src) => `[${citeOf(src)}]`);
+    t.steps = [...t.steps, ...(add.steps || []).map(mark)];
+    if (add.disagree) {
+      t.disagree = add.disagree.map((d) => ({
+        on: d.on,
+        versions: d.versions.map((v) => ({ says: v.says, cites: v.src.map(citeOf) })),
+      }));
+    }
+  }
+}
+
+// Independent witnesses behind one step: guides that do not confirm (aggregators, low trust) are left out, and
+// a near-copy or a page from the same publisher counts as one with its group.
+export function witnesses(trophy, text, sources) {
+  const nums = [...String(text).matchAll(/\[(\d+)\]/g)].map((m) => Number(m[1]));
+  const groups = new Set();
+  let guides = 0;
+  for (const n of nums) {
+    const s = sources[trophy.cites.find((c) => c.n === n)?.src];
+    if (!s || s.role !== "guide") continue;
+    guides++;
+    if (s.confirms !== false) groups.add(s.group || s.short);
+  }
+  return { cited: nums.length > 0, guides, groups: groups.size };
+}
+
+// Counts for the audit strip and the registry, all from the data.
+export function auditCounts(trophies, sources) {
+  let steps = 0, cited = 0, single = 0;
+  for (const t of trophies) {
+    for (const s of t.steps || []) {
+      steps++;
+      const w = witnesses(t, s, sources);
+      if (w.cited) cited++;
+      if (w.guides > 0 && w.groups <= 1) single++;
+    }
+  }
+  const disagree = trophies.filter((t) => t.disagree?.length);
+  return { steps, cited, single, disagree };
 }
 
 export function escapeHtml(text) {
