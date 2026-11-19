@@ -12,7 +12,7 @@
       "read": "2026-11-19",
       "role": "guide",
       "group": "PowerPyx",
-      "note": "PowerPyx location page (same publisher as its trophy guide): used for spot names and counts"
+      "note": "Meditation spot names and counts"
     },
     "pch": {
       "name": "PowerPyx — GTA 6 All Collectible Card Sets Locations",
@@ -21,7 +21,7 @@
       "read": "2026-11-19",
       "role": "guide",
       "group": "PowerPyx",
-      "note": "PowerPyx location page (same publisher as its trophy guide): used for set names and card counts"
+      "note": "Card set names, sizes, where cards sit"
     },
     "pcd": {
       "name": "PowerPyx — GTA 6 Delights Dancers Card Set Locations",
@@ -30,7 +30,7 @@
       "read": "2026-11-19",
       "role": "guide",
       "group": "PowerPyx",
-      "note": "PowerPyx location page, incomplete when read (5 of 18 cards placed)"
+      "note": "One missable card (page had 5 of 18 placed)"
     },
     "gb": {
       "name": "GTABase — GTA 6 Trophy Guide & Achievements List",
@@ -39,7 +39,7 @@
       "read": "2026-11-19",
       "role": "guide",
       "group": "PowerPyx",
-      "note": "Near-copy of PowerPyx (same missions, counts and order): never counted as a second witness"
+      "note": "Extra tips; near-copy of PowerPyx"
     },
     "eg1": {
       "name": "eGamers — GTA 6 Trophy List: All 55 Trophies (George Tsagkarakis)",
@@ -48,7 +48,7 @@
       "read": "2026-11-19",
       "role": "guide",
       "confirms": false,
-      "note": "Aggregator: credits PowerPyx and GTABase, so it confirms nothing on its own"
+      "note": "One tip; aggregator of PowerPyx + GTABase"
     },
     "eg2": {
       "name": "eGamers — GTA 6 100% Completion Guide (George Tsagkarakis)",
@@ -57,7 +57,7 @@
       "read": "2026-11-19",
       "role": "guide",
       "confirms": false,
-      "note": "Aggregator; says itself that some of its counts do not add up"
+      "note": "Its 22-bank-job count; aggregator"
     },
     "lfc": {
       "name": "LFCarry — GTA 6 Platinum Trophy Guide",
@@ -66,7 +66,7 @@
       "read": "2026-11-19",
       "role": "guide",
       "confirms": false,
-      "note": "Low trust: a sales page for paid boosting; cited only where it differs, and never as confirmation"
+      "note": "Where it differs; low trust (boosting sales page)"
     }
   },
   "trophies": {

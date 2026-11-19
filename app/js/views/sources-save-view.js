@@ -28,11 +28,32 @@ function registryRows(trophies, sources) {
     const cites = trophies.filter((t) => t.cites.some((c) => keys.includes(c.src))).length;
     const guide = src.some((s) => s.role === "guide");
     const lists = src.map((s) => s.lists).filter(Boolean).sort((a, b) => b.length - a.length)[0];
-    const use = guide
-      ? "Guide steps and the facts on hours, difficulty, replay and missable windows"
-      : `List cross-check of ${lists || "the official text"} only`;
-    return { name: src.map((s) => s.short).join(" + "), url: src[0].url, guide, use, cites, read: src[0].read };
+    const s0 = src[0];
+    const use = !guide
+      ? `List cross-check of ${lists || "the official text"} only`
+      : s0.group && s0.group !== s0.short || s0.confirms === false
+        ? s0.note
+        : "Steps; hours, replay, missable windows";
+    // Independence, from the data: aggregators and low-trust pages never confirm; near-copies and pages from the
+    // same publisher count as one witness with their group.
+    const counts = !guide ? "official text only"
+      : s0.confirms === false ? "never a confirmation"
+        : s0.group && s0.group !== s0.short ? `one witness with ${s0.group}` : "independent witness";
+    return { name: src.map((s) => s.short).join(" + "), url: s0.url, guide, use, counts, cites, read: s0.read };
   }).sort((a, b) => Number(b.guide) - Number(a.guide) || b.cites - a.cites);
+}
+
+// Every trophy where two sources give different versions, with both versions and their sources.
+function disagreeList(trophies, sources, progress) {
+  const names = (t, v) => v.cites.map((n) => sources[t.cites.find((c) => c.n === n)?.src]?.short).filter(Boolean)
+    .join(", ");
+  return trophies.filter((t) => t.disagree?.length).map((t) => {
+    const name = isSpoilerMasked(t, progress) ? "Story trophy (hidden until earned)" : t.name;
+    const pts = t.disagree.map((d) => `<li><b>${esc(d.on)}:</b> ` +
+      d.versions.map((v) => `${esc(v.says.replace(/\.$/, ""))} <i>(${esc(names(t, v))})</i>`).join(" <em>vs</em> ") +
+      `</li>`).join("");
+    return `<li><span class="dl-name">${esc(name)}</span><ul>${pts}</ul></li>`;
+  });
 }
 
 export function renderSourcesSave(state) {
@@ -61,10 +82,11 @@ export function renderSourcesSave(state) {
   }).join("");
   const rows = registryRows(trophies, sources);
   const reg = rows.map((r) =>
-    `<tr><th scope="row">${esc(r.name)}<span class="reg-role ${r.guide ? "is-guide" : "is-list"}">` +
-    `${r.guide ? "guide" : "list cross-check"}</span></th>` +
-    `<td><a href="${esc(r.url)}" rel="noopener">${esc(new URL(r.url).hostname.replace(/^www\./, ""))}</a></td>` +
-    `<td>${esc(r.use)}</td><td class="num">${r.cites}</td><td>${r.read ? readDate(r.read) : "not recorded"}</td></tr>`).join("");
+    `<tr><th scope="row"><a href="${esc(r.url)}" rel="noopener">${esc(r.name)}</a>` +
+    `<span class="reg-role ${r.guide ? "is-guide" : "is-list"}">${r.guide ? "guide" : "list"}</span></th>` +
+    `<td>${esc(r.use)}</td><td class="reg-counts ${r.counts === "independent witness" ? "is-ind" : ""}">${esc(r.counts)}</td>` +
+    `<td class="num">${r.cites}</td><td>${r.read ? readDate(r.read).replace(/ \d{4}$/, "") : "not recorded"}</td></tr>`).join("");
+  const dis = disagreeList(trophies, sources, progress);
 
   el.innerHTML = `
 <header class="sp-head"><h1 class="sp-title">Sources &amp; save</h1>
@@ -84,10 +106,13 @@ export function renderSourcesSave(state) {
 <section class="sp-card" aria-label="Progress by grade"><h2>By grade</h2><ul class="pm-list">${grades}</ul></section>
 <section class="sp-card" aria-label="Progress by kind"><h2>By kind</h2><ul class="pm-list">${kinds}</ul></section>
 </div>
-<section class="sp-reg" aria-label="Sources registry"><h2>Sources registry <small>${rows.length} sources ·
-cite counts and read dates come from the data</small></h2>
-<table><thead><tr><th>Source</th><th>Link</th><th>What SUNLINE used it for</th><th class="num">Guides citing</th>
+<div class="sp-regwrap"><section class="sp-reg" aria-label="Sources registry"><h2>Sources registry <small>${rows.length}
+sources · counts, independence and read dates come from the data</small></h2>
+<table><thead><tr><th>Source</th><th>What SUNLINE used it for</th><th>Counts as</th><th class="num">Guides citing</th>
 <th>Read</th></tr></thead><tbody>${reg}</tbody></table>
-<p class="sp-note">Sources we could not read (Push Square, KeenGamer) are not listed. Hidden-on-PSN flags and the
-official list share one Exophase page, so they are one row.</p></section>`;
+<p class="sp-note">Not listed: pages we could not read (Push Square, KeenGamer, TrueTrophies, TrueAchievements,
+PlayStationTrophies) and sites whose robots.txt bars us. The official list and the hidden flags share one Exophase
+page, so they are one row.</p></section>
+<section class="sp-dis" aria-label="Where sources disagree"><h2>Where sources disagree <small>${dis.length}
+trophies · both versions kept</small></h2><ol class="dis-list">${dis.join("")}</ol></section></div>`;
 }
