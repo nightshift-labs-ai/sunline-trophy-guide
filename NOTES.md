@@ -134,7 +134,51 @@
   G4b (55 distinct chips checked then).
 - trophies.json: the 55 official names, descriptions and grades are identical to the starter (7d71397).
 
+## Done (G5, short run, 2026-11-19 19:31-19:55 EET): sourcing depth
+Research input: the operator's s267 reader files A and B (both present, ~17 and ~20 KB; each a 11-12 minute pass). Their
+headers say "20 Nov 2026 research", but the sessions ran 19:00-19:12 EET on 19 Nov (file times agree), so the
+registry records read 2026-11-19. No new web research in this run.
+- A (data): `app/data/g5-sources.json`, merged into the guides at load by `trophy-data.js` (`mergeExtra`), so
+  `trophies.json` itself is unchanged. 7 new sources, all pages the readers really read: PowerPyx meditation spots,
+  PowerPyx card sets hub, PowerPyx Delights Dancers (incomplete when read), GTABase, eGamers trophy list, eGamers 100%
+  guide, LFCarry. Independence is data, not prose: `group` (GTABase and the three PowerPyx pages count as ONE witness
+  with PowerPyx; reader B called GTABase independent, reader A and the operator say it mirrors PowerPyx, and we follow
+  that) and `confirms: false` (both eGamers pages: aggregators; LFCarry: boosting sales page, low trust). 24 own-words
+  steps on 20 trophies cite them as [@key], turned into each trophy's numbered cite. `disagree` on 10 trophies, both
+  versions kept with cites: #7 final mission's chapter, #14 bank jobs (8 vaults vs 22 jobs) and stunts (300 vs 250),
+  #17 ranges (12 vs two), #25 strands in 100%, #27 Tyrone's last job name, #28 when the balcony meditation is offered,
+  #35 vehicle total (557 vs 277), #40 what opens the vaults, #46 all three valuables or not, #48 500 actions vs
+  choices. Not used: LFCarry's chapter 1 mission names, cheat and hour claims (single low-trust source, no
+  conflict to show); GTABase's Xbox Gamerscore values (not a PS5 fact).
+- B (cover): the audit strip counts at load: 14 sources (9 guides, 5 lists; the count is in its tooltip),
+  182/182 steps cited, 136 single-source tips (a step whose guide cites reduce to one independent witness), 10 where
+  sources disagree, 2 possibly missable, 5 trigger unknown, read 19 Nov. Shorter labels so the no-wrap strip fits at
+  1280 px. Guide pane: a violet "Sources disagree" row under the steps with both versions side by side, each with
+  boxed cites. Positive Mental Attitude stays the open trophy (it has a disagreement); its two new PowerPyx-spots
+  steps (18 = spots 2-9 twice + balcony + summit; the summit appears only after 17; the eight shared spots). Compared
+  out/sheet_before.jpg with the new sheet at 768x480: the new cover reads at least as well (more sourcing facts, the
+  disagree row legible); the list shows about one row less because longer source tags wrap. Kept.
+- C (shot 3): registry rows link the source name and add a computed "Counts as" column (independent witness / one
+  witness with PowerPyx / never a confirmation) beside "Guides citing"; "Where sources disagree" list (10 trophies,
+  both versions with source names; masked story names stay masked) beside the table. Shots 1-3 re-taken.
+- Rival (dev #1, 0.948) read from the brief image: it shows per-source "cited by n of 55" in a column on its cover.
+  Ours shows those counts on Sources & save; the cover's per-trophy Sources list is below the fold. Open.
+
+## Numbers (end of G5)
+- Shots: 1-checklist-guide.jpg 248,459 B · 2-roadmap.jpg 254,678 B (q81) · 3-sources-save.jpg 214,159 B (all
+  <= 250 KiB). Judge-sheet preview GATE OK.
+- Dossier: 1,130,618 B on the step C commit, byte-identical over two runs (<= 1.45 MiB); kit check on HEAD (step C):
+  4 passed, 0 failed (16 skipped, 5 at submission). Path grep: 0 files. Kit copy level 26, site 27.
+- Data: 55 official names, descriptions and grades identical to the starter (checked after the merge); every step
+  and every disagree version carries a cite that resolves to a registry source (0 unresolved); 182 steps.
+- Guides citing (trophies): PowerPyx 55, OutputLag 48, GTABase 21, LFCarry 8, eGamers 100% 2, PowerPyx spots 1,
+  PowerPyx cards 1, PowerPyx Delights 1, eGamers list 1.
+
 ## Known issues
+- G5: 136 of 182 steps still rest on one independent witness; GTABase echoes do not lower that by design.
+- G5: the single-source count treats a step that cites only an aggregator or LFCarry as single-source (0 witnesses).
+- G5: the step A commit message says "25 steps into 22 trophies"; after step B trimmed Positive Mental Attitude's
+  three new steps to two it is 24 steps on 20 trophies (24 trophies touched counting the disagree-only ones).
 - The registry lists CULTR with 0 guides citing it: it is shown only as a list cross-check in the guide pane.
 - Keys j / k / x act only on #/checklist now (they used to reach the hidden list from #/save).
 - G4b checks on the step C commit: dossier 1,106,514 B, byte-identical over two runs; kit check on HEAD 4 passed,
@@ -148,3 +192,5 @@
 - More sources for the one-source guides once new guides publish (Push Square, KeenGamer could not be read).
 - Bring the shots under 210 KiB (less text in view, or fewer rows) without losing the cover's required parts.
 - A "Next up" pick could weigh time-sensitive strands (Race Against Yago) above plain roadmap order.
+- G5 follow-ups: show "cited by n" per source on the cover (guide pane Sources, or the row tag); a filter chip for
+  "sources disagree"; a second independent witness for the 136 single-source steps once more guides are readable.

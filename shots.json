@@ -3,7 +3,7 @@
     "file": "1-checklist-guide.jpg",
     "path": "/#/checklist?f=all&t=28",
     "viewport": { "width": 1280, "height": 800 },
-    "shows": "Cover: one header band (17/55 earned from the demo save, P/G/S/B chips, spoiler switch, Export, Import, saved time) over an audit strip counted from the data (1/2/6/46, 28 hidden, 55/55 cited, 7 sources, 2 possibly missable + 5 trigger unknown, read 19 Nov 2026) and the S1-S7 strip; checklist in roadmap order with every row's full official description and grade word, source names, filters with counts, masked story rows with Reveal, counters; the guide pane of Positive Mental Attitude (POSSIBLY MISSABLE, 9/18, cited window line) down to its boxed, dated Sources; spoilers hidden."
+    "shows": "Cover: one header band (17/55 earned from the demo save, P/G/S/B chips, spoiler switch, Export, Import, saved time) over an audit strip counted from the data at load (1/2/6/46, 28 hidden, 14 sources, 182/182 steps cited, 136 single-source tips, 10 trophies where sources disagree, 2 possibly missable + 5 trigger unknown, read 19 Nov) and the S1-S7 strip; checklist in roadmap order with every row's full official description and grade word, source names, filters with counts, masked story rows with Reveal, counters; the guide pane of Positive Mental Attitude (POSSIBLY MISSABLE, 9/18, six cited steps incl. the PowerPyx spot list, a 'Sources disagree' row with both versions of when the balcony meditation is offered, each cited, and the cited window line); spoilers hidden."
   },
   {
     "file": "2-roadmap.jpg",
@@ -15,6 +15,6 @@
     "file": "3-sources-save.jpg",
     "path": "/#/save",
     "viewport": { "width": 1280, "height": 800 },
-    "shows": "Sources & save page: the spoiler setting with how many story trophies it masks now, the save card (saved-in-browser time, Export / Import, the export file's name pattern and what it carries, the last import as text), progress by grade and by kind counted from the data and the save, and the sources registry (each source's name, link, what SUNLINE used it for, how many guides cite it, read date; list sites marked as list cross-checks)."
+    "shows": "Sources & save page: the spoiler setting with how many story trophies it masks now, the save card (saved-in-browser time, Export / Import, the export file's name pattern and what it carries, the last import as text), progress by grade and by kind counted from the data and the save, the sources registry (14 sources: linked name, guide or list, what SUNLINE used it for, how far it counts as a witness — independent, one witness with PowerPyx, or never a confirmation — how many guides cite it, read date; all counted from the data), and beside it the list of the 10 trophies where sources disagree, each with both versions and their sources."
   }
 ]
