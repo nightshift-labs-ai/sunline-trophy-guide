@@ -175,7 +175,47 @@ registry records read 2026-11-19. No new web research in this run.
 - Guides citing (trophies): PowerPyx 55, OutputLag 48, GTABase 21, LFCarry 8, eGamers 100% 2, PowerPyx spots 1,
   PowerPyx cards 1, PowerPyx Delights 1, eGamers list 1.
 
+## Done (G6, short polish run, 2026-11-19 19:50-20:11 EET): shot 1 only
+Input: the operator's s268 judge read of G5 against dev #1 (G5 behind on cited guidance because the cover's cite boxes
+had no legend in view: G5 B pushed the guide pane's Sources block below the fold). No new facts, no new web research,
+no data change. A/B rule for every step: re-shoot shot 1 as shots.json defines it, build the judge-sheet preview into
+out/ab/, read before and after at 768x480, run the cut-text check on the shot 1 state; keep only if the cover reads
+better and the cut count stays 0. Baseline: out/ab/before.jpg and out/sheet_before.jpg (G5's cover).
+1. Kept. Cite numbers resolve on the cover. Beside the missable call (where "Not pinned down yet" sat) the guide pane
+   now has a "Cite numbers" legend: one line per cite number with the source's short name, the day it was read and
+   how many of the 55 guides cite that page (n/55), all counted at render from the trophies and sources (same
+   by-page counting as the registry's "Guides citing"). "Not pinned down yet" moves just below, still in the pane.
+   First try showed lines 1-5 with [6] under the fold; tightened to 18 px lines and all six show. At 768x480 every
+   box in the pane ([1] [2] [4] [5] [6]; [3] is the official list) has a readable line: PowerPyx 55/55, OutputLag
+   48/55, Official list 7/55, PowerPyx spots 1/55, GTABase 21/55, LFCarry 8/55. Missable call, window line and the
+   "Sources disagree" row with both versions stay in view. Cut text 0.
+2. Kept. No count reads as "57". Filter chip "Missable 2 · 5 unclear" and tab badge "2 | 5 unclear" replace "2 + 5?"
+   and "5?". Same counts, computed as before. The chip row still fits one line. Cut text 0.
+3. Kept. The audit strip names its unit and leads with the positive count: "steps: 182/182 cited · 37 on 2+
+   independent sources". 37, not 182 - 136 = 46: counted with the same per-step witness count as the single-source
+   figure, 182 = 37 (two or more independent groups) + 136 single-source (135 with one witness, 1 that cites only a
+   guide that never confirms) + 9 that cite no guide at all (official list only, e.g. the goal wording). The 136
+   stays in the strip's tooltip and here. Sources & save does not show it, so shot 3 was not changed for it.
+4. (optional) Kept. Row source tags show the first two guides and "+n" (full list in the tag's tooltip), so they stay
+   on the name line: the cover shows about 10 rows instead of 8. Cut text 0 (21 elements checked).
+Shots 2 and 3 were re-taken only because the shared header changed (audit strip, tab badge); their views did not
+change, so their shots.json sentences stay. Shot 1's sentence now names the legend, the strip and the tags.
+
+## Numbers (end of G6)
+- Shots: 1-checklist-guide.jpg 250,869 B (q83) · 2-roadmap.jpg 255,802 B (q81) · 3-sources-save.jpg 215,559 B (all
+  <= 250 KiB = 256,000 B). Judge-sheet preview GATE OK; final sheet out/ab/sheet_final.jpg read at 768x480.
+- Cut text: shot 1 state 0, shot 2 state 0, after every step.
+- Dossier: 1,136,967 B, byte-identical over two runs (<= 1.45 MiB), on the checks commit. Kit check on HEAD: 4
+  passed, 0 failed (16 skipped, 5 at submission). Path grep: 0 files. Kit copy level 26, site 27.
+- Data: app/data unchanged since G5 (0 diff lines); 55 official names, descriptions and grades identical to the
+  starter; 182 steps and every disagree version carry cites that resolve to registry sources (0 unresolved).
+
 ## Known issues
+- G6: the roadmap's Missable watch list still marks a trigger-unknown trophy with an amber "?" flag (a glyph beside
+  a name, not after a digit); left as it is in this run. Open.
+- G6: shots 1 and 2 sit just under the 250 KiB cap (q83 and q81); more text in view would push the quality lower.
+- G6: the legend sits beside the missable call, so a trophy with many cites (more than about six) would push its
+  last lines under the fold at 1280x800; Positive Mental Attitude has six.
 - G5: 136 of 182 steps still rest on one independent witness; GTABase echoes do not lower that by design.
 - G5: the single-source count treats a step that cites only an aggregator or LFCarry as single-source (0 witnesses).
 - G5: the step A commit message says "25 steps into 22 trophies"; after step B trimmed Positive Mental Attitude's
