@@ -7,8 +7,13 @@ export function exportProgressFile(progress, trophies) {
     const t = byId.get(id);
     if (t) counters[t.name] = value;
   }
+  const notes = {};
+  for (const [id, text] of Object.entries(progress.notes || {})) {
+    const t = byId.get(id);
+    if (t) notes[t.name] = text;
+  }
   const exportedAt = new Date().toISOString();
-  const file = { app: "SUNLINE", version: 1, exportedAt, earned, counters, settings: { ...progress.settings } };
+  const file = { app: "SUNLINE", version: 1, exportedAt, earned, counters, notes, settings: { ...progress.settings } };
   const blob = new Blob([JSON.stringify(file, null, 2)], { type: "application/json" });
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
@@ -57,6 +62,13 @@ export function parseProgressFile(text, trophies) {
     if (t && t.target && Number.isFinite(n)) counters[t.id] = Math.max(0, Math.min(t.target, Math.round(n)));
     else skipped += 1;
   }
+  // Notes: { "<trophy name>": "text" }; anything that is not a string under a known name is skipped.
+  const notes = {};
+  for (const [name, text] of Object.entries((!Array.isArray(data) && data.notes) || {})) {
+    const t = byName.get(normalizeName(name));
+    if (t && typeof text === "string" && text.trim()) notes[t.id] = text.slice(0, 600);
+    else skipped += 1;
+  }
   const settings = !Array.isArray(data) && data.settings && typeof data.settings === "object" ? data.settings : null;
-  return { earned, counters, settings, skipped };
+  return { earned, counters, notes, settings, skipped };
 }

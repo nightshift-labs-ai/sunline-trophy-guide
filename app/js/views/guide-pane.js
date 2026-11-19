@@ -25,7 +25,21 @@ export function renderGuidePane(trophy, state) {
     `<span class="chip-solid">Stage ${stage.n} · ${escapeHtml(stage.title)}</span>` +
     `${missableFlagHtml(trophy) || `<span class="chip-solid">Not missable</span>`}` +
     `${trophy.hidden ? `<span class="chip-solid chip-hidden">Hidden on PSN until earned</span>` : ""}</div>` +
-    (masked ? maskedBodyHtml(trophy) : guideBodyHtml(trophy, state));
+    (masked ? maskedBodyHtml(trophy) : guideBodyHtml(trophy, state)) +
+    notesHtml(trophy, p);
+}
+
+// The player's own note: saved with the progress in this browser and carried in the export file.
+function notesHtml(trophy, progress) {
+  const text = progress.notes?.[trophy.id] || "";
+  return (
+    `<section class="notes-block"><h3><label for="note-input">My notes</label> ` +
+    `<span class="h3-note">· saved with your progress and in the export file</span></h3>` +
+    `<textarea id="note-input" data-id="${trophy.id}" rows="2" maxlength="600" ` +
+    `placeholder="Where you left off, a spot to come back to, a reminder…">${escapeHtml(text)}</textarea>` +
+    `<p class="keys-hint">Keys: <kbd>/</kbd> search · <kbd>j</kbd> <kbd>k</kbd> next / previous trophy · ` +
+    `<kbd>x</kbd> mark earned · <kbd>Enter</kbd> open a focused row</p></section>`
+  );
 }
 
 function stepperHtml(trophy, state) {

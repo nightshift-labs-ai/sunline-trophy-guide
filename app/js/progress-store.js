@@ -5,6 +5,7 @@ export function emptyProgress() {
   return {
     earned: {},
     counters: {},
+    notes: {},
     settings: { spoilers: "hidden", filter: "all" },
     savedAt: null,
     revealed: new Set(),
@@ -18,6 +19,7 @@ export function loadProgress() {
     if (raw && typeof raw === "object") {
       Object.assign(progress.earned, raw.earned || {});
       Object.assign(progress.counters, raw.counters || {});
+      for (const [id, text] of Object.entries(raw.notes || {})) setNote(progress, id, text);
       Object.assign(progress.settings, raw.settings || {});
       progress.savedAt = raw.savedAt || null;
     }
@@ -29,9 +31,9 @@ export function loadProgress() {
 
 export function saveProgress(progress) {
   progress.savedAt = new Date().toISOString();
-  const { earned, counters, settings, savedAt } = progress;
+  const { earned, counters, notes, settings, savedAt } = progress;
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ earned, counters, settings, savedAt }));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ earned, counters, notes, settings, savedAt }));
   } catch {
     // Private windows can refuse storage; the page keeps working for this visit.
   }
@@ -60,6 +62,15 @@ export function setCounter(progress, trophy, value) {
   if (clamped) progress.counters[trophy.id] = clamped;
   else delete progress.counters[trophy.id];
   return clamped;
+}
+
+// A player's own note on one trophy: plain text, at most 600 characters; an empty note is removed.
+export const NOTE_MAX = 600;
+
+export function setNote(progress, id, text) {
+  const clean = typeof text === "string" ? text.slice(0, NOTE_MAX) : "";
+  if (clean.trim()) progress.notes[id] = clean;
+  else delete progress.notes[id];
 }
 
 export function earnedTotal(progress, trophies) {

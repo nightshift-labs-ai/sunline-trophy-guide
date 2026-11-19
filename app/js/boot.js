@@ -1,6 +1,6 @@
 // SUNLINE boot: load the data, keep the state, route by hash, draw the header, and show the toast.
 import { LIST_MAKEUP, loadTrophyData, makeupLine, citedLine } from "./trophy-data.js";
-import { loadProgress, saveProgress, toggleEarned, setCounter, counterStep, earnedTotal } from "./progress-store.js";
+import { loadProgress, saveProgress, toggleEarned, setCounter, counterStep, earnedTotal, setNote } from "./progress-store.js";
 import { exportProgressFile, parseProgressFile } from "./save-file.js";
 import { isKnownFilter } from "./filters.js";
 import { spoilerLabel } from "./spoiler-rule.js";
@@ -75,6 +75,10 @@ function render(state, { scrollToSelected = false } = {}) {
     renderGuidePane(state.byId.get(state.selected), state);
     if (state.route === "save") renderSaveBanner(state);
     if (scrollToSelected) scrollRowIntoView(state.selected);
+    if (state.focusRow) {
+      state.focusRow = false;
+      document.querySelector(`#trophy-list li.row[data-id="${state.selected}"]`)?.focus({ preventScroll: true });
+    }
   } else if (state.route === "roadmap") {
     renderRoadmap(state.stages, state.progress);
   } else {
@@ -174,6 +178,7 @@ async function importFile(state, file) {
     const parsed = parseProgressFile(await file.text(), state.trophies);
     state.progress.earned = parsed.earned;
     state.progress.counters = parsed.counters;
+    state.progress.notes = parsed.notes;
     if (parsed.settings?.spoilers === "shown" || parsed.settings?.spoilers === "hidden") {
       state.progress.settings.spoilers = parsed.settings.spoilers;
     }
@@ -181,7 +186,8 @@ async function importFile(state, file) {
     persist(state);
     const n = Object.keys(parsed.earned).length;
     const c = Object.keys(parsed.counters).length;
-    showToast(`Imported ${n} earned · ${c} counters${parsed.skipped ? ` · ${parsed.skipped} skipped` : ""}`);
+    const k = Object.keys(parsed.notes).length;
+    showToast(`Imported ${n} earned · ${c} counters${k ? ` · ${k} notes` : ""}${parsed.skipped ? ` · ${parsed.skipped} skipped` : ""}`);
   } catch (err) {
     showToast(`Import failed: ${err.message}`);
   }
@@ -239,13 +245,47 @@ function wireEvents(state) {
     state.query = search.value;
     render(state);
   });
-  // "/" jumps to the search box from anywhere outside a text field.
+  // A trophy note saves as you type; only the header (saved time) and the row's note tag refresh, so focus stays.
+  document.addEventListener("input", (event) => {
+    const el = event.target;
+    if (el.id !== "note-input") return;
+    const id = Number(el.dataset.id);
+    setNote(state.progress, id, el.value);
+    saveProgress(state.progress);
+    renderHeader(state);
+    const row = document.querySelector(`#trophy-list li[data-id="${id}"]`);
+    if (row) row.classList.toggle("has-note", Boolean(state.progress.notes[id]));
+  });
+  // Keys outside text fields: "/" jumps to search; j / k move down / up the visible rows; x marks the selected
+  // trophy earned (or not); Enter on a focused row opens its guide.
   document.addEventListener("keydown", (event) => {
-    if (event.key !== "/" || event.ctrlKey || event.metaKey) return;
+    if (event.ctrlKey || event.metaKey || event.altKey) return;
     if (event.target.closest("input, select, textarea")) return;
-    event.preventDefault();
-    if (state.route !== "checklist") writeHash(state, { route: "checklist" });
-    search.focus();
+    if (event.key === "/") {
+      event.preventDefault();
+      if (state.route !== "checklist") writeHash(state, { route: "checklist" });
+      search.focus();
+      return;
+    }
+    if (state.route !== "checklist" && state.route !== "save") return;
+    const rows = [...document.querySelectorAll("#trophy-list li.row")];
+    if (event.key === "j" || event.key === "k") {
+      const i = rows.findIndex((r) => Number(r.dataset.id) === state.selected);
+      const next = rows[Math.max(0, Math.min(rows.length - 1, i + (event.key === "j" ? 1 : -1)))];
+      if (!next || Number(next.dataset.id) === state.selected) return;
+      event.preventDefault();
+      state.focusRow = true;
+      writeHash(state, { t: Number(next.dataset.id) });
+    } else if (event.key === "x" && state.selected) {
+      event.preventDefault();
+      state.focusRow = true;
+      toggleEarned(state.progress, state.selected);
+      persist(state);
+    } else if (event.key === "Enter" && event.target.matches("#trophy-list li.row")) {
+      event.preventDefault();
+      state.focusRow = true;
+      writeHash(state, { t: Number(event.target.dataset.id) });
+    }
   });
   document.getElementById("spoiler-switch").addEventListener("click", () => toggleSpoilers(state));
   document.getElementById("export-progress").addEventListener("click", () => exportFromState(state));

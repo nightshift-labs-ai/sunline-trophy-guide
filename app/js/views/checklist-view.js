@@ -104,14 +104,16 @@ function rowHtml(t, state) {
   const p = state.progress;
   const earned = Boolean(p.earned[t.id]);
   const masked = isSpoilerMasked(t, p);
-  const classes = ["row", earned && "is-earned", masked && "is-masked", state.selected === t.id && "is-selected"];
+  const selected = state.selected === t.id;
+  const classes = ["row", earned && "is-earned", masked && "is-masked", selected && "is-selected", p.notes?.[t.id] && "has-note"];
   const counter = t.target
     ? `<span class="row-count num">${formatAmount(p.counters[t.id] || 0, t.unit)}/${formatAmount(t.target, t.unit)}</span>`
     : "";
   const reveal = masked ? `<button class="reveal" data-action="reveal" data-id="${t.id}">Reveal</button>` : "";
   const hidden = t.hidden ? `<span class="tag tag-hidden">hidden on PSN</span>` : "";
   return (
-    `<li class="${classes.filter(Boolean).join(" ")}" data-action="select" data-id="${t.id}">` +
+    `<li class="${classes.filter(Boolean).join(" ")}" data-action="select" data-id="${t.id}" ` +
+    `tabindex="${selected ? 0 : -1}"${selected ? ` aria-current="true"` : ""}>` +
     `<button class="check" data-action="toggle" data-id="${t.id}" aria-pressed="${earned}"` +
     ` aria-label="Earned: ${escapeHtml(maskedName(t, p))}">${earned ? "✓" : ""}</button>` +
     `<span class="row-medal">${medalSvg(t.grade)}</span>` +
