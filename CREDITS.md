@@ -3,7 +3,8 @@
 ## Sources cited in the guides
 
 Every guide in `app/data/trophies.json` cites its sources by number; the guide pane links them. The facts were
-paraphrased; no guide text was copied.
+paraphrased; no guide text was copied. The roadmap's hour estimates (story, 100% checklist, strands) are PowerPyx's,
+and the Missables page's "what cannot be missed" points cite PowerPyx and OutputLag by name.
 
 - PowerPyx — GTA 6 Trophy Guide & Roadmap: https://www.powerpyx.com/gta-6-grand-theft-auto-vi-trophy-guide-roadmap/
 - OutputLag — GTA 6 Trophy List (Steven Mills): https://outputlag.com/guides/gta-6-trophy-list/

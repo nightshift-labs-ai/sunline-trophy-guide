@@ -12,9 +12,15 @@ stage (S1-S7, each with its own small bar). A spoiler setting keeps unearned sto
 reveal them, and your progress stays in the browser, with export and import of a small JSON save file.
 
 A 7-stage roadmap to the platinum and the missable flags (2 possibly missable, 5 triggers not known yet) are built
-from the official descriptions plus the guides they cite. Every trophy has its own guide, written in our own words,
-with numbered sources (PowerPyx, OutputLag, the official list) linked in the guide pane. The app is plain HTML, CSS
-and JavaScript with no libraries, fonts or images, and it makes no network requests.
+from the official descriptions plus the guides they cite. A "Next up" card at the top of the roadmap names the next
+trophy to go for (a possibly missable one first, then a counter you have started), and the Missables page opens with
+what cannot be missed before it lists the flagged trophies with what to do to stay safe. Every trophy has its own
+guide, written in our own words, with numbered sources (PowerPyx, OutputLag, the official list) linked in the guide
+pane, a tinted "Missable?" callout, and a box for your own notes, which are saved with your progress and travel in
+the export file.
+
+Keys: `/` search, `j` / `k` next and previous trophy, `x` mark earned. The checklist also prints as a plain paper
+list. The app is plain HTML, CSS and JavaScript with no libraries, fonts or images, and it makes no network requests.
 
 Unofficial fan project, not affiliated with Rockstar Games or Sony. Built by an AI agent (Claude Code) for
 Nightshift Labs.
