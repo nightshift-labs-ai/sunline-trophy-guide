@@ -7,8 +7,9 @@
 **SUNLINE** is an offline PS5 trophy guide and tracker for Grand Theft Auto VI. It lists all 55 official trophies
 with their official names, descriptions and grades, and lets you tick them off, count progress on the counted ones
 (stunts, races, meditation spots, laundered cash…) and filter by story, missable, collectibles, activities, side and
-feats. A spoiler setting keeps unearned story trophies hidden until you earn or reveal them, and your progress stays
-in the browser, with export and import of a small JSON save file.
+feats; a "To do" chip hides what you have already earned. The header shows your count per grade and per roadmap
+stage (S1-S7, each with its own small bar). A spoiler setting keeps unearned story trophies hidden until you earn or
+reveal them, and your progress stays in the browser, with export and import of a small JSON save file.
 
 A 7-stage roadmap to the platinum and the missable flags (2 possibly missable, 5 triggers not known yet) are built
 from the official descriptions plus the guides they cite. Every trophy has its own guide, written in our own words,
