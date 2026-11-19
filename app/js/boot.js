@@ -203,6 +203,10 @@ function wireEvents(state) {
         state.selected = id;
         render(state);
         break;
+      case "todo":
+        state.todoOnly = !state.todoOnly;
+        render(state);
+        break;
       case "filter":
         state.progress.settings.filter = el.dataset.f;
         saveProgress(state.progress);

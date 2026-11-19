@@ -56,7 +56,12 @@ function filterChipsHtml(trophies, state) {
     }
     return `<button class="chip${on ? " is-on" : ""}" data-action="filter" data-f="${f}" aria-pressed="${on}">${label}</button>`;
   };
-  return ["all", ...FILTERS].map(chip).join("");
+  // "To do" is a switch on top of any filter: it hides what is already earned and counts what is left.
+  const left = state.trophies.filter((t) => !state.progress.earned[t.id]).length;
+  const todo =
+    `<button class="chip chip-todo${state.todoOnly ? " is-on" : ""}" data-action="todo" aria-pressed="${!!state.todoOnly}"` +
+    ` title="Hide trophies you have earned">To do <b>${left}</b></button>`;
+  return ["all", ...FILTERS].map(chip).join("") + todo;
 }
 
 function listToolsHtml(state) {

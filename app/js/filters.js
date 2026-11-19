@@ -39,6 +39,7 @@ export function applyListFilters(trophies, state, nameOf) {
     (t) =>
       matchesFilter(t, state.filter) &&
       (state.grade === "all" || t.grade === state.grade) &&
+      !(state.todoOnly && state.progress?.earned[t.id]) &&
       matchesSearch(t, state.query || "", nameOf(t)),
   );
 }

@@ -184,6 +184,10 @@ body[data-route="roadmap"] .view, body[data-route="missables"] .view { grid-temp
 
 .chip b { font-weight: 800; color: var(--amber); margin-left: 2px; }
 
+.chip-todo { padding: 3px 7px; border-style: dashed; }
+
+.chip-todo b { color: var(--teal); }
+
 .chip.is-on { background: var(--amber); color: var(--page); border-color: var(--amber); }
 
 .chip.is-on b { color: var(--page); }
