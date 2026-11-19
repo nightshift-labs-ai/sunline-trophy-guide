@@ -14,6 +14,12 @@ and the Missables page's "what cannot be missed" points cite PowerPyx and Output
 - Beebom — GTA 6 Trophy List (Bipradeep Biswas): https://beebom.com/gta-6-trophy-achievements-list/
 - Insider Gaming — Complete GTA 6 Trophy List (Charlie Champion):
   https://insider-gaming.com/complete-gta-6-trophy-list-how-to-get-all-trophies-achievements/
+- CULTR — Complete GTA 6 Trophy List (Oliver Tryon):
+  https://www.cultr.com/news/complete-gta-6-trophy-list-every-trophy-and-achievement/
+
+All pages were read on 19 Nov 2026; the date is kept once per source in the data's `sources` registry and shown on
+every source line. PSNProfiles, Beebom, Insider Gaming and CULTR only list the official text (names, grades and/or
+descriptions), so the guide pane shows them as a cross-check of exactly that, never as a source for how-to facts.
 
 ## Official text
 
@@ -22,8 +28,10 @@ roadmap stages, missable calls, guides and steps) was written by SUNLINE.
 
 ## Code, fonts and images
 
-No third-party code, libraries, fonts or images are used. The app uses the system font stack, and the medal marks are
-inline SVG drawn by the app. There is no Rockstar logo, wordmark, artwork, screenshot or lookalike font.
+No third-party code, libraries, fonts or images are used. The app uses system fonts only and ships no font file: its
+stack asks for Ubuntu Sans first (narrower, so the official descriptions fit without being cut) and falls back to
+system-ui, Segoe UI, Roboto, Helvetica Neue, Arial and the default sans-serif. The medal marks are inline SVG drawn
+by the app. There is no Rockstar logo, wordmark, artwork, screenshot or lookalike font.
 
 ## Affiliation and authorship
 

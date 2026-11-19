@@ -64,8 +64,42 @@
 - Outside sources: all 55 trophies cite PowerPyx and/or OutputLag; 5 of them (unknown triggers) lead with the
   official description and cite the guides only for "trigger not known yet" or a guess.
 
+## Done (G4a, short run, 16:36-16:58 EET): the cover gaps
+- Header: one band (wordmark, big earned count + bar, P/G/S/B chips at 16 px, spoiler switch, Export, Import, "Saved in
+  this browser" + time), then an audit strip counted from the data at load (55 official: 1 P · 2 G · 6 S · 46 B ·
+  28 hidden on PSN · 55/55 guides cite a source · 7 sources (2 guides, 5 lists; the official list and the hidden flags
+  share one Exophase page, counted once) · 2 possibly missable · 5 trigger not known · sources read 19 Nov 2026), then
+  the tabs (active tab filled amber) beside the S1-S7 strip. Header + tabs: 108 px of 800 (was ~165).
+- Font: "Ubuntu Sans" first in the stack, the old fallbacks kept, no font file shipped. The sheet preview's cover reads
+  better than before (compared out/sheet-before.jpg vs out/sheet.jpg), so it stays.
+- Checklist rows: official name + a grade word chip (PLATINUM / GOLD / SILVER / BRONZE, medal colours) on the first
+  line, with the source names (PowerPyx · OutputLag, "+n" list sites) and the counter or Reveal at its end; the FULL
+  official description on the second line, the chips (missable flag, stage, kind, hidden on PSN) after it, wrapping
+  instead of squeezing. List column 575 -> 600 px. Masked rows leave the source tag off (Reveal shows it).
+- Guide pane: boxed cite numbers (not superscripts) in steps, callouts and the stepper; each source line shows "read
+  19 Nov 2026" from the registry (one `read` per source) and wraps its "supports" note; list sites the trophy does not
+  cite are shown as "Cross-check of the official text only" with what each lists (below the fold on the cover).
+  Positive Mental Attitude's Missable callout gained a cited Window line (after Down to Earth [OutputLag], may close
+  when Chapter 1 ends [PowerPyx]).
+- B5: the Missables tab badge is "2" (red) + "5?" (amber) and the Missable chip reads "2 + 5?" instead of one 7.
+- Registry: `role` (guide / list), `lists` (what a list site lists), `read` (date) per source; CULTR added as a list.
+- Not done in G4a (by plan): step C (roadmap: all 55 chips, counts, no ellipses, key-fact tiles) and step D (shot 3
+  as a sources registry / save page). Shots 2 and 3 were not re-taken, so they still show the G3 header.
+
+## Numbers (end of G4a)
+- Shots: 1-checklist-guide.jpg 247,480 B (q85) · 2-roadmap.jpg 255,540 B · 3-spoilers-save.jpg 213,740 B (both from
+  G3, unchanged). Judge-sheet preview GATE OK.
+- Dossier: 1,111,561 B, byte-identical over two runs; kit check on HEAD: 4 passed, 0 failed.
+- Cut text (out/cut-check.mjs, 1280x800, not committed): shot 1 state 0 of 24 checked elements; shot 2 state
+  (#/roadmap, spoilers shown) 9 of 17 (stage titles and goal lines: step C, open).
+- trophies.json: the 55 official names, descriptions and grades are identical to the starter (7d71397).
+- Process note: one word of README.md ("fonts" -> "font files") was changed with a shell `sed` instead of the edit
+  tool; every other change in this run went through the edit/write tools.
+
 ## Known issues
-- Long stage titles are cut with an ellipsis on the roadmap cards at 1280 px.
+- Long stage titles and goal lines are still cut with an ellipsis on the roadmap cards at 1280 px (9 in the shot 2
+  state); the roadmap does not show all 55 trophies; shots 2-3 show the G3 header. All three are G4b work.
+- Step 1 of the Positive Mental Attitude guide leaves its cite box alone on a second line at 1280 px.
 - Shots 1-2 are over the 210 KiB target (dense text); both are under the gate's 256 KiB.
 - Mid-session in run 1 one batch of CSS edits went through a shell script instead of the edit tool; the whole
   stylesheet was rewritten with the Write tool right after, so every line of it comes from a direct write.
