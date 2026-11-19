@@ -138,7 +138,10 @@ function renderHeader(state) {
   sw.textContent = spoilerLabel(progress);
   sw.setAttribute("aria-pressed", String(progress.settings.spoilers !== "shown"));
   for (const a of document.querySelectorAll("#tabs a")) {
-    a.classList.toggle("is-active", a.dataset.route === state.route);
+    const on = a.dataset.route === state.route;
+    a.classList.toggle("is-active", on);
+    if (on) a.setAttribute("aria-current", "page");
+    else a.removeAttribute("aria-current");
   }
 }
 
@@ -230,6 +233,12 @@ function wireEvents(state) {
         break;
       case "export":
         exportFromState(state);
+        break;
+      case "skip":
+        event.preventDefault();
+        state.focusRow = true;
+        if (state.route === "checklist" || state.route === "save") render(state);
+        else writeHash(state, { route: "checklist" });
         break;
     }
   });

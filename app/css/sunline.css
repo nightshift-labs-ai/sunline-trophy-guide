@@ -9,7 +9,7 @@
   --muted: #9aa6bf;
   --amber: #ffb547;
   --teal: #35d0b5;
-  --red: #c62f2f;
+  --red: #a82626; /* white text on it: 7.07:1 */
   --sun: linear-gradient(90deg, #ffb547, #ff6a5c 55%, #d94f9c);
   --sun-down: linear-gradient(180deg, #ffb547, #ff6a5c 55%, #d94f9c);
   --stripes: repeating-linear-gradient(135deg, #161d2e 0 20px, #1b2236 20px 40px);
@@ -451,7 +451,13 @@ body[data-route="roadmap"] .view, body[data-route="missables"] .view { grid-temp
 
 .miss-call.miss-possible { border-left-color: #ff5a4f; background: #3a1c24; }
 
-.miss-call.miss-possible h3 { color: #ff8a80; }
+.miss-call.miss-possible h3 { color: #ff9d94; }
+
+/* Skip link: off screen until it gets keyboard focus. */
+.skip { position: absolute; left: 8px; top: -60px; z-index: 50; padding: 8px 12px; border-radius: var(--r-ctl);
+  background: var(--amber); color: var(--page); font-weight: 800; text-decoration: none; }
+
+.skip:focus { top: 8px; }
 
 .miss-call.miss-unknown { border-left-color: var(--amber); background: #33291b; }
 
@@ -667,6 +673,32 @@ body[data-route="roadmap"] .view, body[data-route="missables"] .view { grid-temp
 .miss-card p { margin: 3px 0 0; font-size: 14px; color: var(--desc); }
 
 .miss-card b { color: var(--text); }
+
+.miss-card.miss-possible { border-left: 5px solid #ff5a4f; }
+
+.miss-card.miss-unknown { border-left: 5px solid var(--amber); }
+
+.miss-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+
+.miss-status { font-size: 13px; font-weight: 800; padding: 2px 8px; border-radius: 6px; background: var(--raised);
+  border: 1px solid var(--line); color: var(--text); }
+
+.miss-status.is-earned { border-color: var(--teal); color: var(--teal); }
+
+.miss-src a { color: var(--text); font-weight: 700; }
+
+.miss-group { margin: 12px 0 0; font-size: 22px; font-weight: 800; }
+
+.miss-group .num { color: var(--amber); }
+
+.miss-safe { margin-top: 8px; padding: 6px 14px 8px; border-radius: var(--r-pane); border: 1px solid var(--line);
+  border-left: 5px solid var(--teal); background: #17322f; }
+
+.miss-safe h3 { margin: 0 0 2px; font-size: 17px; color: var(--teal); }
+
+.miss-safe ul { margin: 0; padding-left: 20px; columns: 2; column-gap: 28px; font-size: 14px; color: var(--text); }
+
+.miss-safe li { margin: 1px 0; break-inside: avoid; }
 
 /* ---------- toast + footer ---------- */
 .toast {

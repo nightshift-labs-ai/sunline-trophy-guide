@@ -135,27 +135,58 @@ function namedMarks(text, trophy) {
 // The Missables page: every flagged trophy with the reason for the call and what to do to stay safe.
 export function renderMissables(stages, progress) {
   const flagged = stages.flatMap((s) => s.trophies).filter((t) => t.missable);
-  const cards = flagged
-    .map((t) => {
-      const masked = isSpoilerMasked(t, progress);
-      const safe =
-        t.missable === "possible"
-          ? "Do it in the stage shown and keep a manual save from before that stage ends."
-          : "Keep manual saves from each chapter until a guide pins the trigger down.";
-      return (
-        `<article class="miss-card${masked ? " is-masked" : ""}">${missableFlagHtml(t)}` +
-        `<h3>${medalSvg(t.grade, 22)}${escapeHtml(maskedName(t, progress))}</h3>` +
-        `<p><b>Stage ${t.stage} · ${escapeHtml(stageTitle(stages, t.stage))}</b></p>` +
-        `<p><b>Why:</b> ${masked ? "Hidden with the spoiler setting on." : namedMarks(t.missableWhy, t)}</p>` +
-        `<p><b>To stay safe:</b> ${escapeHtml(safe)}</p>` +
-        (t.unknown && !masked ? `<p><b>Not pinned down yet:</b> ${namedMarks(t.unknown, t)}</p>` : "") +
-        `<p class="miss-src">Sources: ${escapeHtml(t.cites.map((c) => context.sources[c.src]?.name).filter(Boolean).join(" · "))}</p>` +
-        `<p><a href="#/checklist?f=missable&amp;t=${t.id}">Open the guide and its sources</a></p></article>`
-      );
-    })
-    .join("");
+  const group = (kind, title) => {
+    const items = flagged.filter((t) => t.missable === kind);
+    return (
+      `<h3 class="miss-group">${title} <span class="num">· ${items.length}</span></h3>` +
+      `<div class="miss-list">${items.map((t) => missCardHtml(t, stages, progress)).join("")}</div>`
+    );
+  };
   document.getElementById("missables").innerHTML =
     `<div class="road-head"><h2 class="banner-title">Missables</h2>` +
     `<p class="road-sub">${escapeHtml(context.missables)}</p></div>` +
-    `<div class="miss-list">${cards}</div>`;
+    safeListHtml() +
+    group("possible", "Possibly missable") +
+    group("unknown", "Trigger not known yet");
+}
+
+// What the guides say cannot be missed, so the flagged list below reads in proportion.
+function safeListHtml() {
+  const m = (s) => `<sup class="cite-mark">[${s}]</sup>`;
+  return (
+    `<section class="miss-safe" aria-label="What cannot be missed"><h3>Good news first: what cannot be missed</h3><ul>` +
+    `<li>Story and chapter trophies unlock on their own as the story runs ${m("PPX")}.</li>` +
+    `<li>Nothing on the 100% checklist can be missed ${m("PPX")}.</li>` +
+    `<li>Let’s Go Bowling stays open: its valuables respawn ${m("PPX")}.</li>` +
+    `<li>Side-story finales are still there after the credits ${m("OL")}.</li>` +
+    `<li>There is no mission replay, so keep a manual save before the final mission ${m("OL")}.</li></ul></section>`
+  );
+}
+
+function missCardHtml(t, stages, progress) {
+  const masked = isSpoilerMasked(t, progress);
+  const safe =
+    t.missable === "possible"
+      ? "Do it in the stage shown and keep a manual save from before that stage ends."
+      : "Keep manual saves from each chapter until a guide pins the trigger down.";
+  const value = progress.counters[t.id];
+  const status = progress.earned[t.id]
+    ? `<span class="miss-status is-earned">Earned ✓</span>`
+    : t.target
+      ? `<span class="miss-status num">${formatAmount(value || 0, t.unit)} / ${formatAmount(t.target, t.unit)}</span>`
+      : `<span class="miss-status">Not earned yet</span>`;
+  const links = t.cites
+    .map((c) => context.sources[c.src])
+    .filter(Boolean)
+    .map((s) => `<a href="${escapeHtml(s.url)}" target="_blank" rel="noopener">${escapeHtml(s.short)}</a>`)
+    .join(" · ");
+  return (
+    `<article class="miss-card miss-${t.missable}${masked ? " is-masked" : ""}"><div class="miss-top">${missableFlagHtml(t)}${status}</div>` +
+    `<h3>${medalSvg(t.grade, 22)}${escapeHtml(maskedName(t, progress))}</h3>` +
+    `<p><b>Stage ${t.stage} · ${escapeHtml(stageTitle(stages, t.stage))}</b></p>` +
+    `<p><b>Why:</b> ${masked ? "Hidden with the spoiler setting on." : namedMarks(t.missableWhy, t)}</p>` +
+    `<p><b>To stay safe:</b> ${escapeHtml(safe)}</p>` +
+    (t.unknown && !masked ? `<p><b>Not pinned down yet:</b> ${namedMarks(t.unknown, t)}</p>` : "") +
+    `<p class="miss-src">Sources: ${links} · <a href="#/checklist?f=missable&amp;t=${t.id}">open the full guide</a></p></article>`
+  );
 }
