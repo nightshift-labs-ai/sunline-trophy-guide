@@ -96,11 +96,12 @@
       "guide": "Play through the Chapter 2 story; PowerPyx saw this one unlock only once Chapter 3 had begun.",
       "steps": [
         "Expect the trophy at the start of Chapter 3, with Welcome to Vice City [1].",
-        "Treat a delayed pop as normal: OutputLag notes that chapter trophies can arrive with the following chapter [2]."
+        "Treat a delayed pop as normal: OutputLag notes that chapter trophies can arrive with the following chapter [2].",
+        "Keep a manual save from late Chapter 2 if you want to replay a mission later, since the game has no mission replay [2]."
       ],
       "cites": [
         { "n": 1, "src": "ppx", "supports": "unlocks as Chapter 3 opens" },
-        { "n": 2, "src": "ol", "supports": "chapter trophies can lag into the next chapter" }
+        { "n": 2, "src": "ol", "supports": "chapter trophies can lag into the next chapter; no mission replay" }
       ]
     },
     {
@@ -810,7 +811,8 @@
       "guide": "Discover 100 different vehicles; a WAiNK scan is enough, with no need to drive each one.",
       "steps": [
         "Scan cars, bikes and boats with WAiNK as you pass them; each scan counts [1].",
-        "Keep scanning past 100 if you want 100%: PowerPyx gives 200 base models and OutputLag 277 [1][2]."
+        "Keep scanning past 100 if you want 100%: PowerPyx gives 200 base models and OutputLag 277 [1][2].",
+        "Do not hunt rare cars for this one: PowerPyx counts 557 vehicles at launch, so ordinary traffic gets you to 100 [1]."
       ],
       "cites": [
         { "n": 1, "src": "ppx", "supports": "scans count as discoveries; 557 vehicles; 200 base models" },
