@@ -127,8 +127,9 @@
 ## Numbers (end of G4c)
 - Shots: 1-checklist-guide.jpg 247,480 B · 2-roadmap.jpg 249,984 B · 3-sources-save.jpg 213,385 B (all <= 250 KiB).
   Judge-sheet preview GATE OK; shot 3's title reads in its small cell.
-- Dossier: 1,114,741 B (<= 1.45 MiB), byte-identical over two runs; kit check on HEAD: 4 passed, 0 failed
-  (16 skipped, 5 at submission). Path grep: no operator paths in the repo.
+- Dossier: 1,114,741 B on the step D commit; 1,114,713 B on the final app (key fix), byte-identical over two runs
+  both times (<= 1.45 MiB); kit check on HEAD: 4 passed, 0 failed (16 skipped, 5 at submission), run on both
+  commits. Path grep: no operator paths in the repo. The kit copy is level 26, the site level 27.
 - Cut text (out/cut-check.mjs, 1280x800): shot 1 state 0 of 24; shot 2 state 0 of 15. Roadmap untouched since
   G4b (55 distinct chips checked then).
 - trophies.json: the 55 official names, descriptions and grades are identical to the starter (7d71397).
