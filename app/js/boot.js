@@ -169,6 +169,16 @@ function stepCounter(state, direction) {
   persist(state);
 }
 
+// Once the other 54 are all ticked, the toast points at the platinum, which the checklist never ticks on its own.
+function suggestPlatinum(state) {
+  const plat = state.trophies.find((t) => t.grade === "platinum");
+  if (!plat || state.progress.earned[plat.id]) return;
+  const rest = state.trophies.filter((t) => t.id !== plat.id);
+  if (rest.every((t) => state.progress.earned[t.id])) {
+    showToast(`All ${rest.length} done: ${plat.name} should pop now. Tick it in the Goal group.`);
+  }
+}
+
 function toggleSpoilers(state) {
   const s = state.progress.settings;
   s.spoilers = s.spoilers === "shown" ? "hidden" : "shown";
@@ -209,6 +219,7 @@ function wireEvents(state) {
         event.stopPropagation();
         toggleEarned(state.progress, id);
         persist(state);
+        suggestPlatinum(state);
         break;
       case "reveal":
         event.stopPropagation();
@@ -290,6 +301,7 @@ function wireEvents(state) {
       state.focusRow = true;
       toggleEarned(state.progress, state.selected);
       persist(state);
+      suggestPlatinum(state);
     } else if (event.key === "Enter" && event.target.matches("#trophy-list li.row")) {
       event.preventDefault();
       state.focusRow = true;

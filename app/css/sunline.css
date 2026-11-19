@@ -722,3 +722,15 @@ body[data-route="roadmap"] .view, body[data-route="missables"] .view { grid-temp
 .toast.show { opacity: 1; transform: translateX(-50%); }
 
 .footer { height: var(--foot-h); padding: 5px 20px 0; font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; }
+
+/* ---------- print: the checklist as a paper list (black on white, every row, no controls) ---------- */
+@media print {
+  * { color: #000 !important; background: transparent !important; box-shadow: none !important; }
+  html, body, .top, .view, .list-col, .trophy-list { height: auto !important; max-height: none !important; overflow: visible !important; }
+  .top, .view { display: block !important; }
+  .actions, .stage-earned, .tabs, #filters, .list-tools, .guide-pane, .toast, .skip, #roadmap, #missables, .reveal { display: none !important; }
+  .row { break-inside: avoid; border-bottom: 1px solid #999 !important; }
+  .row-desc, .row-name { white-space: normal !important; overflow: visible !important; }
+  .check { border: 1px solid #000 !important; }
+  .footer { white-space: normal; }
+}
