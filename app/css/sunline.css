@@ -107,6 +107,12 @@ code { font-size: 13px; background: var(--raised); padding: 1px 5px; border-radi
 
 .earned-count small { font-size: 18px; color: var(--amber); font-weight: 800; }
 
+.earned-count .to-go { display: block; margin-top: 3px; font-size: 13px; font-style: normal; font-weight: 700;
+  color: var(--desc); }
+
+.tab-badge { display: inline-block; min-width: 18px; margin-left: 4px; padding: 0 5px; border-radius: 9px;
+  background: var(--red); color: #fff; font-size: 12px; font-weight: 800; line-height: 18px; text-align: center; }
+
 .count-side { flex: 1; display: flex; flex-direction: column; gap: 5px; }
 
 .sunbar { height: 10px; border-radius: 5px; background: var(--raised); overflow: hidden; border: 1px solid var(--line); }
@@ -416,6 +422,22 @@ body[data-route="roadmap"] .view, body[data-route="missables"] .view { grid-temp
 .pane-cols { display: grid; grid-template-columns: 1.25fr 1fr; gap: 18px; }
 
 .pane-cols p { margin: 0; font-size: 15px; line-height: 1.33; }
+
+.h3-note { font-size: 13px; font-weight: 700; letter-spacing: 0; text-transform: none; color: var(--desc); }
+
+/* Missable callout: a tinted box with a solid left edge, so the call reads before the prose. */
+.miss-call { margin-top: 6px; padding: 0 10px 6px; border-radius: var(--r-ctl); border-left: 5px solid var(--teal);
+  background: #17322f; }
+
+.miss-call h3 { margin-top: 5px; }
+
+.miss-call.miss-possible { border-left-color: #ff5a4f; background: #3a1c24; }
+
+.miss-call.miss-possible h3 { color: #ff8a80; }
+
+.miss-call.miss-unknown { border-left-color: var(--amber); background: #33291b; }
+
+.miss-call.miss-no h3 { color: var(--teal); }
 
 .quiet { color: var(--desc); }
 

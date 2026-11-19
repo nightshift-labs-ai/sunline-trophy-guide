@@ -57,10 +57,14 @@ function guideBodyHtml(trophy, state) {
   const unknown = trophy.unknown
     ? `<h3>Not pinned down yet</h3><p>${withMarks(trophy.unknown)}</p>`
     : `<h3>Not pinned down yet</h3><p class="quiet">Nothing open: the sources agree on this one.</p>`;
+  // The missable call sits in a tinted callout: red for 'possible', amber for an unknown trigger, teal for 'no'.
+  const call = trophy.missable === "possible" ? "possible" : trophy.missable === "unknown" ? "unknown" : "no";
+  const callHead = { possible: "Missable? Possibly", unknown: "Missable? Not known", no: "Missable? No" }[call];
   return (
-    `<section class="howto"><h3>How to get it</h3><p class="guide-text">${withMarks(trophy.guide)}</p>` +
-    `<ol class="steps">${steps}</ol></section>` +
-    `<div class="pane-cols"><section><h3>Can it be missed?</h3><p>${withMarks(trophy.missableWhy)}</p></section>` +
+    `<section class="howto"><h3>How to get it <span class="h3-note">· in our own words</span></h3>` +
+    `<p class="guide-text">${withMarks(trophy.guide)}</p><ol class="steps">${steps}</ol></section>` +
+    `<div class="pane-cols"><section class="miss-call miss-${call}" aria-label="Can it be missed?">` +
+    `<h3>${callHead}</h3><p>${withMarks(trophy.missableWhy)}</p></section>` +
     `<section>${unknown}</section></div>` +
     `<section class="sources-block"><h3>Sources</h3>${sourcesHtml(trophy, state)}</section>`
   );

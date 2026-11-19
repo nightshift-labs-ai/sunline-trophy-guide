@@ -99,7 +99,11 @@ function renderHeader(state) {
   const pct = Math.round((earned / total) * 100);
   document.getElementById("makeup").textContent = makeupLine(trophies);
   document.getElementById("cited-line").textContent = citedLine(trophies);
-  document.getElementById("earned-count").innerHTML = `${earned} / ${total} <small>${pct}%</small>`;
+  document.getElementById("earned-count").innerHTML =
+    `${earned} / ${total} <small>${pct}%</small> <em class="to-go">${total - earned} to go</em>`;
+  const flagged = trophies.filter((t) => t.missable).length;
+  document.getElementById("tab-missables").innerHTML =
+    `Missables <span class="tab-badge" aria-label="${flagged} flagged">${flagged}</span>`;
   const bar = document.getElementById("progress-bar");
   bar.innerHTML = `<span style="width:${pct}%"></span>`;
   bar.setAttribute("aria-valuenow", String(pct));
