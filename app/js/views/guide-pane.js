@@ -82,8 +82,32 @@ function guideBodyHtml(trophy, state) {
     `<div class="pane-cols"><section class="miss-call miss-${call}" aria-label="Can it be missed?">` +
     `<h3>${callHead}</h3><p>${withMarks(trophy.missableWhy)}</p>` +
     `${trophy.window ? `<p class="miss-window"><b>Window:</b> ${withMarks(trophy.window)}</p>` : ""}</section>` +
-    `<section>${unknown}</section></div>` +
+    `${citeKeyHtml(trophy, state)}</div>` +
+    `<section class="open-q">${unknown}</section>` +
     `<section class="sources-block"><h3>Sources</h3>${sourcesHtml(trophy, state)}</section>`
+  );
+}
+
+// What each boxed number on this page means, beside the missable call so it stays in view: the source's short
+// name, the day we read it and how many of the trophy guides cite that page. All of it is counted here, at render.
+function citeKeyHtml(trophy, state) {
+  const all = state.trophies || [];
+  const rows = trophy.cites
+    .map((c) => {
+      const src = state.sources[c.src];
+      if (!src) return "";
+      const keys = Object.entries(state.sources).filter(([, s]) => s.url === src.url).map(([k]) => k);
+      const citing = all.filter((t) => t.cites.some((x) => keys.includes(x.src))).length;
+      const read = src.read ? readDate(src.read).replace(/ \d{4}$/, "") : "not recorded";
+      return (
+        `<li title="${escapeHtml(src.name)} · ${escapeHtml(c.supports)}"><span class="cite-box">${c.n}</span>` +
+        `<b>${escapeHtml(src.short || src.name)}</b><span>${read}</span><span class="num">${citing}/${all.length}</span></li>`
+      );
+    })
+    .join("");
+  return (
+    `<section class="cite-key" aria-label="What the cite numbers mean"><h3>Cite numbers</h3>` +
+    `<p class="ck-sub">source · read · guides citing it</p><ol>${rows}</ol></section>`
   );
 }
 
