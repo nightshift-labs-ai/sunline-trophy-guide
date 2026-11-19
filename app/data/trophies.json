@@ -4,13 +4,14 @@
   "list": "the official 55 trophies: 1 platinum, 2 gold, 6 silver, 46 bronze (28 hidden on PSN until earned)",
   "basis": "Names, descriptions and grades: the official PS5 list (as listed by Exophase, https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/, and PSNProfiles, https://psnprofiles.com/trophies/43531-grand-theft-auto-vi). Kinds: derived by SUNLINE from those descriptions. Roadmap stages and missable flags: from the descriptions plus PowerPyx and OutputLag, cited. Guides: our own words, each citing its sources.",
   "sources": {
-    "ppx": { "name": "PowerPyx — GTA 6 Trophy Guide & Roadmap", "short": "PPX", "url": "https://www.powerpyx.com/gta-6-grand-theft-auto-vi-trophy-guide-roadmap/" },
-    "ol": { "name": "OutputLag — GTA 6 Trophy List (Steven Mills)", "short": "OL", "url": "https://outputlag.com/guides/gta-6-trophy-list/" },
-    "psn": { "name": "Official trophy list (PlayStation), as listed by Exophase", "short": "PSN desc.", "url": "https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/" },
-    "exo": { "name": "Exophase — GTA VI PSN trophy list (hidden-until-earned flags)", "short": "Exophase", "url": "https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/" },
-    "psnp": { "name": "PSNProfiles — Grand Theft Auto VI trophy list", "short": "PSNP", "url": "https://psnprofiles.com/trophies/43531-grand-theft-auto-vi" },
-    "bb": { "name": "Beebom — GTA 6 Trophy List (Bipradeep Biswas)", "short": "Beebom", "url": "https://beebom.com/gta-6-trophy-achievements-list/" },
-    "ig": { "name": "Insider Gaming — Complete GTA 6 Trophy List (Charlie Champion)", "short": "IG", "url": "https://insider-gaming.com/complete-gta-6-trophy-list-how-to-get-all-trophies-achievements/" }
+    "ppx": { "name": "PowerPyx — GTA 6 Trophy Guide & Roadmap", "short": "PowerPyx", "url": "https://www.powerpyx.com/gta-6-grand-theft-auto-vi-trophy-guide-roadmap/", "read": "2026-11-19", "role": "guide" },
+    "ol": { "name": "OutputLag — GTA 6 Trophy List (Steven Mills)", "short": "OutputLag", "url": "https://outputlag.com/guides/gta-6-trophy-list/", "read": "2026-11-19", "role": "guide" },
+    "psn": { "name": "Official trophy list (PlayStation), as listed by Exophase", "short": "Official list", "url": "https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/", "read": "2026-11-19", "role": "list", "lists": "names, grades and descriptions" },
+    "exo": { "name": "Exophase — GTA VI PSN trophy list (hidden-until-earned flags)", "short": "Exophase", "url": "https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/", "read": "2026-11-19", "role": "list", "lists": "names, grades, descriptions and hidden flags" },
+    "psnp": { "name": "PSNProfiles — Grand Theft Auto VI trophy list", "short": "PSNProfiles", "url": "https://psnprofiles.com/trophies/43531-grand-theft-auto-vi", "read": "2026-11-19", "role": "list", "lists": "names, grades and descriptions" },
+    "bb": { "name": "Beebom — GTA 6 Trophy List (Bipradeep Biswas)", "short": "Beebom", "url": "https://beebom.com/gta-6-trophy-achievements-list/", "read": "2026-11-19", "role": "list", "lists": "names and descriptions" },
+    "ig": { "name": "Insider Gaming — Complete GTA 6 Trophy List (Charlie Champion)", "short": "Insider Gaming", "url": "https://insider-gaming.com/complete-gta-6-trophy-list-how-to-get-all-trophies-achievements/", "read": "2026-11-19", "role": "list", "lists": "names, grades and descriptions" },
+    "cultr": { "name": "CULTR — Complete GTA 6 Trophy List (Oliver Tryon)", "short": "CULTR", "url": "https://www.cultr.com/news/complete-gta-6-trophy-list-every-trophy-and-achievement/", "read": "2026-11-19", "role": "list", "lists": "names, grades and descriptions" }
   },
   "trophies": [
     {
@@ -641,6 +642,7 @@
       "stage": 1,
       "missable": "possible",
       "missableWhy": "Possibly: the Jason's-house spot may be gone after Chapter 1 [1][2]. Meditate there and keep a Chapter 1 save.",
+      "window": "Opens after Down to Earth (the balcony, or the kitchen the next morning) [2] and may close when Chapter 1 ends [1].",
       "target": 18,
       "unit": "spots",
       "targetCite": 1,

@@ -1,5 +1,5 @@
 // Guide pane: one trophy's official text, chips, counter, cited guide, missable call and numbered sources.
-import { escapeHtml, formatAmount, shortUrl, KIND_LABELS } from "../trophy-data.js";
+import { escapeHtml, formatAmount, shortUrl, readDate, KIND_LABELS } from "../trophy-data.js";
 import { isSpoilerMasked, MASKED_NAME, MASKED_DESCRIPTION } from "../spoiler-rule.js";
 import { medalSvg, missableFlagHtml } from "./checklist-view.js";
 
@@ -45,7 +45,7 @@ function notesHtml(trophy, progress) {
 function stepperHtml(trophy, state) {
   if (!trophy.target) return "";
   const value = state.progress.counters[trophy.id] || 0;
-  const mark = trophy.targetCite ? `<sup class="cite-mark">[${trophy.targetCite}]</sup>` : "";
+  const mark = trophy.targetCite ? `<span class="cite-box">${trophy.targetCite}</span>` : "";
   return (
     `<span class="stepper"><button data-action="step" data-d="-1" aria-label="One less">−</button>` +
     `<span class="stepper-value num">${formatAmount(value, trophy.unit)} / ${formatAmount(trophy.target, trophy.unit)}</span>` +
@@ -62,8 +62,9 @@ function maskedBodyHtml(trophy) {
   );
 }
 
+// Cite numbers are boxed, full-size marks (not superscripts) so they stay readable when the page is shrunk.
 function withMarks(text) {
-  return escapeHtml(text).replace(/\[(\d+)\]/g, '<sup class="cite-mark">[$1]</sup>');
+  return escapeHtml(text).replace(/\[(\d+)\]/g, '<span class="cite-box">$1</span>');
 }
 
 function guideBodyHtml(trophy, state) {
@@ -78,7 +79,8 @@ function guideBodyHtml(trophy, state) {
     `<section class="howto"><h3>How to get it <span class="h3-note">· in our own words</span></h3>` +
     `<p class="guide-text">${withMarks(trophy.guide)}</p><ol class="steps">${steps}</ol></section>` +
     `<div class="pane-cols"><section class="miss-call miss-${call}" aria-label="Can it be missed?">` +
-    `<h3>${callHead}</h3><p>${withMarks(trophy.missableWhy)}</p></section>` +
+    `<h3>${callHead}</h3><p>${withMarks(trophy.missableWhy)}</p>` +
+    `${trophy.window ? `<p class="miss-window"><b>Window:</b> ${withMarks(trophy.window)}</p>` : ""}</section>` +
     `<section>${unknown}</section></div>` +
     `<section class="sources-block"><h3>Sources</h3>${sourcesHtml(trophy, state)}</section>`
   );
@@ -89,10 +91,11 @@ function sourcesHtml(trophy, state) {
     .map((c) => {
       const src = state.sources[c.src];
       if (!src) return "";
+      const read = src.read ? `read ${readDate(src.read)}` : "read date not recorded";
       return (
-        `<li><span class="src-n">[${c.n}]</span><div><a href="${escapeHtml(src.url)}" target="_blank" rel="noopener">` +
-        `${escapeHtml(src.name)}</a><span class="src-note"><span class="src-url">${escapeHtml(shortUrl(src.url))}</span>` +
-        ` · ${escapeHtml(c.supports)}</span></div></li>`
+        `<li><span class="cite-box">${c.n}</span><div><a href="${escapeHtml(src.url)}" target="_blank" rel="noopener" ` +
+        `title="${escapeHtml(shortUrl(src.url))}">${escapeHtml(src.name)}</a><span class="src-note">` +
+        `<span class="src-url">${read}</span> · ${escapeHtml(c.supports)}</span></div></li>`
       );
     })
     .join("");
@@ -101,5 +104,16 @@ function sourcesHtml(trophy, state) {
     trophy.hidden && exo
       ? `<p class="src-extra">Hidden-on-PSN flag: <a href="${escapeHtml(exo.url)}" target="_blank" rel="noopener">Exophase</a></p>`
       : "";
-  return `<ol class="sources">${items}</ol>${hiddenNote}`;
+  return `<ol class="sources">${items}</ol>${hiddenNote}${crossCheckHtml(trophy, state.sources)}`;
+}
+
+// List sites only list the official text; we show them as a cross-check of exactly what each one lists, nothing more.
+function crossCheckHtml(trophy, sources) {
+  const cited = new Set(trophy.cites.map((c) => c.src));
+  const lists = Object.entries(sources).filter(([k, s]) => s.role === "list" && k !== "psn" && k !== "exo" && !cited.has(k));
+  if (!lists.length) return "";
+  const links = lists
+    .map(([, s]) => `<a href="${escapeHtml(s.url)}" target="_blank" rel="noopener">${escapeHtml(s.short)}</a> (${escapeHtml(s.lists)})`)
+    .join(" · ");
+  return `<p class="src-extra"><b>Cross-check of the official text only:</b> ${links}</p>`;
 }

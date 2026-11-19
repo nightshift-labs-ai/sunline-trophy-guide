@@ -1,5 +1,5 @@
 // SUNLINE boot: load the data, keep the state, route by hash, draw the header, and show the toast.
-import { LIST_MAKEUP, loadTrophyData, makeupLine, citedLine } from "./trophy-data.js";
+import { LIST_MAKEUP, loadTrophyData, auditHtml } from "./trophy-data.js";
 import { loadProgress, saveProgress, toggleEarned, setCounter, counterStep, earnedTotal, setNote } from "./progress-store.js";
 import { exportProgressFile, parseProgressFile } from "./save-file.js";
 import { isKnownFilter } from "./filters.js";
@@ -101,13 +101,15 @@ function renderHeader(state) {
   const earned = earnedTotal(progress, trophies);
   const total = trophies.length || LIST_MAKEUP.total;
   const pct = Math.round((earned / total) * 100);
-  document.getElementById("makeup").textContent = makeupLine(trophies);
-  document.getElementById("cited-line").textContent = citedLine(trophies);
+  document.getElementById("audit").innerHTML = auditHtml(trophies, state.sources || {});
   document.getElementById("earned-count").innerHTML =
     `${earned} / ${total} <small>${pct}%</small> <em class="to-go">${total - earned} to go</em>`;
-  const flagged = trophies.filter((t) => t.missable).length;
+  // Split, not one number: possibly missable (red) vs trigger not known yet (amber, with a question mark).
+  const possible = trophies.filter((t) => t.missable === "possible").length;
+  const unknown = trophies.filter((t) => t.missable === "unknown").length;
   document.getElementById("tab-missables").innerHTML =
-    `Missables <span class="tab-badge" aria-label="${flagged} flagged">${flagged}</span>`;
+    `Missables <span class="tab-badge" aria-label="${possible} possibly missable">${possible}</span>` +
+    `<span class="tab-badge tab-badge-amber" aria-label="${unknown} with a trigger not known yet">${unknown}?</span>`;
   const bar = document.getElementById("progress-bar");
   bar.innerHTML = `<span style="width:${pct}%"></span>`;
   bar.setAttribute("aria-valuenow", String(pct));
@@ -133,7 +135,7 @@ function renderHeader(state) {
   const when = progress.savedAt
     ? new Date(progress.savedAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
     : "nothing saved yet";
-  document.getElementById("saved-at").innerHTML = `<i class="dot"></i>Saved in this browser · ${when}`;
+  document.getElementById("saved-at").innerHTML = `<i class="dot"></i>Saved in this browser<br>${when}`;
   const sw = document.getElementById("spoiler-switch");
   sw.textContent = spoilerLabel(progress);
   sw.setAttribute("aria-pressed", String(progress.settings.spoilers !== "shown"));

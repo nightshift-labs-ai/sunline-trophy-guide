@@ -42,22 +42,41 @@ export function roadmapOrder(trophies) {
   return [...trophies].sort((a, b) => stageRank(a.stage) - stageRank(b.stage) || a.id - b.id);
 }
 
-export function makeupLine(trophies) {
+
+// The header's audit strip: every number is counted from the data at load, nothing is typed in.
+export function auditHtml(trophies, sources) {
   const count = (g) => trophies.filter((t) => t.grade === g).length;
-  const parts = GRADES.map((g) => `${count(g)} ${g}`);
-  return `${trophies.length} official trophies · ${parts.join(" · ")}`;
+  const used = new Set(trophies.flatMap((t) => t.cites.map((c) => c.src)));
+  for (const t of trophies) if (t.hidden) used.add("exo");
+  // One source per page: the official list and the hidden flags both come from the same Exophase page.
+  const byUrl = new Map();
+  for (const [key, s] of Object.entries(sources)) {
+    if (used.has(key) || s.role === "list") byUrl.set(s.url, [key, s]);
+  }
+  const regs = [...byUrl.values()];
+  const guides = regs.filter(([, s]) => s.role === "guide").length;
+  const reads = [...new Set(regs.map(([, s]) => s.read).filter(Boolean))];
+  const cited = trophies.filter((t) => t.guide?.trim() && t.cites?.length).length;
+  const possible = trophies.filter((t) => t.missable === "possible").length;
+  const unknown = trophies.filter((t) => t.missable === "unknown").length;
+  const hidden = trophies.filter((t) => t.hidden).length;
+  const b = (v) => `<b>${v}</b>`;
+  const parts = [
+    `${b(trophies.length)} official trophies: ${b(count("platinum"))} P · ${b(count("gold"))} G · ${b(count("silver"))} S · ${b(count("bronze"))} B`,
+    `${b(hidden)} hidden on PSN`,
+    `${b(`${cited}/${trophies.length}`)} guides cite a source`,
+    `${b(regs.length)} sources (${guides} guides, ${regs.length - guides} lists)`,
+    `${b(possible)} possibly missable · ${b(unknown)} trigger not known`,
+    `sources read ${reads.map(readDate).join(", ") || "date not recorded"}`,
+  ];
+  return `<span class="audit-tag">Audit</span>${parts.join(" <i>·</i> ")}`;
 }
 
-// Header line computed from the cites: how many guides cite a guide site, how many lean on the description alone.
-export function citedLine(trophies) {
-  const cited = trophies.filter((t) => t.guide?.trim() && t.cites?.length).length;
-  const guideSites = trophies.filter((t) => t.cites.some((c) => c.src === "ppx" || c.src === "ol")).length;
-  const officialOnly = trophies.filter((t) => t.cites.every((c) => c.src === "psn")).length;
-  const unknown = trophies.filter((t) => t.missable === "unknown").length;
-  const parts = [`Guides: ${cited}/${trophies.length} cited`, `${guideSites} cite PowerPyx and/or OutputLag`];
-  if (officialOnly) parts.push(`${officialOnly} cite the official description only`);
-  parts.push(`${unknown} triggers not known yet`);
-  return parts.join(" · ");
+// "2026-11-19" -> "19 Nov 2026"
+export function readDate(iso) {
+  const [y, m, d] = String(iso).split("-").map(Number);
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  return y && m && d ? `${d} ${months[m - 1]} ${y}` : String(iso);
 }
 
 export function formatAmount(value, unit) {

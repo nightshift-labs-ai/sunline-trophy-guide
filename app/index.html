@@ -11,34 +11,28 @@
 <body>
 <a id="skip-link" class="skip" href="#/checklist" data-action="skip">Skip to the trophy list</a>
 <header id="top" class="top">
-<div class="brand">
-<h1 id="wordmark" class="wordmark">SUNLINE</h1>
-<p id="tagline" class="tagline">55 official trophies · roadmap &amp; missables built from the
-official descriptions · every guide cites its sources</p>
-<p id="makeup" class="makeup">55 official trophies</p>
-<p id="cited-line" class="cited-line">Guides: loading…</p>
+<div class="band">
+<div class="brand"><h1 id="wordmark" class="wordmark">SUNLINE</h1>
+<p id="tagline" class="tagline">Unofficial PS5 trophy guide</p></div>
+<div class="count-block"><p id="earned-count" class="earned-count">0 / 55</p>
+<div id="progress-bar" class="sunbar" role="progressbar" aria-label="Trophies earned"></div></div>
+<p id="grade-earned" class="grade-earned"></p>
+<div class="actions">
+<button id="spoiler-switch" aria-pressed="true">Spoilers: hidden until earned</button>
+<button id="export-progress">Export</button>
+<label id="import-label" for="import-progress" class="btn">Import</label>
+<input id="import-progress" type="file" accept=".json">
+</div>
+<p id="saved-at" class="saved-at">Saved in this browser</p>
+</div>
+<p id="audit" class="audit" aria-label="Data audit, counted from the data at load">Audit: loading…</p>
+<div class="tabrow">
 <nav id="tabs" class="tabs" aria-label="Checklist, Roadmap, Missables, Spoilers and save">
 <a id="tab-checklist" href="#/checklist" data-route="checklist">Checklist</a>
 <a id="tab-roadmap" href="#/roadmap" data-route="roadmap">Roadmap</a>
 <a id="tab-missables" href="#/missables" data-route="missables">Missables</a>
 <a id="tab-save" href="#/save" data-route="save">Spoilers &amp; save</a>
 </nav>
-</div>
-<div class="status">
-<div class="count-row">
-<p id="earned-count" class="earned-count">0 / 55</p>
-<div class="count-side">
-<div id="progress-bar" class="sunbar" role="progressbar" aria-label="Trophies earned"></div>
-<p id="grade-earned" class="grade-earned"></p>
-<p id="saved-at" class="saved-at">Saved in this browser</p>
-</div>
-</div>
-<div class="actions">
-<button id="spoiler-switch" aria-pressed="true">Spoilers: hidden until earned</button>
-<button id="export-progress">Export progress</button>
-<label id="import-label" for="import-progress" class="btn">Import progress</label>
-<input id="import-progress" type="file" accept=".json">
-</div>
 <nav id="stage-earned" class="stage-earned" aria-label="Earned per roadmap stage"></nav>
 </div>
 </header>

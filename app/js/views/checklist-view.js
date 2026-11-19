@@ -1,5 +1,5 @@
 // Checklist view: filter chips, grade/sort tools and the trophy rows in roadmap order; also the #/save view's banner.
-import { escapeHtml, roadmapOrder, formatAmount, citeShorts, KIND_LABELS } from "../trophy-data.js";
+import { escapeHtml, roadmapOrder, formatAmount, KIND_LABELS } from "../trophy-data.js";
 import { FILTERS, FILTER_LABELS, filterCounts, applyListFilters } from "../filters.js";
 import { isSpoilerMasked, maskedName, maskedDescription } from "../spoiler-rule.js";
 
@@ -47,11 +47,19 @@ function filterChipsHtml(trophies, state) {
   const counts = filterCounts(trophies);
   const chip = (f) => {
     const on = state.filter === f;
-    const label = `${FILTER_LABELS[f]} <b>${counts[f]}</b>`;
+    let label = `${FILTER_LABELS[f]} <b>${counts[f]}</b>`;
+    if (f === "missable") {
+      const possible = trophies.filter((t) => t.missable === "possible").length;
+      const unknown = trophies.filter((t) => t.missable === "unknown").length;
+      if (possible + unknown === counts[f]) {
+        label = `${FILTER_LABELS[f]} <b class="miss-p" title="possibly missable">${possible}</b>` +
+          ` <b class="miss-u" title="trigger not known yet">+ ${unknown}?</b>`;
+      }
+    }
     if (f === "online") {
       return (
         `<button class="chip" disabled title="No online trophies: PowerPyx overview lists 0 online">` +
-        `${label} <sup class="cite-mark">[PPX]</sup></button>`
+        `${label} <span class="chip-src">· PowerPyx</span></button>`
       );
     }
     return `<button class="chip${on ? " is-on" : ""}" data-action="filter" data-f="${f}" aria-pressed="${on}">${label}</button>`;
@@ -118,20 +126,25 @@ function rowHtml(t, state) {
     ` aria-label="Earned: ${escapeHtml(maskedName(t, p))}">${earned ? "✓" : ""}</button>` +
     `<span class="row-medal">${medalSvg(t.grade)}</span>` +
     `<div class="row-main"><div class="row-line">` +
-    `<span class="row-name">${escapeHtml(maskedName(t, p))}</span>${missableFlagHtml(t, true)}</div>` +
+    `<span class="row-name">${escapeHtml(maskedName(t, p))}</span><span class="gw gw-${t.grade}">${t.grade}</span>` +
+    `<span class="row-end">` +
+    (masked ? "" : `<span class="row-src" title="Sources this guide cites">${escapeHtml(rowSources(t, state.sources))}</span>`) +
+    `${counter}${reveal}</span></div>` +
     `<div class="row-line row-sub"><span class="row-desc">${escapeHtml(maskedDescription(t, p))}</span>` +
-    `<span class="tag tag-stage">S${t.stage}</span><span class="tag">${ROW_KIND[t.kind]}</span>${hidden}</div></div>` +
-    `<div class="row-side">${counter || reveal}<span class="cite-badge">${escapeHtml(badgeText(t, state.sources))}</span>` +
-    `${counter ? reveal : ""}</div></li>`
+    `${missableFlagHtml(t, true)}<span class="tag tag-stage">S${t.stage}</span><span class="tag">${ROW_KIND[t.kind]}</span>` +
+    `${hidden}</div></div></li>`
   );
 }
 
 const ROW_KIND = { story: "Story", side: "Side", activity: "Activity", collectible: "Collectible", feat: "Feat", completion: "100%" };
 
-// Row badge: at most two source short names, then "+n" for the rest (the pane lists them all).
-function badgeText(trophy, sources) {
-  const shorts = citeShorts(trophy, sources).split(" · ").filter(Boolean);
-  return shorts.length > 2 ? `${shorts.slice(0, 2).join(" · ")} +${shorts.length - 2}` : shorts.join(" · ");
+// Row source names: the guide sites by name first; the official list is implied by the description itself.
+function rowSources(trophy, sources) {
+  const keys = [...new Set(trophy.cites.map((c) => c.src))].filter((k) => sources[k]);
+  const guides = keys.filter((k) => sources[k].role === "guide").map((k) => sources[k].short);
+  const lists = keys.length - guides.length;
+  if (!guides.length) return keys.map((k) => sources[k].short).join(" · ");
+  return guides.join(" · ") + (lists > 1 ? ` +${lists - 1}` : "");
 }
 
 // The #/save view: banner with the spoiler rule and the save-file format above the story checklist.
