@@ -12,9 +12,9 @@
     "shows": "Roadmap to the platinum with spoilers shown: 7 stage cards on the sun-line spine, each with n / m progress, a sun-line bar, [PPX][OL] cites and trophy chips (missables in red/amber), the missables line, and the Missable watch list."
   },
   {
-    "file": "3-spoilers-save.jpg",
-    "path": "/#/save?t=3",
+    "file": "3-sources-save.jpg",
+    "path": "/#/save",
     "viewport": { "width": 1280, "height": 800 },
-    "shows": "Spoiler setting & save file: story filter with unearned story trophies masked (striped), the import toast 'Imported 17 earned · 12 counters', Export/Import, and a masked guide pane with its Reveal button."
+    "shows": "Sources & save page: the spoiler setting with how many story trophies it masks now, the save card (saved-in-browser time, Export / Import, the export file's name pattern and what it carries, the last import as text), progress by grade and by kind counted from the data and the save, and the sources registry (each source's name, link, what SUNLINE used it for, how many guides cite it, read date; list sites marked as list cross-checks)."
   }
 ]

@@ -4,7 +4,8 @@ import { loadProgress, saveProgress, toggleEarned, setCounter, counterStep, earn
 import { exportProgressFile, parseProgressFile } from "./save-file.js";
 import { isKnownFilter } from "./filters.js";
 import { spoilerLabel } from "./spoiler-rule.js";
-import { renderChecklist, renderSaveBanner } from "./views/checklist-view.js";
+import { renderChecklist } from "./views/checklist-view.js";
+import { renderSourcesSave } from "./views/sources-save-view.js";
 import { renderGuidePane } from "./views/guide-pane.js";
 import { renderRoadmap, renderMissables, setRoadmapContext } from "./views/roadmap-view.js";
 
@@ -60,10 +61,10 @@ function writeHash(state, patch = {}) {
 function render(state, { scrollToSelected = false } = {}) {
   renderHeader(state);
   document.body.dataset.route = state.route;
-  const listRoute = state.route === "checklist" || state.route === "save";
+  const listRoute = state.route === "checklist";
   document.getElementById("checklist").hidden = !listRoute;
   document.getElementById("guide-pane").hidden = !listRoute;
-  document.getElementById("save-banner").hidden = state.route !== "save";
+  document.getElementById("save-page").hidden = state.route !== "save";
   document.getElementById("roadmap").hidden = state.route !== "roadmap";
   document.getElementById("missables").hidden = state.route !== "missables";
   if (listRoute) {
@@ -73,12 +74,13 @@ function render(state, { scrollToSelected = false } = {}) {
       renderChecklist(state.trophies, state);
     }
     renderGuidePane(state.byId.get(state.selected), state);
-    if (state.route === "save") renderSaveBanner(state);
     if (scrollToSelected) scrollRowIntoView(state.selected);
     if (state.focusRow) {
       state.focusRow = false;
       document.querySelector(`#trophy-list li.row[data-id="${state.selected}"]`)?.focus({ preventScroll: true });
     }
+  } else if (state.route === "save") {
+    renderSourcesSave(state);
   } else if (state.route === "roadmap") {
     renderRoadmap(state.stages, state.progress);
   } else {
@@ -202,7 +204,14 @@ async function importFile(state, file) {
     const n = Object.keys(parsed.earned).length;
     const c = Object.keys(parsed.counters).length;
     const k = Object.keys(parsed.notes).length;
-    showToast(`Imported ${n} earned · ${c} counters${k ? ` · ${k} notes` : ""}${parsed.skipped ? ` · ${parsed.skipped} skipped` : ""}`);
+    const summary = `${n} earned · ${c} counters${k ? ` · ${k} notes` : ""}${parsed.skipped ? ` · ${parsed.skipped} skipped` : ""}`;
+    state.lastImport = {
+      file: file.name,
+      at: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+      summary,
+    };
+    if (state.route === "save") renderSourcesSave(state);
+    showToast(`Imported ${summary}`);
   } catch (err) {
     showToast(`Import failed: ${err.message}`);
   }

@@ -21,11 +21,11 @@ const SHOTS = {
   "2-roadmap.jpg": { hash: "#/roadmap", spoilersShown: true, waitToastGone: true },
   "2-checklist-missable.jpg": { hash: `#/checklist?f=missable&t=${PMA}`, waitToastGone: true },
   "missables-page.jpg": { hash: "#/missables", waitToastGone: true },
-  "3-spoilers-save.jpg": { hash: `#/save?t=${PARADISE_LOST}` },
+  "3-sources-save.jpg": { hash: "#/save", waitToastGone: true },
 };
 
 // The entry's three shots; the others are for checking a view by hand (name them on the command line).
-const FINAL = ["1-checklist-guide.jpg", "2-roadmap.jpg", "3-spoilers-save.jpg"];
+const FINAL = ["1-checklist-guide.jpg", "2-roadmap.jpg", "3-sources-save.jpg"];
 
 const MAX_BYTES = 210 * 1024;
 const GATE_BYTES = 250 * 1024; // a margin under the gate's 256 KiB

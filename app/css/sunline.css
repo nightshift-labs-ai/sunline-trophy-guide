@@ -809,3 +809,33 @@ body[data-route="roadmap"] .view, body[data-route="missables"] .view { grid-temp
   .check { border: 1px solid #000 !important; }
   .footer { white-space: normal; }
 }
+
+/* Sources & save page (#/save): one big title, four cards, then the sources registry. */
+.save-page { grid-column: 1 / -1; padding: 2px 4px 0; }
+.sp-head { display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; }
+.sp-title { margin: 0; font-size: 46px; line-height: 1.05; font-weight: 800; letter-spacing: -0.01em; }
+.sp-sub { margin: 0; font-size: 16px; color: var(--desc); }
+.sp-grid { display: grid; grid-template-columns: 1fr 1.35fr 1fr 1fr; gap: 12px; margin-top: 10px; }
+.sp-card, .sp-reg { border: 1px solid var(--line); border-radius: 10px; background: var(--raised); padding: 10px 14px; }
+.sp-card h2, .sp-reg h2 { margin: 0 0 4px; font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--amber); }
+.sp-card p { margin: 4px 0; font-size: 15px; line-height: 1.35; }
+.sp-big { font-size: 24px !important; font-weight: 800; }
+.sp-actions { display: flex; gap: 8px; margin: 6px 0; }
+.sp-card button, .sp-actions .btn { font-weight: 700; }
+.sp-last { color: var(--teal); }
+.pm-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.pm { display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; align-items: center; font-size: 15px; }
+.pm b { font-size: 17px; }
+.pm-bar { grid-column: 1 / -1; height: 7px; border-radius: 4px; background: var(--page); overflow: hidden; }
+.pm-bar span { display: block; height: 100%; background: var(--teal); }
+.sp-reg { margin-top: 12px; }
+.sp-reg h2 small { text-transform: none; letter-spacing: 0; color: var(--desc); font-weight: 400; font-size: 14px; }
+.sp-reg table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.sp-reg th, .sp-reg td { text-align: left; padding: 4px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.sp-reg thead th { font-size: 13px; color: var(--desc); text-transform: uppercase; letter-spacing: 0.05em; }
+.sp-reg tbody th { font-weight: 800; white-space: nowrap; }
+.sp-reg .num { text-align: right; font-weight: 800; }
+.reg-role { margin-left: 8px; padding: 0 6px; border-radius: 4px; font-size: 12px; font-weight: 700; }
+.reg-role.is-guide { background: var(--teal); color: var(--page); }
+.reg-role.is-list { border: 1px solid var(--desc); color: var(--desc); }
+.sp-note { margin: 6px 0 0; font-size: 14px; color: var(--desc); }
