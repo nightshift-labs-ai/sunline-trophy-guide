@@ -128,7 +128,8 @@ function rowHtml(t, state) {
     `<div class="row-main"><div class="row-line">` +
     `<span class="row-name">${escapeHtml(maskedName(t, p))}</span><span class="gw gw-${t.grade}">${t.grade}</span>` +
     `<span class="row-end">` +
-    (masked ? "" : `<span class="row-src" title="Sources this guide cites">${escapeHtml(rowSources(t, state.sources))}</span>`) +
+    (masked ? "" : `<span class="row-src" title="Sources this guide cites: ${escapeHtml(rowSources(t, state.sources, true))}">` +
+      `${escapeHtml(rowSources(t, state.sources))}</span>`) +
     `${counter}${reveal}</span></div>` +
     `<div class="row-line row-sub"><span class="row-desc">${escapeHtml(maskedDescription(t, p))}</span>` +
     `${missableFlagHtml(t, true)}<span class="tag tag-stage">S${t.stage}</span><span class="tag">${ROW_KIND[t.kind]}</span>` +
@@ -139,12 +140,15 @@ function rowHtml(t, state) {
 const ROW_KIND = { story: "Story", side: "Side", activity: "Activity", collectible: "Collectible", feat: "Feat", completion: "100%" };
 
 // Row source names: the guide sites by name first; the official list is implied by the description itself.
-function rowSources(trophy, sources) {
+// Full list for the tooltip; the tag itself shows the first two guides and "+n" so it stays on the name line.
+function rowSources(trophy, sources, full = false) {
   const keys = [...new Set(trophy.cites.map((c) => c.src))].filter((k) => sources[k]);
   const guides = keys.filter((k) => sources[k].role === "guide").map((k) => sources[k].short);
   const lists = keys.length - guides.length;
   if (!guides.length) return keys.map((k) => sources[k].short).join(" · ");
-  return guides.join(" · ") + (lists > 1 ? ` +${lists - 1}` : "");
+  if (full) return guides.join(" · ") + (lists > 1 ? ` +${lists - 1}` : "");
+  const more = guides.length - 2 + Math.max(lists - 1, 0);
+  return guides.slice(0, 2).join(" · ") + (more > 0 ? ` +${more}` : "");
 }
 
 // The #/save view: banner with the spoiler rule and the save-file format above the story checklist.
