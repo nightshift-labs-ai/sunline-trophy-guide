@@ -41,7 +41,8 @@
     {
       "id": "s4",
       "n": 4,
-      "title": "Chapters 4-5 & the final mission",
+      "title": "Chapters 4-5 & finale",
+      "hours": "whole story 60-80 h",
       "goal": "The rest of the story plus the optional bank mission that opens vaults and armored trucks.",
       "why": "Vault and armored-truck robberies unlock with an optional Chapter 4 mission.",
       "tips": [
@@ -53,7 +54,8 @@
     {
       "id": "s5",
       "n": 5,
-      "title": "After the credits: activities & strands",
+      "title": "Activities & strands",
+      "hours": "strands ~10 h",
       "goal": "Stunts, ranges, drone races, races, challenges and the eight stranger strands.",
       "why": "PowerPyx leaves activities and Strangers & Freaks for after the story.",
       "tips": [
@@ -65,8 +67,8 @@
     {
       "id": "s6",
       "n": 6,
-      "title": "After the credits: collectibles, money & unknown triggers",
-      "goal": "Cards, WAiNK scans, vehicles, map fog, gang operations, spending, and the five secret triggers.",
+      "title": "Collectibles, money & secrets",
+      "goal": "Cards, WAiNK scans, vehicles, map fog, gang jobs, spending, five secret triggers.",
       "why": "Everything here stays open in free roam; five triggers are still unknown.",
       "tips": [
         "A WAiNK scan also counts as discovering a vehicle.",
@@ -78,6 +80,7 @@
       "id": "s7",
       "n": 7,
       "title": "100% and the platinum",
+      "hours": "~100 h",
       "goal": "Finish the 100% checklist under Progress > Stats, then the platinum follows.",
       "why": "The checklist only appears after the credits, but earlier progress counts.",
       "tips": [

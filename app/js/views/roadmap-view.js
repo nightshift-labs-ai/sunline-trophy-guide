@@ -5,12 +5,32 @@ import { medalSvg, missableFlagHtml } from "./checklist-view.js";
 
 export function renderRoadmap(stages, progress) {
   const flagged = stages.flatMap((s) => s.trophies).filter((t) => t.missable);
-  const cards = stages.map((s) => stageCardHtml(s, progress)).join("");
+  const card = (n) => stageCardHtml(stages.find((s) => s.n === n), progress);
+  // Three columns balanced by chip count (1-3 | 4-5 | 6-7 + watch list) so every one of the 55 chips is in view.
+  const cols = [[1, 2, 3], [4, 5], [6, 7]].map((ns) => ns.filter((n) => stages.some((s) => s.n === n)).map(card).join(""));
   document.getElementById("roadmap").innerHTML =
     `<div class="road-head"><h2 class="banner-title">Roadmap to the platinum</h2>${nextUpHtml(stages, progress)}</div>` +
-    `<p class="missables-line">${missablesSummaryHtml(flagged)}<span>${escapeHtml(context.missables)}</span></p>` +
-    `<div class="road-grid"><div class="stages">${cards}${methodCardHtml()}</div>` +
-    `${watchListHtml(flagged, stages, progress)}</div>`;
+    keyFactsHtml(flagged) +
+    `<div class="road-cols"><div class="road-col">${cols[0]}</div><div class="road-col">${cols[1]}</div>` +
+    `<div class="road-col">${cols[2]}${watchListHtml(flagged, stages, progress)}</div></div>`;
+}
+
+// Key facts above the stages, each with its source; the missable split is counted from the data.
+function keyFactsHtml(flagged) {
+  const m = (...keys) => `<span class="cite-box">${citeMarks(keys)}</span>`;
+  const possible = flagged.filter((t) => t.missable === "possible").length;
+  const unknown = flagged.filter((t) => t.missable === "unknown").length;
+  const tile = (label, value, cites) =>
+    `<div class="fact"><span class="fact-label">${label}</span><b class="fact-value">${value}</b>${cites}</div>`;
+  return (
+    `<div class="facts" aria-label="Key facts">` +
+    tile("Platinum", "~200 h", m("ppx", "ol")) +
+    tile("Difficulty", "4 / 10", m("ppx")) +
+    tile("Runs", "1 · no replay", m("ppx", "ol")) +
+    tile("Online", "0 trophies", m("ppx")) +
+    tile("Missable", `<span class="flag flag-red">${possible} possible</span> <span class="flag flag-amber">${unknown} ? unknown</span>`, m("ppx", "ol")) +
+    `</div>`
+  );
 }
 
 // "Next up": the first roadmap stage with work left; inside it a possibly-missable trophy comes first, then a
@@ -47,16 +67,6 @@ function nextUpHtml(stages, progress) {
   );
 }
 
-// Fills the free grid slot under stage 7: how the stages were put together, with PowerPyx's own hour estimates.
-function methodCardHtml() {
-  return (
-    `<article class="stage-card method-card" aria-label="How this roadmap is built"><h3 class="stage-title">How this roadmap is built</h3>` +
-    `<p>Order from the official descriptions; chapters cited <sup class="cite-mark">[PPX][OL]</sup>. ` +
-    `Time: story 60-80 h, 100% checklist ~100 h, strands ~10 h <sup class="cite-mark">[PPX]</sup>. ` +
-    `No mission replay <sup class="cite-mark">[PPX][OL]</sup>.</p></article>`
-  );
-}
-
 let context = { missables: "", sources: {} };
 
 // Boot hands over the parts of the data files the roadmap needs besides the stages themselves.
@@ -82,11 +92,12 @@ function stageCardHtml(stage, progress) {
   return (
     `<article class="stage-card${earned === total ? " is-done" : ""}" aria-label="Stage ${stage.n}: ${escapeHtml(stage.title)}">` +
     `<span class="stage-disc">${stage.n}</span>` +
-    `<div class="stage-top"><h3 class="stage-title">${escapeHtml(stage.title)}</h3>` +
+    `<div class="stage-top"><h3 class="stage-title">${escapeHtml(stage.title)} <span class="cite-box">${citeMarks(stage.cites)}</span></h3>` +
     `<span class="stage-count">${earned} / ${total}</span></div>` +
     `<div class="stage-bar"><span style="width:${pct}%"></span></div>` +
-    `<p class="stage-goal" title="${escapeHtml(stage.why)}">${escapeHtml(stage.goal)} ` +
-    `<sup class="cite-mark">${citeMarks(stage.cites)}</sup></p>` +
+    `<p class="stage-goal" title="${escapeHtml(stage.why)}">` +
+    (stage.hours ? `<b class="stage-hours">${escapeHtml(stage.hours)} <span class="cite-box">[PowerPyx]</span></b> · ` : "") +
+    `${escapeHtml(stage.goal)}</p>` +
     `<div class="tchips">${chips}</div></article>`
   );
 }
@@ -100,7 +111,9 @@ function trophyChipHtml(t, progress) {
   const name = isSpoilerMasked(t, progress) ? "Story trophy" : t.name;
   return (
     `<a class="${classes.join(" ")}" href="#/checklist?f=all&amp;t=${t.id}" title="${escapeHtml(maskedName(t, progress))}">` +
-    `${medalSvg(t.grade, 16)}${mark}${escapeHtml(name)}${progress.earned[t.id] ? " ✓" : ""}</a>`
+    `${medalSvg(t.grade, 16)}${mark}${escapeHtml(name)}${progress.earned[t.id] ? " ✓" : ""}` +
+    (t.target ? ` <b class="tchip-num">${formatAmount(progress.counters[t.id] || 0, t.unit)}/${formatAmount(t.target, t.unit)}</b>` : "") +
+    `</a>`
   );
 }
 
@@ -116,11 +129,13 @@ function watchListHtml(flagged, stages, progress) {
   const items = flagged
     .map(
       (t) =>
-        `<li><div class="watch-top">${missableFlagHtml(t, true)}<span class="watch-name">${escapeHtml(maskedName(t, progress))}</span></div>` +
-        `<p class="watch-why"><b>Stage ${t.stage}</b> · ${escapeHtml(plainWhy(t.missableWhy))}</p></li>`,
+        `<li title="${escapeHtml(plainWhy(t.missableWhy))}"><span class="watch-mark flag flag-${t.missable === "possible" ? "red" : "amber"}">${t.missable === "possible" ? "!" : "?"}</span>` +
+        `<span class="watch-name">${escapeHtml(maskedName(t, progress))}</span><b class="watch-stage">S${t.stage}</b></li>`,
     )
     .join("");
-  return `<aside class="watch" aria-label="Missable watch list"><h3>Missable watch list</h3><ul>${items}</ul></aside>`;
+  return (
+    `<aside class="watch" aria-label="Missable watch list"><h3><a href="#/missables">Missable watch list</a></h3><ul>${items}</ul></aside>`
+  );
 }
 
 // "[2]" in a trophy's text becomes "[OL]": the page shows no numbered source list, so it names the source instead.

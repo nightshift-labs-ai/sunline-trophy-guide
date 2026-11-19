@@ -585,16 +585,47 @@ body[data-route="roadmap"] .view, body[data-route="missables"] .view { grid-temp
 
 .missables-line { margin: 3px 0 5px; font-size: 15px; font-weight: 700; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 
-.road-grid { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 12px; }
+.road-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; align-items: start; }
 
-.stages {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-rows: repeat(4, auto);
-  grid-auto-flow: column;
-  gap: 5px 12px;
-  min-width: 0;
-}
+.road-col { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+
+.road-col > .stage-card:last-of-type::before { bottom: 0; }
+
+.facts { display: grid; grid-template-columns: 1.25fr 0.9fr 1.25fr 0.9fr 1.3fr; gap: 8px; margin: 3px 0 6px; }
+
+.fact { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 0 6px; padding: 3px 10px; background: var(--pane); border: 1px solid var(--line); border-radius: var(--r-pane); }
+
+.fact .fact-label { grid-column: 1; grid-row: 1; }
+
+.fact .cite-box { grid-column: 2; grid-row: 1; justify-self: end; height: auto; white-space: nowrap; }
+
+.fact .fact-value { grid-column: 1 / -1; grid-row: 2; white-space: nowrap; }
+
+.watch ul { display: flex; flex-wrap: wrap; gap: 2px 12px; }
+
+.watch ul li { padding: 2px 0; border-top: 0; }
+
+.watch h3 a { color: inherit; text-decoration: none; }
+
+.watch .watch-name { font-size: 14px; white-space: nowrap; }
+
+.fact-label { font-size: 13px; font-weight: 700; color: var(--desc); text-transform: uppercase; letter-spacing: 0.04em; }
+
+.fact-value { font-size: 18px; font-weight: 800; color: var(--text); }
+
+.stage-hours { font-size: 13px; font-weight: 700; color: var(--desc); white-space: nowrap; }
+
+.tchip-num { color: var(--amber); font-weight: 800; }
+
+.tchip.flag-possible .tchip-num, .tchip.flag-unknown .tchip-num { color: inherit; }
+
+.watch li { display: flex; align-items: center; gap: 6px; }
+
+.watch-mark { min-width: 22px; text-align: center; }
+
+.watch-stage { margin-left: auto; color: var(--amber); font-size: 14px; }
+
+.watch-more { display: block; margin-top: 4px; font-size: 14px; font-weight: 700; color: var(--amber); }
 
 .stage-card {
   position: relative;
@@ -637,7 +668,7 @@ body[data-route="roadmap"] .view, body[data-route="missables"] .view { grid-temp
 
 .stage-top { display: flex; align-items: baseline; gap: 10px; }
 
-.stage-title { margin: 0; font-size: 22px; font-weight: 800; line-height: 1.15; flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.stage-title { margin: 0; font-size: 22px; font-weight: 800; line-height: 1.15; flex: 1; min-width: 0; }
 
 .stage-count { font-size: 22px; font-weight: 800; color: var(--amber); white-space: nowrap; }
 
@@ -645,17 +676,17 @@ body[data-route="roadmap"] .view, body[data-route="missables"] .view { grid-temp
 
 .stage-bar span { display: block; height: 100%; background: var(--sun); }
 
-.stage-goal { margin: 0 0 3px; font-size: 14px; line-height: 1.3; color: var(--desc); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.stage-goal { margin: 0 0 3px; font-size: 14px; line-height: 1.3; color: var(--desc); }
 
 .stage-goal .cite-mark { font-size: 12px; }
 
-.tchips { display: flex; flex-wrap: wrap; gap: 3px 4px; max-height: 43px; overflow: hidden; }
+.tchips { display: flex; flex-wrap: wrap; gap: 3px 4px; }
 
 .tchip {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  max-width: 180px;
+  max-width: 100%;
   height: 20px;
   font-size: 12px;
   font-weight: 600;
@@ -682,7 +713,7 @@ body[data-route="roadmap"] .view, body[data-route="missables"] .view { grid-temp
 
 .watch { background: var(--pane); border: 1px solid var(--line); border-radius: var(--r-pane); padding: 10px 12px; align-self: start; }
 
-.watch h3 { margin: 0 0 6px; font-size: 28px; font-weight: 800; line-height: 1.1; white-space: nowrap; }
+.watch h3 { margin: 0 0 4px; font-size: 22px; font-weight: 800; line-height: 1.1; white-space: nowrap; }
 
 .watch ul { list-style: none; margin: 0; padding: 0; }
 
@@ -690,7 +721,7 @@ body[data-route="roadmap"] .view, body[data-route="missables"] .view { grid-temp
 
 .watch-top { display: flex; align-items: center; gap: 6px; }
 
-.watch-name { font-size: 15px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.watch-name { font-size: 15px; font-weight: 700; }
 
 .watch-why {
   margin: 2px 0 0;
