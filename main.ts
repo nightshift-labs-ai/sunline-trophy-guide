@@ -9,6 +9,7 @@
 // checklist of the 55 official trophies with saved progress, filters, a spoiler setting and export/import, a guide pane
 // whose every guide cites its sources, and a 7-stage roadmap to the platinum with missable flags built from the
 // official descriptions. screenshots/ holds the 3 shots tools/shoot.mjs takes; shots.json says what each one shows.
+// Shots: 1-checklist-guide.jpg (cover), 2-roadmap.jpg, 3-spoilers-save.jpg; app/data/trophies.json holds 55 cited guides.
 //
 // Serve it locally with `node serve.ts`, then open http://localhost:8080.
 // Outside the grader's container, MAKEFUN_OUTPUT_DIR stands in for /output:
