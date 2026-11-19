@@ -167,8 +167,9 @@ registry records read 2026-11-19. No new web research in this run.
 ## Numbers (end of G5)
 - Shots: 1-checklist-guide.jpg 248,459 B · 2-roadmap.jpg 254,678 B (q81) · 3-sources-save.jpg 214,159 B (all
   <= 250 KiB). Judge-sheet preview GATE OK.
-- Dossier: 1,130,618 B on the step C commit, byte-identical over two runs (<= 1.45 MiB); kit check on HEAD (step C):
-  4 passed, 0 failed (16 skipped, 5 at submission). Path grep: 0 files. Kit copy level 26, site 27.
+- Dossier: 1,130,618 B on the step C commit and again on the docs commit (da958f4), byte-identical over two runs
+  each time (<= 1.45 MiB); kit check on HEAD, both commits: 4 passed, 0 failed (16 skipped, 5 at submission). Path
+  grep: 0 files. Kit copy level 26, site 27.
 - Data: 55 official names, descriptions and grades identical to the starter (checked after the merge); every step
   and every disagree version carries a cite that resolves to a registry source (0 unresolved); 182 steps.
 - Guides citing (trophies): PowerPyx 55, OutputLag 48, GTABase 21, LFCarry 8, eGamers 100% 2, PowerPyx spots 1,
