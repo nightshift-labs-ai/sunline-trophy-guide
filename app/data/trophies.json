@@ -1211,10 +1211,12 @@
       "guide": "Spend $100,000 in shops over time; every purchase adds to the total.",
       "steps": [
         "Buy guns, car mods and tattoos, which cost the most [1].",
-        "Spread it across the 24 Ammu-Nation stores, 14 mod shops and 19 Pay 'n' Spray garages PowerPyx counts [1]."
+        "Spread it across the 24 Ammu-Nation stores, 14 mod shops and 19 Pay 'n' Spray garages PowerPyx counts [1].",
+        "Leave the bulk of the shopping for after the credits, where OutputLag's checklist puts it [2]."
       ],
       "cites": [
-        { "n": 1, "src": "ppx", "supports": "cumulative $100,000; priciest items; shop counts" }
+        { "n": 1, "src": "ppx", "supports": "cumulative $100,000; priciest items; shop counts" },
+        { "n": 2, "src": "ol", "supports": "shopping listed with the post-story work" }
       ]
     },
     {
