@@ -1,5 +1,5 @@
 // Roadmap view: 7 stage cards on the sun-line spine with progress and cites, the missable watch list, and the Missables page.
-import { escapeHtml } from "../trophy-data.js";
+import { escapeHtml, formatAmount } from "../trophy-data.js";
 import { maskedName, isSpoilerMasked } from "../spoiler-rule.js";
 import { medalSvg, missableFlagHtml } from "./checklist-view.js";
 
@@ -7,10 +7,54 @@ export function renderRoadmap(stages, progress) {
   const flagged = stages.flatMap((s) => s.trophies).filter((t) => t.missable);
   const cards = stages.map((s) => stageCardHtml(s, progress)).join("");
   document.getElementById("roadmap").innerHTML =
-    `<div class="road-head"><h2 class="banner-title">Roadmap to the platinum</h2>` +
-    `<p class="road-sub">7 stages · built from the official descriptions · chapters cited from PowerPyx &amp; OutputLag</p></div>` +
+    `<div class="road-head"><h2 class="banner-title">Roadmap to the platinum</h2>${nextUpHtml(stages, progress)}</div>` +
     `<p class="missables-line">${missablesSummaryHtml(flagged)}<span>${escapeHtml(context.missables)}</span></p>` +
-    `<div class="road-grid"><div class="stages">${cards}</div>${watchListHtml(flagged, stages, progress)}</div>`;
+    `<div class="road-grid"><div class="stages">${cards}${methodCardHtml()}</div>` +
+    `${watchListHtml(flagged, stages, progress)}</div>`;
+}
+
+// "Next up": the first roadmap stage with work left; inside it a possibly-missable trophy comes first, then a
+// counter already under way, then roadmap order. Two more follow as "then".
+export function pickNextUp(stages, progress) {
+  const rank = (t) => (t.missable === "possible" ? 0 : progress.counters[t.id] ? 1 : 2);
+  const open = stages.flatMap((s) =>
+    s.trophies.filter((t) => !progress.earned[t.id] && t.grade !== "platinum").map((t, i) => ({ t, s, i })),
+  );
+  if (!open.length) return [];
+  const first = open[0].s.n;
+  const head = open.filter((o) => o.s.n === first).sort((a, b) => rank(a.t) - rank(b.t) || a.i - b.i);
+  return [...head, ...open.filter((o) => o.s.n !== first)].slice(0, 3);
+}
+
+function nextUpHtml(stages, progress) {
+  const [pick, ...then] = pickNextUp(stages, progress);
+  if (!pick) return `<div class="next-up"><span class="next-label">Next up</span><b>Only the platinum is left.</b></div>`;
+  const t = pick.t;
+  const value = progress.counters[t.id];
+  const why =
+    t.missable === "possible"
+      ? `possibly missable: do it before ${escapeHtml(pick.s.title)} ends`
+      : value
+        ? "under way: finish what you started"
+        : escapeHtml(pick.s.title);
+  const count = t.target ? ` · <b class="num">${formatAmount(value || 0, t.unit)} / ${formatAmount(t.target, t.unit)}</b>` : "";
+  const thenText = then.map((o) => escapeHtml(isSpoilerMasked(o.t, progress) ? "a story trophy" : o.t.name)).join(", ");
+  return (
+    `<div class="next-up" aria-label="Next up"><span class="next-label">Next up</span>` +
+    `<a class="next-name" href="#/checklist?f=all&amp;t=${t.id}">${medalSvg(t.grade, 18)}${escapeHtml(maskedName(t, progress))}</a>` +
+    `<span class="next-why">${count.slice(3)}</span>` +
+    `<span class="next-then">Stage ${pick.s.n} · ${why}${thenText ? ` · then ${thenText}` : ""}</span></div>`
+  );
+}
+
+// Fills the free grid slot under stage 7: how the stages were put together, with PowerPyx's own hour estimates.
+function methodCardHtml() {
+  return (
+    `<article class="stage-card method-card" aria-label="How this roadmap is built"><h3 class="stage-title">How this roadmap is built</h3>` +
+    `<p>Order from the official descriptions; chapters cited <sup class="cite-mark">[PPX][OL]</sup>. ` +
+    `Time: story 60-80 h, 100% checklist ~100 h, strands ~10 h <sup class="cite-mark">[PPX]</sup>. ` +
+    `No mission replay <sup class="cite-mark">[PPX][OL]</sup>.</p></article>`
+  );
 }
 
 let context = { missables: "", sources: {} };
