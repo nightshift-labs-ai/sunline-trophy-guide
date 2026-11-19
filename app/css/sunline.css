@@ -1,0 +1,39 @@
+/* SUNLINE · dusk palette, the sun line, system type. One stylesheet for the whole app. */
+:root {
+  --page: #0e1320;
+  --pane: #161d2e;
+  --raised: #1e2740;
+  --line: #2a3450;
+  --text: #eef1f7;
+  --desc: #c8d0df;
+  --muted: #9aa6bf;
+  --amber: #ffb547;
+  --teal: #35d0b5;
+  --red: #c62f2f;
+  --sun: linear-gradient(90deg, #ffb547, #ff6a5c 55%, #d94f9c);
+  --plat: #cfd9e6;
+  --gold: #e8b93e;
+  --silver: #b9c1cc;
+  --bronze: #c47b4a;
+  --r-ctl: 8px;
+  --r-pane: 12px;
+  --font: system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; background: var(--page); color: var(--text); font: 15px/1.4 var(--font); }
+
+.wordmark {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  display: inline-block;
+  padding-bottom: 4px;
+  background: var(--sun) bottom / 100% 4px no-repeat;
+}
+
+.row { padding: 6px 12px; border-bottom: 1px solid var(--line); }
+
+[hidden] { display: none !important; }

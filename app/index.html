@@ -2,24 +2,57 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta id="about" content="SUNLINE: 55 GTA VI PS5 trophies, cited guides, roadmap, missables" name="description">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GTA VI trophy checklist</title>
-<link rel="stylesheet" href="style.css">
+<title>SUNLINE · PS5 trophy guide &amp; tracker for Grand Theft Auto VI (unofficial)</title>
+<link rel="stylesheet" href="css/sunline.css">
+<script type="module" src="js/boot.js"></script>
 </head>
 <body>
-<header>
-  <h1>GTA VI trophy checklist</h1>
-  <p id="progress">0 of 55 earned</p>
-</header>
-<div class="controls">
-  <label>Grade <select id="grade"><option value="all">All</option><option value="platinum">Platinum</option><option value="gold">Gold</option><option value="silver">Silver</option><option value="bronze">Bronze</option></select></label>
-  <button id="export" type="button">Export progress</button>
-  <label class="import">Import progress <input id="import" type="file" accept="application/json"></label>
+<header id="top" class="top">
+<div class="brand">
+<h1 id="wordmark" class="wordmark">SUNLINE</h1>
+<p id="tagline" class="tagline">55 official trophies · roadmap &amp; missables built from the
+official descriptions · every guide cites its sources</p>
+<p id="makeup" class="makeup">55 official trophies</p>
+<p id="cited-line" class="cited-line">Guides: loading…</p>
+<nav id="tabs" class="tabs" aria-label="Checklist, Roadmap, Missables, Spoilers and save">
+<a id="tab-checklist" href="#/checklist" data-route="checklist">Checklist</a>
+<a id="tab-roadmap" href="#/roadmap" data-route="roadmap">Roadmap</a>
+<a id="tab-missables" href="#/missables" data-route="missables">Missables</a>
+<a id="tab-save" href="#/save" data-route="save">Spoilers &amp; save</a>
+</nav>
 </div>
-<table>
-  <thead><tr><th>Earned</th><th>Trophy</th><th>Grade</th><th>How to get it</th></tr></thead>
-  <tbody id="rows"></tbody>
-</table>
-<script type="module" src="app.js"></script>
+<div class="status">
+<div class="count-row">
+<p id="earned-count" class="earned-count">0 / 55</p>
+<div class="count-side">
+<div id="progress-bar" class="sunbar" role="progressbar" aria-label="Trophies earned"></div>
+<p id="grade-earned" class="grade-earned"></p>
+<p id="saved-at" class="saved-at">Saved in this browser</p>
+</div>
+</div>
+<div class="actions">
+<button id="spoiler-switch" aria-pressed="true">Spoilers: hidden until earned</button>
+<button id="export-progress">Export progress</button>
+<label id="import-label" for="import-progress" class="btn">Import progress</label>
+<input id="import-progress" type="file" accept=".json">
+</div>
+</div>
+</header>
+<main id="view" class="view">
+<section id="save-banner" class="banner" hidden></section>
+<section id="checklist" class="list-col" aria-label="Trophy checklist">
+<nav id="filters" aria-label="Story, Missable, Collectibles, Activities, Online"></nav>
+<div id="list-tools" class="list-tools"></div>
+<ol id="trophy-list" class="trophy-list"></ol>
+</section>
+<aside id="guide-pane" class="guide-pane" aria-label="Trophy guide"></aside>
+<section id="roadmap" aria-label="Roadmap to the platinum" hidden></section>
+<section id="missables" aria-label="Missable trophies" hidden></section>
+</main>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<footer id="footer" class="footer">Unofficial fan guide · not affiliated with Rockstar Games or Sony.
+Trophy names, descriptions and grades as PlayStation publishes them; guides written by SUNLINE.</footer>
 </body>
 </html>
