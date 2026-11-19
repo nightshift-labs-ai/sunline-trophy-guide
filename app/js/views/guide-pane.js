@@ -1,0 +1,87 @@
+// Guide pane: one trophy's official text, chips, counter, cited guide, missable call and numbered sources.
+import { escapeHtml, formatAmount, shortUrl, KIND_LABELS } from "../trophy-data.js";
+import { isSpoilerMasked, MASKED_NAME, MASKED_DESCRIPTION } from "../spoiler-rule.js";
+import { medalSvg, missableFlagHtml } from "./checklist-view.js";
+
+export function renderGuidePane(trophy, state) {
+  const pane = document.getElementById("guide-pane");
+  if (!trophy) {
+    pane.innerHTML = `<p class="pane-empty">Pick a trophy on the left to read its guide.</p>`;
+    return;
+  }
+  const p = state.progress;
+  const masked = isSpoilerMasked(trophy, p);
+  const earned = Boolean(p.earned[trophy.id]);
+  const stage = state.stageByN.get(trophy.stage);
+  pane.innerHTML =
+    `<div class="pane-head">${medalSvg(trophy.grade, 40)}<div class="pane-title">` +
+    `<h2>${escapeHtml(masked ? MASKED_NAME : trophy.name)}</h2>` +
+    `<span class="grade-word grade-${trophy.grade}">${trophy.grade}</span></div>` +
+    `<button class="earn-toggle${earned ? " is-on" : ""}" data-action="toggle" data-id="${trophy.id}" aria-pressed="${earned}">` +
+    `${earned ? "✓ Earned" : "Mark earned"}</button></div>` +
+    `<div class="official${masked ? " is-masked" : ""}"><div><span class="official-label">Official description · PlayStation</span>` +
+    `<p>${escapeHtml(masked ? MASKED_DESCRIPTION : trophy.description)}</p></div>${stepperHtml(trophy, state)}</div>` +
+    `<div class="pane-chips"><span class="chip-solid">${escapeHtml(KIND_LABELS[trophy.kind])}</span>` +
+    `<span class="chip-solid">Stage ${stage.n} · ${escapeHtml(stage.title)}</span>` +
+    `${missableFlagHtml(trophy) || `<span class="chip-solid">Not missable</span>`}` +
+    `${trophy.hidden ? `<span class="chip-solid chip-hidden">Hidden on PSN until earned</span>` : ""}</div>` +
+    (masked ? maskedBodyHtml(trophy) : guideBodyHtml(trophy, state));
+}
+
+function stepperHtml(trophy, state) {
+  if (!trophy.target) return "";
+  const value = state.progress.counters[trophy.id] || 0;
+  const mark = trophy.targetCite ? `<sup class="cite-mark">[${trophy.targetCite}]</sup>` : "";
+  return (
+    `<span class="stepper"><button data-action="step" data-d="-1" aria-label="One less">−</button>` +
+    `<span class="stepper-value num">${formatAmount(value, trophy.unit)} / ${formatAmount(trophy.target, trophy.unit)}</span>` +
+    `<span class="stepper-unit">${trophy.unit === "$" ? "" : escapeHtml(trophy.unit)}${mark}</span>` +
+    `<button data-action="step" data-d="1" aria-label="One more">+</button></span>`
+  );
+}
+
+function maskedBodyHtml(trophy) {
+  return (
+    `<div class="masked-body"><p>This is a story trophy and the spoiler setting is on, so its name and guide ` +
+    `stay hidden until you earn it.</p>` +
+    `<button class="reveal reveal-big" data-action="reveal" data-id="${trophy.id}">Reveal this trophy</button></div>`
+  );
+}
+
+function withMarks(text) {
+  return escapeHtml(text).replace(/\[(\d+)\]/g, '<sup class="cite-mark">[$1]</sup>');
+}
+
+function guideBodyHtml(trophy, state) {
+  const steps = (trophy.steps || []).map((s) => `<li>${withMarks(s)}</li>`).join("");
+  const unknown = trophy.unknown
+    ? `<h3>Not pinned down yet</h3><p>${withMarks(trophy.unknown)}</p>`
+    : `<h3>Not pinned down yet</h3><p class="quiet">Nothing open: the sources agree on this one.</p>`;
+  return (
+    `<section class="howto"><h3>How to get it</h3><p class="guide-text">${withMarks(trophy.guide)}</p>` +
+    `<ol class="steps">${steps}</ol></section>` +
+    `<div class="pane-cols"><section><h3>Can it be missed?</h3><p>${withMarks(trophy.missableWhy)}</p></section>` +
+    `<section>${unknown}</section></div>` +
+    `<section class="sources-block"><h3>Sources</h3>${sourcesHtml(trophy, state)}</section>`
+  );
+}
+
+function sourcesHtml(trophy, state) {
+  const items = trophy.cites
+    .map((c) => {
+      const src = state.sources[c.src];
+      if (!src) return "";
+      return (
+        `<li><span class="src-n">[${c.n}]</span><div><a href="${escapeHtml(src.url)}" target="_blank" rel="noopener">` +
+        `${escapeHtml(src.name)}</a><span class="src-note"><span class="src-url">${escapeHtml(shortUrl(src.url))}</span>` +
+        ` · ${escapeHtml(c.supports)}</span></div></li>`
+      );
+    })
+    .join("");
+  const exo = state.sources.exo;
+  const hiddenNote =
+    trophy.hidden && exo
+      ? `<p class="src-extra">Hidden-on-PSN flag: <a href="${escapeHtml(exo.url)}" target="_blank" rel="noopener">Exophase</a></p>`
+      : "";
+  return `<ol class="sources">${items}</ol>${hiddenNote}`;
+}

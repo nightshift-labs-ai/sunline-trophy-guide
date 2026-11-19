@@ -1,5 +1,20 @@
 [
-  { "file": "1-checklist.jpg", "path": "/", "viewport": { "width": 1280, "height": 800 } },
-  { "file": "2-silver.jpg", "path": "/", "grade": "silver", "viewport": { "width": 1280, "height": 800 } },
-  { "file": "3-bronze.jpg", "path": "/", "grade": "bronze", "scroll": 1400, "viewport": { "width": 1280, "height": 800 } }
+  {
+    "file": "1-checklist-guide.jpg",
+    "path": "/#/checklist?f=all&t=28",
+    "viewport": { "width": 1280, "height": 800 },
+    "shows": "Cover: checklist in roadmap order (Goal group first) with 17/55 earned from the demo save, filters, masked story rows, counters, and the guide pane of Positive Mental Attitude (POSSIBLY MISSABLE, 9/18) down to its numbered Sources; spoilers hidden."
+  },
+  {
+    "file": "2-checklist-missable.jpg",
+    "path": "/#/checklist?f=missable&t=28",
+    "viewport": { "width": 1280, "height": 800 },
+    "shows": "Temporary: the Missable filter (2 possible, 5 unknown triggers) with the same guide pane; replaced by the roadmap shot."
+  },
+  {
+    "file": "3-spoilers-save.jpg",
+    "path": "/#/save?t=3",
+    "viewport": { "width": 1280, "height": 800 },
+    "shows": "Spoiler setting & save file: story filter with unearned story trophies masked (striped), the import toast 'Imported 17 earned · 12 counters', Export/Import, and a masked guide pane with its Reveal button."
+  }
 ]

@@ -1,0 +1,39 @@
+{
+  "app": "SUNLINE",
+  "version": 1,
+  "exportedAt": "2026-11-19T12:00:00.000Z",
+  "earned": [
+    "Just Like Paradise",
+    "Baited My Tackle",
+    "Stick Fiddler",
+    "Hot Together",
+    "Personal Best",
+    "Let’s Go Bowling",
+    "The Lone Rider",
+    "Fair Game",
+    "Retail Therapy",
+    "Sneakthief",
+    "Master of None",
+    "Gunslinger",
+    "Catch Me If You Can",
+    "Challenging Tank",
+    "A Classic Blitz Play",
+    "The Goodtime State",
+    "Pest Control"
+  ],
+  "counters": {
+    "Positive Mental Attitude": 9,
+    "A Long Road": 23,
+    "Cunning Stunts": 112,
+    "Earn Cash, Not Kudos": 9,
+    "Strangers & Freaks": 3,
+    "Don't Touch My Deck": 1,
+    "You WAiNKer!": 37,
+    "One Last Thing": 21,
+    "Whip It Good": 64,
+    "Maximum Withdrawal": 2,
+    "Dime on the Dollar": 85000,
+    "Treat Yo Self": 41000
+  },
+  "settings": { "spoilers": "hidden", "filter": "all" }
+}

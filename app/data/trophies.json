@@ -629,16 +629,16 @@
       "filters": ["collectibles", "missable"],
       "stage": 1,
       "missable": "possible",
-      "missableWhy": "Possibly: the spot at Jason's house may not come back after Chapter 1 [1][2]; meditate there and keep a Chapter 1 save to be safe.",
+      "missableWhy": "Possibly: the Jason's-house spot may be gone after Chapter 1 [1][2]. Meditate there and keep a Chapter 1 save.",
       "target": 18,
       "unit": "spots",
       "targetCite": 1,
-      "guide": "Meditate at every spot, and do the one at Jason's house before Chapter 1 ends.",
+      "guide": "Meditate at every spot; do the one at Jason's house before Chapter 1 ends.",
       "steps": [
-        "Do the meditation at Jason's house in Chapter 1: PowerPyx says it is only there in that chapter [1].",
-        "Check his balcony after Down to Earth, and the kitchen the next morning, as OutputLag suggests [2].",
-        "Find the rest by their purple icons: 18 spots at 10 locations, tracked under Progress > Collections > Exploration > Meditations, which is why SUNLINE files this as a collectible [1][2].",
-        "Leave the last spot for after Coffee Break in Chapter 2, since it needs both Jason and Lucia [1]."
+        "Meditate at Jason's house in Chapter 1: PowerPyx says that spot is only there then [1].",
+        "Check his balcony after Down to Earth, then the kitchen the next morning [2].",
+        "Find the rest by their purple icons: 18 spots at 10 locations, under Progress > Collections [1][2].",
+        "Leave the last spot until after Coffee Break: it needs both Jason and Lucia [1]."
       ],
       "unknown": "Nobody has confirmed yet whether the Chapter 1 spot is strictly required [1].",
       "cites": [
