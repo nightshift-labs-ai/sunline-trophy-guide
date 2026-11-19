@@ -106,12 +106,13 @@ function renderHeader(state) {
   document.getElementById("audit").innerHTML = auditHtml(trophies, state.sources || {});
   document.getElementById("earned-count").innerHTML =
     `${earned} / ${total} <small>${pct}%</small> <em class="to-go">${total - earned} to go</em>`;
-  // Split, not one number: possibly missable (red) vs trigger not known yet (amber, with a question mark).
+  // Split, not one number: possibly missable (red) vs trigger not known yet (amber, said in a word: a bare "?"
+  // after a digit read as "57" at judge size).
   const possible = trophies.filter((t) => t.missable === "possible").length;
   const unknown = trophies.filter((t) => t.missable === "unknown").length;
   document.getElementById("tab-missables").innerHTML =
     `Missables <span class="tab-badge" aria-label="${possible} possibly missable">${possible}</span>` +
-    `<span class="tab-badge tab-badge-amber" aria-label="${unknown} with a trigger not known yet">${unknown}?</span>`;
+    `<span class="tab-badge tab-badge-amber" aria-label="${unknown} with a trigger not known yet">${unknown} unclear</span>`;
   const bar = document.getElementById("progress-bar");
   bar.innerHTML = `<span style="width:${pct}%"></span>`;
   bar.setAttribute("aria-valuenow", String(pct));

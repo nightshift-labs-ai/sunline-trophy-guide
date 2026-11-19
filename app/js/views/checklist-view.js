@@ -53,7 +53,7 @@ function filterChipsHtml(trophies, state) {
       const unknown = trophies.filter((t) => t.missable === "unknown").length;
       if (possible + unknown === counts[f]) {
         label = `${FILTER_LABELS[f]} <b class="miss-p" title="possibly missable">${possible}</b>` +
-          ` <b class="miss-u" title="trigger not known yet">+ ${unknown}?</b>`;
+          ` · <b class="miss-u" title="trigger not known yet">${unknown} unclear</b>`;
       }
     }
     if (f === "online") {
