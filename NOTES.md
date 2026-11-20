@@ -253,7 +253,44 @@ state; keep only if the cover clearly reads better and the cut count stays 0.
   only in Positive Mental Attitude's steps 1 and 3 (shorter wording, same cites [1] and [1][2]). 182/182 steps cited;
   audit counts unchanged: 37 on 2+ independent sources, 136 single-source, 10 trophies where sources disagree.
 
+## Done (G8, short run, 2026-11-20 03:45-04:00 EET): shot 1 only, calm
+Goal: shot 1's guide pane reads calmer at the judge's 1024 px (after G7 the judge placed us #20, 0.9385; the pane
+stacked about six coloured boxes in small type). No new facts, sources or wording; app/data untouched; theme kept.
+Baseline: out/ab/before_1024.jpg and out/ab/sheet_before.jpg (the G7 shot 1).
+1a. KEPT. Room freed without changing type size: the Short answer loses its panel (no background, border or
+   padding; its teal label stays inline); the official description loses its tinted box (label and 9/18 counter
+   kept); kind, stage and the missable call leave their chip row and sit as plain text on the grade line under the
+   trophy name (each part kept whole, so the line only breaks between parts: on the cover it breaks before
+   POSSIBLY MISSABLE); the cite legend loses its box and becomes a plain list headed 'Sources' ('read · how many of
+   55 guides cite it'; rows 'n of 55', no more '55/55'), still in the right column beside the missable call; h3 and
+   callout top margins 8/6 -> 4 px. Two coloured callouts are left (sources disagree, possibly missable). A/B at
+   1024x640 (out/ab/g8a2_1024.jpg vs before_1024.jpg): clearly calmer, four boxes fewer, every fact still shown,
+   about 47 px freed. The first shoot broke 'Stage 1 · Chapter 1' across lines; fixed before the commit.
+1b. KEPT for the steps, REVERTED for the answer. Steps 15 -> 16 px (line height 1.26). The answer at 16 px wrapped to
+   a third line holding only its last cite (the G7 result again), so it stays at 15 px as the plan says. A/B at
+   1024x640 (out/ab/g8b2_1024.jpg) and on the 768x480 sheet (out/ab/g8b2_sheet.jpg vs sheet_before.jpg): steps
+   visibly larger and easier, the pane calmer, nothing lost; on the 1280x800 shot the window line's last cite and
+   the last 'Sources' row (LFCarry) sit fully inside the pane, above its bottom edge (read on the 1024 and 1280 images, not measured in px).
+3. Checks. Shots 2 and 3 not re-taken (their views do not show the guide pane). shots.json: only shot 1's "shows"
+   sentence changed.
+
+## Numbers (end of G8)
+- Shots: 1-checklist-guide.jpg 255,911 B (q82) · 2-roadmap.jpg 255,802 B (unchanged) · 3-sources-save.jpg 215,559 B
+  (unchanged), all <= 250 KiB = 256,000 B. Judge-sheet preview GATE OK after every shoot; final sheet
+  out/ab/g8b2_sheet.jpg read at 768x480.
+- Cut text: shot 1 state 0, shot 2 state 0, after every shoot.
+- Dossier: 1,142,973 B, byte-identical over two runs (<= 1.45 MiB), on the checks commit. Kit check on HEAD:
+  4 passed, 0 failed (16 skipped, 5 at submission). Path grep: nothing printed.
+- Data: app/data byte-identical to G7 (git diff 1cb2280 -- app/data/ is empty): 55 official names, descriptions
+  and grades unchanged, answers 55/55, every step and answer cite as in G7 (0 unresolved).
+
 ## Known issues
+- G8: shot 1 is 89 B under the 256,000 B cap (q82); any more text in view will push the shooter's quality lower.
+- G8: the next section's heading ('Not pinned down yet') and the top half of its first line now peek in at the
+  pane's bottom edge on the cover (scrollable content below the fold, not cut horizontally; cut check 0).
+- G8: on the cover, step 6 ends with 'rocks [4].' alone on its third line at 16 px.
+- G8: the answer (15 px) is now one size smaller than the steps (16 px); the label and brighter colour still mark
+  it as the lead.
 - G7: answers summarise the trophy's cited steps, so where a step's figure is itself disputed (A Long Road: 300
   stunts per [1][2], 250 per LFCarry [5]) the answer gives the steps' figure and the dispute stays in the pane's
   "Sources disagree" row, not in the answer.
@@ -279,9 +316,10 @@ state; keep only if the cover clearly reads better and the cut count stays 0.
   stylesheet was rewritten with the Write tool right after, so every line of it comes from a direct write.
 
 ## Next
-- G7 open: the Short answer one size larger than the steps (16 px) once the pane has a line to spare above the
-  fold (for example a shorter legend sub-line, or the answer for Positive Mental Attitude cut to fit two lines at
-  16 px); A/B at 768x480 again.
+- G8 open: the Short answer at 16 px like the steps; it needs Positive Mental Attitude's answer to fit two lines at
+  16 px (a few words shorter, same cites), then A/B at 1024x640 and 768x480 again. The plain grade line would fit one
+  line if the Mark earned button moved; not tried.
+- G8 open: check the calmer pane on the other trophies with long steps and many cites (the cover fits).
 - More sources for the one-source guides once new guides publish (Push Square, KeenGamer could not be read).
 - Bring the shots under 210 KiB (less text in view, or fewer rows) without losing the cover's required parts.
 - A "Next up" pick could weigh time-sensitive strands (Race Against Yago) above plain roadmap order.
