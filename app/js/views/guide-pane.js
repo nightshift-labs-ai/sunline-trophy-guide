@@ -16,15 +16,24 @@ export function renderGuidePane(trophy, state) {
   pane.innerHTML =
     `<div class="pane-head">${medalSvg(trophy.grade, 40)}<div class="pane-title">` +
     `<h2>${escapeHtml(masked ? MASKED_NAME : trophy.name)}</h2>` +
-    `<span class="grade-word grade-${trophy.grade}">${trophy.grade}</span></div>` +
+    // G8: kind, stage and the missable call ride on the grade line as plain text instead of a row of chips.
+    // Each part stays whole; the line may only break between parts.
+    `<p class="grade-line">` +
+    [
+      `<span class="grade-word grade-${trophy.grade}">${trophy.grade}</span>`,
+      escapeHtml(KIND_LABELS[trophy.kind]),
+      `Stage ${stage.n} · ${escapeHtml(stage.title)}`,
+      missableFlagHtml(trophy) || "Not missable",
+      trophy.hidden ? "Hidden on PSN until earned" : "",
+    ]
+      .filter(Boolean)
+      .map((part) => `<span class="gl-part">${part}</span>`)
+      .join(`<span class="gl-sep">·</span> `) +
+    `</p></div>` +
     `<button class="earn-toggle${earned ? " is-on" : ""}" data-action="toggle" data-id="${trophy.id}" aria-pressed="${earned}">` +
     `${earned ? "✓ Earned" : "Mark earned"}</button></div>` +
     `<div class="official${masked ? " is-masked" : ""}"><div><span class="official-label">Official description · PlayStation</span>` +
     `<p>${escapeHtml(masked ? MASKED_DESCRIPTION : trophy.description)}</p></div>${stepperHtml(trophy, state)}</div>` +
-    `<div class="pane-chips"><span class="chip-solid">${escapeHtml(KIND_LABELS[trophy.kind])}</span>` +
-    `<span class="chip-solid">Stage ${stage.n} · ${escapeHtml(stage.title)}</span>` +
-    `${missableFlagHtml(trophy) || `<span class="chip-solid">Not missable</span>`}` +
-    `${trophy.hidden ? `<span class="chip-solid chip-hidden">Hidden on PSN until earned</span>` : ""}</div>` +
     (masked ? maskedBodyHtml(trophy) : guideBodyHtml(trophy, state)) +
     notesHtml(trophy, p);
 }
@@ -107,13 +116,15 @@ function citeKeyHtml(trophy, state) {
       const read = src.read ? readDate(src.read).replace(/ \d{4}$/, "") : "not recorded";
       return (
         `<li title="${escapeHtml(src.name)} · ${escapeHtml(c.supports)}"><span class="cite-box">${c.n}</span>` +
-        `<b>${escapeHtml(src.short || src.name)}</b><span>${read}</span><span class="num">${citing}/${all.length}</span></li>`
+        `<b>${escapeHtml(src.short || src.name)}</b><span>${read}</span>` +
+        `<span class="num">${citing} of ${all.length}</span></li>`
       );
     })
     .join("");
+  // G8: a plain list under a plain heading (no box), so the pane keeps only two callouts.
   return (
-    `<section class="cite-key" aria-label="What the cite numbers mean"><h3>Cite numbers</h3>` +
-    `<p class="ck-sub">source · read · guides citing it</p><ol>${rows}</ol></section>`
+    `<section class="cite-key" aria-label="What the cite numbers mean"><h3>Sources</h3>` +
+    `<p class="ck-sub">read · how many of ${all.length} guides cite it</p><ol>${rows}</ol></section>`
   );
 }
 

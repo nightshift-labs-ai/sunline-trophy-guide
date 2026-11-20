@@ -398,20 +398,31 @@ body[data-route="roadmap"] .view, body[data-route="missables"] .view { grid-temp
 
 .earn-toggle.is-on { background: var(--teal); border-color: var(--teal); color: var(--page); }
 
+/* G8: kind, stage and the missable call as plain text on the grade line (no chip row). */
+.grade-line { margin: 1px 0 0; font-size: 14px; color: var(--desc); }
+
+.grade-line .gl-part { white-space: nowrap; }
+
+.grade-line .gl-sep { margin: 0 0 0 6px; color: var(--line); }
+
+.grade-line .flag { padding: 0; background: none; border: 0; font-size: 13px; font-weight: 800; letter-spacing: 0.04em; }
+
+.grade-line .flag-red { color: #ff8278; }
+
+.grade-line .flag-amber { color: var(--amber); }
+
+/* G8: the official text is plain (label + line), no tinted box; the counter stays on its right. */
 .official {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin: 8px 0;
-  padding: 5px 8px 5px 12px;
-  background: var(--raised);
-  border-radius: var(--r-ctl);
-  border-left: 3px solid var(--amber);
+  margin: 6px 0 0;
 }
 
 .official > div { flex: 1; min-width: 0; }
 
-.official.is-masked { background: repeating-linear-gradient(135deg, #1e2740 0 18px, #232c47 18px 36px); }
+.official.is-masked { padding: 5px 8px; border-radius: var(--r-ctl);
+  background: repeating-linear-gradient(135deg, #1e2740 0 18px, #232c47 18px 36px); }
 
 .official-label { font-size: 12px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--amber); }
 
@@ -443,7 +454,7 @@ body[data-route="roadmap"] .view, body[data-route="missables"] .view { grid-temp
 .stepper-unit { font-size: 13px; color: var(--desc); }
 
 .guide-pane h3 {
-  margin: 8px 0 2px;
+  margin: 4px 0 1px;
   font-size: 16px;
   font-weight: 800;
   letter-spacing: 0.06em;
@@ -453,14 +464,10 @@ body[data-route="roadmap"] .view, body[data-route="missables"] .view { grid-temp
 
 .guide-text { margin: 0 0 3px; font-size: 15px; }
 
-/* G7 short answer: the gist before the steps. A teal rule and an inline label set it apart from a heading; its
-   text is the steps' size and the brightest text colour in the pane. */
+/* G7 short answer: the gist before the steps. G8: plain lead text (no panel); the inline teal label marks it and
+   its text is the brightest in the pane. */
 .answer {
-  margin: 7px 0 0;
-  padding: 4px 9px 5px;
-  border-left: 3px solid var(--teal);
-  border-radius: 0 6px 6px 0;
-  background: var(--raised);
+  margin: 6px 0 0;
   font-size: 15px;
   line-height: 1.35;
   color: var(--text);
@@ -479,14 +486,14 @@ body[data-route="roadmap"] .view, body[data-route="missables"] .view { grid-temp
 
 .steps li { margin: 0; line-height: 1.28; }
 
-.answer + .howto h3 { margin-top: 5px; }
+.answer + .howto h3 { margin-top: 4px; }
 
 .pane-cols { display: grid; grid-template-columns: 1.45fr 1fr; gap: 12px; }
 
 .pane-cols p { margin: 0; font-size: 15px; line-height: 1.33; }
 
 /* Cite numbers legend: one line per boxed number, beside the missable call so every [n] resolves on screen. */
-.cite-key { margin-top: 6px; padding: 0 8px 6px; border-radius: var(--r-ctl); background: var(--raised); }
+.cite-key { margin-top: 4px; }
 
 .cite-key h3 { margin-top: 4px; margin-bottom: 0; }
 
@@ -532,7 +539,7 @@ body[data-route="roadmap"] .view, body[data-route="missables"] .view { grid-temp
 .h3-note { font-size: 13px; font-weight: 700; letter-spacing: 0; text-transform: none; color: var(--desc); }
 
 /* Missable callout: a tinted box with a solid left edge, so the call reads before the prose. */
-.miss-call { margin-top: 6px; padding: 0 10px 6px; border-radius: var(--r-ctl); border-left: 5px solid var(--teal);
+.miss-call { margin-top: 4px; padding: 0 10px 6px; border-radius: var(--r-ctl); border-left: 5px solid var(--teal);
   background: #17322f; }
 
 .miss-call h3 { margin-top: 5px; }
