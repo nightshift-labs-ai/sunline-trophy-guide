@@ -126,20 +126,28 @@ export function auditHtml(trophies, sources) {
   const possible = trophies.filter((t) => t.missable === "possible").length;
   const unknown = trophies.filter((t) => t.missable === "unknown").length;
   const hidden = trophies.filter((t) => t.hidden).length;
-  const b = (v) => `<b>${v}</b>`;
   const shortRead = (iso) => readDate(iso).replace(/ \d{4}$/, "");
-  const parts = [
-    `${b(trophies.length)} official: ${b(count("platinum"))} P · ${b(count("gold"))} G · ${b(count("silver"))} S · ${b(count("bronze"))} B`,
-    `${b(hidden)} hidden`,
-    `<span title="${guides} guides, ${regs.length - guides} lists">${b(regs.length)} sources</span>`,
-    `<span title="Counted per guide step. ${a.single} of ${a.steps} steps rest on one independent witness ` +
-      `(pages that echo PowerPyx count with it; aggregators never confirm).">steps: ${b(`${a.cited}/${a.steps}`)} cited · ` +
-      `${b(a.multi)} on 2+ independent sources</span>`,
-    `<span class="audit-dis">${b(a.disagree.length)} disagree</span>`,
-    `${b(possible)} possibly missable · ${b(unknown)} trigger unknown`,
-    `read ${reads.map(shortRead).join(", ") || "date not recorded"}`,
+  const witness = `Counted per guide step. ${a.single} of ${a.steps} steps rest on one independent witness ` +
+    `(pages that echo PowerPyx count with it; aggregators never confirm).`;
+  // One figure: a big number with its words beside it (one or two short lines).
+  const fig = (num, line1, line2 = "") =>
+    `<span class="fig"><b>${num}</b><span class="fig-l"><span>${line1}</span>` +
+    (line2 ? `<span>${line2}</span>` : "") + `</span></span>`;
+  const tile = (inner, cls = "", title = "") =>
+    `<span class="tile${cls ? ` ${cls}` : ""}"${title ? ` title="${title}"` : ""}>${inner}</span>`;
+  const g = (n, letter) => `<em>${n}</em> ${letter}`;
+  const tiles = [
+    tile(fig(trophies.length, "official",
+      `${g(count("platinum"), "P")} · ${g(count("gold"), "G")} · ${g(count("silver"), "S")} · ${g(count("bronze"), "B")}`)),
+    tile(fig(hidden, "hidden")),
+    tile(fig(regs.length, "sources", `read ${reads.map(shortRead).join(", ") || "date not recorded"}`), "",
+      `${guides} guides, ${regs.length - guides} lists`),
+    tile(fig(`${a.cited}/${a.steps}`, "steps", "cited"), "", witness),
+    tile(fig(a.multi, "on 2+ independent", "sources"), "", witness),
+    tile(fig(a.disagree.length, "sources", "disagree"), "audit-dis"),
+    tile(fig(possible, "possibly", "missable") + fig(unknown, "trigger", "unknown")),
   ];
-  return `<span class="audit-tag">Audit</span>${parts.join(" <i>·</i> ")}`;
+  return `<span class="audit-tag">Audit</span>${tiles.join("")}`;
 }
 
 // "2026-11-19" -> "19 Nov 2026"

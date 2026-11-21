@@ -55,9 +55,9 @@ code { font-size: 13px; background: var(--raised); padding: 1px 5px; border-radi
 .top {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
   height: var(--head-h);
-  padding: 6px 20px 0;
+  padding: 4px 20px 0;
   border-bottom: 1px solid var(--line);
   background: #111727;
 }
@@ -81,13 +81,24 @@ code { font-size: 13px; background: var(--raised); padding: 1px 5px; border-radi
 
 .count-block { display: flex; flex-direction: column; gap: 3px; width: 196px; flex-shrink: 0; }
 
-.audit { margin: 0; font-size: 14px; line-height: 22px; color: var(--desc); white-space: nowrap; }
+/* Audit row: each count is a big number with its words beside it; every number is counted at load. */
+.audit { display: flex; align-items: center; height: 26px; margin: 0; color: var(--desc); white-space: nowrap; }
 
-.audit b { color: var(--text); }
+.audit .tile { display: flex; align-items: center; gap: 14px; height: 26px; padding: 0 20px;
+  border-left: 1px solid #2a3350; }
 
-.audit i { font-style: normal; color: #5d6a8f; }
+.audit .tile:nth-child(2) { border-left: 0; padding-left: 0; }
 
-.audit-tag { display: inline-block; margin-right: 8px; padding: 0 7px; border-radius: 4px; background: var(--teal);
+.audit .fig { display: flex; align-items: center; gap: 6px; }
+
+.audit .fig b { font-size: 24px; line-height: 24px; font-weight: 800; color: #f4f6fb; font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em; }
+
+.audit .fig-l { display: flex; flex-direction: column; font-size: 12px; line-height: 12px; color: var(--desc); }
+
+.audit .fig-l em { font-style: normal; font-weight: 700; color: var(--text); }
+
+.audit-tag { display: inline-block; margin-right: 14px; padding: 0 7px; border-radius: 4px; background: var(--teal);
   color: var(--page); font-size: 12px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; line-height: 18px; }
 
 .tabrow { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-top: auto; }
@@ -594,7 +605,9 @@ body[data-route="roadmap"] .view, body[data-route="missables"] .view { grid-temp
 
 .dis-vs li { padding-left: 10px; border-left: 2px solid #5e5191; }
 
-.audit-dis b { color: #d6c8ff; }
+.audit .audit-dis .fig b { color: #d6c8ff; }
+
+.audit .audit-dis .fig-l { color: #c4b6ef; }
 
 .src-extra { font-size: 13px; color: var(--desc); margin: 2px 0 0; }
 
