@@ -284,7 +284,55 @@ Baseline: out/ab/before_1024.jpg and out/ab/sheet_before.jpg (the G7 shot 1).
 - Data: app/data byte-identical to G7 (git diff 1cb2280 -- app/data/ is empty): 55 official names, descriptions
   and grades unchanged, answers 55/55, every step and answer cite as in G7 (0 unresolved).
 
+## Done (G9, short run, 2026-11-21 09:46-10:05 EET): the evidence reads at a glance
+Goal: the header's audit facts read at a glance on shot 1, at the judge's 1024x640 and on the 768x480 sheet (after
+G8 we were dev #40 of 6,482, 0.9458). The old audit line was one 14 px line: hard to read at 1024 and unreadable at
+768. No new facts, sources or wording in the data; app/data untouched; theme, band, tagline and guide pane unchanged.
+Baseline: out/ab/g9_before_1024.jpg and out/ab/g9_sheet_before.jpg (the G8 shot 1; the older before_* files are G7).
+1. KEPT. The audit line becomes a row of seven tiles under the band. Each tile is a big number (24 px, line height
+   24 px, weight 800, near-white) with its words beside it on the right, in one or two 12 px lines (line height
+   12 px), and tiles are split by a thin dark rule rather than boxed. The row: teal 'Audit' tag; 55 official
+   (second line 1 P · 2 G · 6 S · 46 B); 28 hidden; 14 sources (second line 'read 19 Nov'; hover '9 guides, 5
+   lists'); 182/182 steps cited; 37 on 2+ independent sources (both step tiles carry the hover '136 of 182 steps rest
+   on one independent witness ...'); 10 sources disagree (violet, its own colour as before); and 2 possibly missable
+   and 5 trigger unknown as two separate numbers, each with its own words. auditHtml still counts every number from
+   the data at load, and nothing is typed in. id="audit" and class "audit" are kept on the row (boot.js fills it;
+   cut-check reads it).
+   Room: the row is 26 px tall where the old line was 22 px; .top padding-top 6 -> 4 px and its gap 3 -> 2 px;
+   --head-h is still 108 px. Measured with Playwright at 1280x800: the tab row's top was 78 and is now 77.6, the
+   guide pane's top was 118 and is still 118, and the audit row sits at y 50-76, width 1240 with no overflow.
+   Keep rule, as I read it: at 1024x640 (out/ab/g9_2_1024.jpg vs g9_before_1024.jpg) each number (55, 28, 14,
+   182/182, 37, 10, 2, 5) reads without zooming, where before the line was small print. On the 768x480 sheet
+   (out/ab/g9_2_sheet.jpg vs g9_sheet_before.jpg) the row now reads as a row of numbers; before, it was one grey
+   line. Every fact the line showed is still on the cover or in a hover title, the guide pane and list start
+   at the same y (118) and show the same lines down to the fold, nothing overlaps (full-res header crop out/ab/g9_2_head.jpg), and cut text is 0.
+   First try had 11.5 px labels and 16 px tile padding, so the row ended at x 1070; the kept version uses 12 px
+   labels and 20 px padding to spread the row across the free width.
+2. Checks. Shots 2 and 3 were re-taken because their header shows the same tile row (the views under it did not
+   change). shots.json: only shot 1's "shows" sentence changed (the audit line became the tile row); shots 2 and 3
+   do not describe the header.
+
+## Numbers (end of G9)
+- Shots: 1-checklist-guide.jpg 251,825 B (q81) · 2-roadmap.jpg 250,613 B (q80) · 3-sources-save.jpg 216,922 B
+  (q85), all <= 250 KiB = 256,000 B. Judge-sheet preview GATE OK after every shoot; final sheet
+  out/ab/g9_final_sheet.jpg read at 768x480. Tile numbers stay crisp at q81 at 1024x640.
+- Cut text: shot 1 state 0, shot 2 state 0, after every shoot.
+- Header geometry (1280x800): tab row top 78 -> 77.6, guide pane top 118 -> 118, audit row y 50-76 (26 px), last tile
+  ends at x 1142.
+- Dossier: 1,132,381 B, byte-identical over two runs (<= 1.45 MiB). Kit check on HEAD (checks commit): 4 passed,
+  0 failed (16 skipped, 5 at submission); the kit copy is level 26 and the site is at 32 (operator's call). Path
+  grep: nothing printed.
+- Data: app/data byte-identical to G8 (git diff e4d38d7 -- app/data/ is empty): 55 official names, descriptions and
+  grades unchanged, answers 55/55, every step and answer cite as in G8; 0 trophies without cites.
+
 ## Known issues
+- G9: the tile labels are 12 px, so at 768x480 the numbers read but most of their words do not; the hover titles
+  only help on a real screen.
+- G9: the official tile's second line (1 P · 2 G · 6 S · 46 B) is the smallest text in the row.
+- G9: the tile row has no narrow-screen rule; its last tile ends at x 1142 on the 1280 cover, so below about
+  1160 px wide it would run past the right edge.
+- G9 (seen, not new): on shot 3 the fixed footer line sits over the last visible registry row (eGamers list); the
+  G8 shot 3 shows the same thing (out/ab/g8_shot3_foot.jpg).
 - G8: shot 1 is 89 B under the 256,000 B cap (q82); any more text in view will push the shooter's quality lower.
 - G8: the next section's heading ('Not pinned down yet') and the top half of its first line now peek in at the
   pane's bottom edge on the cover (scrollable content below the fold, not cut horizontally; cut check 0).
@@ -316,6 +364,9 @@ Baseline: out/ab/before_1024.jpg and out/ab/sheet_before.jpg (the G7 shot 1).
   stylesheet was rewritten with the Write tool right after, so every line of it comes from a direct write.
 
 ## Next
+- G9 open: a narrow-screen rule for the tile row (wrap to two rows, or drop the second label lines below ~1160 px).
+- G9 open: try 13 px tile labels if the row still fits 1240 px and 26 px height (labels would read better at 768).
+- G9 open: lift the footer line on Sources & save so it does not sit over the registry table's last visible row.
 - G8 open: the Short answer at 16 px like the steps; it needs Positive Mental Attitude's answer to fit two lines at
   16 px (a few words shorter, same cites), then A/B at 1024x640 and 768x480 again. The plain grade line would fit one
   line if the Mark earned button moved; not tried.
