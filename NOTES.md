@@ -363,10 +363,32 @@ Baseline: out/ab/g9_before_1024.jpg and out/ab/g9_sheet_before.jpg (the G8 shot 
 - Mid-session in run 1 one batch of CSS edits went through a shell script instead of the edit tool; the whole
   stylesheet was rewritten with the Write tool right after, so every line of it comes from a direct write.
 
+## G10: nothing is hidden under the footer
+- Flaw named by every call of an independent 6-call review: on shot 3 (Sources & save) the footer line was drawn
+  over the registry table's last row (eGamers list), so both read as a jumble. Cause: .view has a fixed height
+  (100vh minus header and footer) but on the save route nothing in it scrolled, so the save page overflowed down
+  past .view and under the transparent footer.
+- Step 1 (CSS only, app/css/sunline.css): on the save route .view gets overflow-y auto and 8 px bottom padding, so it
+  is its own scroll area that ends above the footer; the footer gets position relative, z-index 1 and the opaque page
+  background, so even if content overflows, nothing shows through the footer strip. No markup, text, data, tiles,
+  detail pane or theme changed. Checklist and roadmap rules are untouched.
+- KEPT. Before/after crops of the lowest 240 px of all three shots (out/ab/g10_before_*_bottom.jpg,
+  g10_after_*_bottom.jpg): on shot 3 the footer now sits on its own strip and the registry ends cleanly at the
+  scroll area's edge after PowerPyx Delights (the 14th row, eGamers list, is one scroll down, not overdrawn); the
+  "where sources disagree" column is cut the same clean way. Shots 1 and 2 bottoms are unchanged; shot 1's only pixel
+  difference from G9 is a 6x9 px spot in the header's saved-at time (x 1141, y 29), so tab row top 77.6 and pane top
+  118 are unchanged, and the missable window line and the last 'Sources' row (LFCarry) stay inside the pane.
+  Cut-text check: shot 1 21 checked, 0 cut; shot 2 15 checked, 0 cut.
+- Numbers: shots 251,728 B (q81) / 250,613 B (q80) / 212,356 B (q85), all <= 250 KiB = 256,000 B; judge-size preview
+  of shot 3 at 1024x640 read (footer clean), sheet out/ab/g10_sheet_final.jpg; dossier 1,126,171 B, byte-identical
+  twice (out/g10d1, out/g10d2); kit check on HEAD 4 passed, 0 failed (16 skipped); path grep empty. shots.json
+  unchanged: shot 3 still shows the registry and its "14 sources" heading. App data unchanged since G9.
+
 ## Next
 - G9 open: a narrow-screen rule for the tile row (wrap to two rows, or drop the second label lines below ~1160 px).
 - G9 open: try 13 px tile labels if the row still fits 1240 px and 26 px height (labels would read better at 768).
-- G9 open: lift the footer line on Sources & save so it does not sit over the registry table's last visible row.
+- G10 open: a small "more below" fade or row count at the foot of the Sources & save scroll area, so the 14th source
+  (eGamers list) reads as one scroll away.
 - G8 open: the Short answer at 16 px like the steps; it needs Positive Mental Attitude's answer to fit two lines at
   16 px (a few words shorter, same cites), then A/B at 1024x640 and 768x480 again. The plain grade line would fit one
   line if the Mark earned button moved; not tried.
